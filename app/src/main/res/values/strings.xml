@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">DuAnMau</string>
+
+<!--    Login Activity-->
+    <string name="activity_login_edt_username_hint">UserName</string>
+    <string name="activity_login_edt_password_hint">PassWord</string>
+    <string name="activity_login_btn_login">LogIn</string>
+    <string name="activity_login_btn_signin">SignIn</string>
+
+
+
+
+
+
+</resources>
