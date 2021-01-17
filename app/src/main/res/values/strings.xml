@@ -1,15 +1,25 @@
 <resources>
     <string name="app_name">DuAnMau</string>
 
-<!--    Login Activity-->
+    <!--    Login Activity-->
     <string name="activity_login_edt_username_hint">UserName</string>
     <string name="activity_login_edt_password_hint">PassWord</string>
     <string name="activity_login_btn_login">LogIn</string>
     <string name="activity_login_btn_signin">SignIn</string>
-
-
-
-
-
-
+    <!--    Signin activity-->
+    <string name="activity_signin_edt_repass_hint">Repeat PassWord</string>
+    <string name="activity_signin_edt_name_hint">Name</string>
+    <string name="activity_signin_edt_phone_hint">Phone Number</string>
+    <string name="activity_signin_btn_confirm">Confirm</string>
+    <string name="activity_signin_btn_cancel">Cancel</string>
+    <!--    Menu-->
+    <string name="menu_nav_title_type">Thể Loại</string>
+    <string name="menu_nav_title_book">Sách</string>
+    <string name="menu_nav_title_user">Người Dùng</string>
+    <string name="menu_nav_title_shop">Shop Pet</string>
+    <string name="menu_nav_title_facebook">Facebook</string>
+    <string name="menu_nav_title_twitter">Twitter</string>
+    <string name="menu_nav_title_exit">Exit</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
 </resources>

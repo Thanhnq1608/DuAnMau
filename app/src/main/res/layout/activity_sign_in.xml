@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LOGIN.LogInActivity"
+    tools:context=".LOGIN.SignInActivity"
     android:background="@drawable/background_login">
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,15 +23,39 @@
             android:layout_gravity="center_horizontal"
             android:textColor="@color/login_text"
             android:layout_marginTop="50dp"
-            android:id="@+id/ed_user_login"/>
+            android:id="@+id/ed_user_signin"/>
         <EditText
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:hint="@string/activity_login_edt_password_hint"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/login_text"
+            android:id="@+id/ed_pass_signin"
+            android:layout_marginTop="20dp"/>
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="@string/activity_signin_edt_repass_hint"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/login_text"
+            android:layout_marginTop="20dp"
+            android:id="@+id/ed_repass_signin"/>
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="@string/activity_signin_edt_name_hint"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/login_text"
             android:id="@+id/ed_pass_login"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="20dp"/>
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:hint="@string/activity_signin_edt_phone_hint"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/login_text"
+            android:id="@+id/ed_name_signin"
+            android:layout_marginTop="20dp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -40,14 +64,14 @@
             <Button
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/activity_login_btn_login"
-                android:id="@+id/btn_login_login"
+                android:text="@string/activity_signin_btn_confirm"
+                android:id="@+id/btn_confirm_signin"
                 android:layout_marginLeft="95dp"/>
             <Button
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/activity_login_btn_signin"
-                android:id="@+id/btn_signin_login"
+                android:text="@string/activity_signin_btn_cancel"
+                android:id="@+id/btn_cancel_signin"
                 android:layout_marginLeft="20dp"/>
         </LinearLayout>
 

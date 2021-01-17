@@ -4,4 +4,12 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="login_text">#000000</color>
+
+    <color name="color_it">#64D5FA</color>
+    <color name="color_his">#DE5A21</color>
+    <color name="color_phy">#25BA20</color>
+    <color name="color_math">#FF1F0F</color>
+    <color name="color_viet">#FFF82E</color>
+    <color name="color_mar">#3220F0</color>
+
 </resources>

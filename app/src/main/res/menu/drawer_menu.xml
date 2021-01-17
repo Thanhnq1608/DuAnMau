@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_pet"
+        android:icon="@drawable/icon_book"
+        android:title="@string/menu_nav_title_user" />
+    <item
+        android:id="@+id/news_pet"
+        android:icon="@drawable/icon_book"
+        android:title="@string/menu_nav_title_type" />
+
+
+    <item
+        android:id="@+id/hospital_pet"
+        android:icon="@drawable/icon_book"
+        android:title="@string/menu_nav_title_book" />
+
+
+    <item android:title="CONNECT WITH US">
+        <menu>
+            <item
+                android:id="@+id/facebook"
+                android:icon="@drawable/icon_book"
+                android:title="@string/menu_nav_title_facebook" />
+            <item
+                android:id="@+id/twitter"
+                android:icon="@drawable/icon_book"
+                android:title="@string/menu_nav_title_twitter" />
+        </menu>
+    </item>
+            <item
+                android:id="@+id/exit"
+                android:icon="@drawable/icon_book"
+                android:title="@string/menu_nav_title_exit" />
+</menu>
