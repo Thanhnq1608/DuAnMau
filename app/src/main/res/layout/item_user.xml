@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
-        android:background="#C6C5C9">
+        android:background="@drawable/shadow">
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"

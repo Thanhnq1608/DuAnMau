@@ -50,6 +50,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         }
         holder.imgBill.setBackgroundColor(R.drawable.icon_bill);
         holder.tvNgayMua.setText(String.valueOf(hoaDon.getNgayMua()));
+        holder.tvId.setText(hoaDon.getMaHoaDon());
     }
 
     @Override
@@ -62,12 +63,13 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgBill;
-        TextView tvNgayMua;
+        TextView tvNgayMua,tvId;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgBill = itemView.findViewById(R.id.img_bill);
             tvNgayMua = itemView.findViewById(R.id.tv_ngay_mua_itemBill);
+            tvId=itemView.findViewById(R.id.tv_id_bill_itemBill);
         }
     }
 

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
@@ -37,12 +38,53 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
         AnhXa();
 
         hoaDonArrayList = new ArrayList<>();
+        addBill();
+        billAdapter=new BillAdapter(this,hoaDonArrayList);
+        recBill.setLayoutManager(new GridLayoutManager(this,2));
+        recBill.setAdapter(billAdapter);
 
 
     }
 
     private void addBill() {
-        HoaDon hoaDon = new HoaDon("1", "21/10/2010");
+        HoaDon hoaDon1 = new HoaDon("1", "21/10/2010");
+        HoaDon hoaDon2 = new HoaDon("2", "21/10/2010");
+        HoaDon hoaDon3 = new HoaDon("3", "21/10/2010");
+        HoaDon hoaDon4 = new HoaDon("4", "21/10/2010");
+        HoaDon hoaDon5 = new HoaDon("5", "21/10/2010");
+        HoaDon hoaDon6 = new HoaDon("6", "21/10/2010");
+        HoaDon hoaDon7 = new HoaDon("7", "21/10/2010");
+        HoaDon hoaDon8 = new HoaDon("8", "21/10/2010");
+        HoaDon hoaDon9 = new HoaDon("9", "21/10/2010");
+        HoaDon hoaDon10 = new HoaDon("10", "21/10/2010");
+        HoaDon hoaDon11 = new HoaDon("11", "21/10/2010");
+        HoaDon hoaDon12 = new HoaDon("12", "21/10/2010");
+        HoaDon hoaDon13 = new HoaDon("13", "21/10/2010");
+        HoaDon hoaDon14 = new HoaDon("14", "21/10/2010");
+        HoaDon hoaDon15 = new HoaDon("15", "21/10/2010");
+        HoaDon hoaDon16 = new HoaDon("16", "21/10/2010");
+        HoaDon hoaDon17 = new HoaDon("17", "21/10/2010");
+        hoaDonArrayList.add(hoaDon1);
+        hoaDonArrayList.add(hoaDon2);
+        hoaDonArrayList.add(hoaDon3);
+        hoaDonArrayList.add(hoaDon4);
+        hoaDonArrayList.add(hoaDon5);
+        hoaDonArrayList.add(hoaDon6);
+        hoaDonArrayList.add(hoaDon7);
+        hoaDonArrayList.add(hoaDon8);
+        hoaDonArrayList.add(hoaDon9);
+        hoaDonArrayList.add(hoaDon10);
+        hoaDonArrayList.add(hoaDon11);
+        hoaDonArrayList.add(hoaDon12);
+        hoaDonArrayList.add(hoaDon13);
+        hoaDonArrayList.add(hoaDon14);
+        hoaDonArrayList.add(hoaDon15);
+        hoaDonArrayList.add(hoaDon16);
+        hoaDonArrayList.add(hoaDon17);
+
+
+
+
     }
 
     private void AnhXa() {
