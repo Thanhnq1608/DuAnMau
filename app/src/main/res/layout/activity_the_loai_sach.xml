@@ -5,40 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".TheLoaiActivity">
+    tools:context=".TheLoaiActivity"
+    android:background="@drawable/background_home">
 
-<!--    <include-->
-<!--        layout="@layout/drawer_toolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content" />-->
-
-<!--    <androidx.drawerlayout.widget.DrawerLayout-->
-<!--        android:id="@+id/drawer"-->
-<!--        android:fitsSystemWindows="true"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recTrangChu"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include
+            layout="@layout/drawer_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
 
-<!--        <include-->
-<!--            layout="@layout/content_main"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content" />-->
+        <androidx.drawerlayout.widget.DrawerLayout
+            android:id="@+id/drawer_type"
+            android:fitsSystemWindows="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-<!--        <com.google.android.material.navigation.NavigationView-->
-<!--            android:id="@+id/navigation_view"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_gravity="start"-->
-<!--            android:background="#FFFFFF"-->
-<!--            android:fitsSystemWindows="true"-->
-<!--            app:headerLayout="@layout/drawer_header"-->
-<!--            app:menu="@menu/drawer_menu">-->
 
-<!--        </com.google.android.material.navigation.NavigationView>-->
-<!--    </androidx.drawerlayout.widget.DrawerLayout>-->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recTrangChu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <include
+                layout="@layout/content_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.google.android.material.navigation.NavigationView
+                android:id="@+id/navigation_view_type"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="start"
+                android:background="#FFFFFF"
+                android:fitsSystemWindows="true"
+                app:headerLayout="@layout/drawer_header"
+                app:menu="@menu/drawer_menu">
+
+            </com.google.android.material.navigation.NavigationView>
+        </androidx.drawerlayout.widget.DrawerLayout>
+    </LinearLayout>
 
 </LinearLayout>

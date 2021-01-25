@@ -2,35 +2,47 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/home_pet"
-        android:icon="@drawable/icon_book"
+        android:id="@+id/user_menu"
+        android:icon="@drawable/icon_user"
         android:title="@string/menu_nav_title_user" />
-    <item
-        android:id="@+id/news_pet"
-        android:icon="@drawable/icon_book"
-        android:title="@string/menu_nav_title_type" />
 
 
-    <item
-        android:id="@+id/hospital_pet"
-        android:icon="@drawable/icon_book"
-        android:title="@string/menu_nav_title_book" />
-
-
-    <item android:title="CONNECT WITH US">
+    <item android:title="@string/menu_nav_title_menu_first">
         <menu>
             <item
-                android:id="@+id/facebook"
-                android:icon="@drawable/icon_book"
-                android:title="@string/menu_nav_title_facebook" />
+                android:id="@+id/type_menu"
+                android:icon="@drawable/icon_type_book"
+                android:title="@string/menu_nav_title_type" />
+
             <item
-                android:id="@+id/twitter"
+                android:id="@+id/book_menu"
                 android:icon="@drawable/icon_book"
-                android:title="@string/menu_nav_title_twitter" />
+                android:title="@string/menu_nav_title_book" />
+
+
         </menu>
     </item>
+    <item android:title="@string/menu_nav_title_menu_secornd">
+        <menu>
+            <item android:id="@+id/bill_menu"
+                android:icon="@drawable/icon_bill"
+                android:title="@string/menu_nav_title_bill"/>
             <item
-                android:id="@+id/exit"
-                android:icon="@drawable/icon_book"
+                android:id="@+id/statistical_menu"
+                android:icon="@drawable/icon_statistical"
+                android:title="@string/menu_nav_title_statistical" />
+        </menu>
+    </item>
+    <item android:title="@string/menu_nav_title_menu_third">
+        <menu>
+            <item
+                android:id="@+id/settings_menu"
+                android:icon="@drawable/icon_settings"
+                android:title="@string/menu_nav_title_settings" />
+            <item
+                android:id="@+id/exit_menu"
+                android:icon="@drawable/icon_exit"
                 android:title="@string/menu_nav_title_exit" />
+        </menu>
+    </item>
 </menu>

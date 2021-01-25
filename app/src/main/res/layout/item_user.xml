@@ -2,14 +2,15 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="200dp">
+    android:layout_height="100dp">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="horizontal">
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:background="#C6C5C9">
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:id="@+id/img_ava_user"
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
@@ -24,32 +25,16 @@
                 android:layout_height="wrap_content"
                 android:text="Họ Tên"
                 android:textColor="@color/login_text"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:id="@+id/tv_ten_itemUser"
-                android:layout_marginTop="20dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Số điện thoại"
-                android:textColor="@color/login_text"
-                android:textSize="20dp"
-                android:id="@+id/tv_phone_itemUser"
                 android:layout_marginTop="20dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Người Dùng"
                 android:textColor="@color/login_text"
-                android:textSize="20dp"
+                android:textSize="15dp"
                 android:id="@+id/tv_user_itemUser"
-                android:layout_marginTop="20dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mật Khẩu"
-                android:textColor="@color/login_text"
-                android:textSize="20dp"
-                android:id="@+id/tv_pass_itemUser"
                 android:layout_marginTop="20dp"/>
         </LinearLayout>
 

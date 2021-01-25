@@ -1,24 +1,30 @@
 package com.example.duanmau;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
-import com.example.duanmau.adapter.HomeAdapter;
+import com.example.duanmau.adapter.TypeBookAdapter;
 import com.example.duanmau.model.TheLoaiSach;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class TheLoaiActivity extends AppCompatActivity {
+public class TheLoaiActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     RecyclerView recyclerView;
     ArrayList<TheLoaiSach> theloaiList;
-    HomeAdapter homeAdapter;
+    TypeBookAdapter typeBookAdapter;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
@@ -28,14 +34,15 @@ public class TheLoaiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_loai_sach);
-
+//        getSupportActionBar().hide();
         anhXa();
+        Menu();
 
         theloaiList = new ArrayList<>();
         addTheLoai();
-        homeAdapter = new HomeAdapter(this, theloaiList);
+        typeBookAdapter = new TypeBookAdapter(this, theloaiList);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        recyclerView.setAdapter(homeAdapter);
+        recyclerView.setAdapter(typeBookAdapter);
     }
 
     private void anhXa() {
@@ -58,18 +65,53 @@ public class TheLoaiActivity extends AppCompatActivity {
 
     }
 
-//    private void Menu() {
-//
-//        toolbar = findViewById(R.id.tool_bar);
-//        toolbar.setTitle("Thể Loại Sách");
-//        setSupportActionBar(toolbar);
-//        drawerLayout = findViewById(R.id.drawer);
-//        navigationView = findViewById(R.id.navigation_view);
-//        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
-//        drawerLayout.addDrawerListener(actionBarDrawerToggle);
-//        actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
-//        actionBarDrawerToggle.syncState();
-//        navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
-//    }
+    private void Menu() {
+        toolbar = findViewById(R.id.tool_bar);
+        toolbar.setTitle("Thể Loại Sách");
+        setSupportActionBar(toolbar);
+//        getSupportActionBar().hide();
+        drawerLayout = findViewById(R.id.drawer_type);
+        navigationView = findViewById(R.id.navigation_view_type);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.setDrawerIndicatorEnabled(true);
+        actionBarDrawerToggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+    }
 
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.user_menu) {
+            startActivity(new Intent(TheLoaiActivity.this, UserActivity.class));
+        } else if (item.getItemId() == R.id.type_menu) {
+            startActivity(new Intent(TheLoaiActivity.this, TheLoaiActivity.class));
+        } else if (item.getItemId() == R.id.bill_menu) {
+            startActivity(new Intent(TheLoaiActivity.this, BillActivity.class));
+        } else if (item.getItemId() == R.id.book_menu) {
+            startActivity(new Intent(TheLoaiActivity.this, SachActivity.class));
+        } else if (item.getItemId() == R.id.statistical_menu) {
+            startActivity(new Intent(TheLoaiActivity.this, ThongKeActivity.class));
+        } else if (item.getItemId() == R.id.settings_menu) {
+            startActivity(new Intent(TheLoaiActivity.this, SettingActivity.class));
+        } else if (item.getItemId() == R.id.exit_menu) {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(TheLoaiActivity.this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            builder.setTitle(R.string.dialog_exit_title);
+            builder.setIcon(R.drawable.icon_exit);
+            builder.setPositiveButton(getString(R.string.dialog_exit_yes), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    System.exit(0);
+                }
+            });
+            builder.setNegativeButton(getString(R.string.dialog_exit_no), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            builder.show();
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return false;
+    }
 }

@@ -31,12 +31,6 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.ViewHolder> {
     public SachAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sach, parent, false);
         SachAdapter.ViewHolder viewHolder = new SachAdapter.ViewHolder(view);
-        viewHolder.imgSach.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         return viewHolder;
     }
 
@@ -66,7 +60,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.ViewHolder> {
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-//            imgSach = itemView.findViewById(R.id.img_sach);
+            imgSach = itemView.findViewById(R.id.img_sach);
             tvTenSach = itemView.findViewById(R.id.tv_ten_sach);
             tvTenLoaiSach=itemView.findViewById(R.id.tv_type_book);
         }

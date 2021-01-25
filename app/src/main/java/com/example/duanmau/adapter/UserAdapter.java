@@ -29,12 +29,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_user,parent,false);
         UserAdapter.ViewHolder viewHolder = new UserAdapter.ViewHolder(view);
-        viewHolder.tvTenNguoiDung.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         return viewHolder;
     }
 
@@ -45,6 +39,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             return;
         }
         holder.tvTenNguoiDung.setText(nguoiDung.getHoTen());
+        holder.tvUser.setText(nguoiDung.getUserName());
+        holder.imgUser.setImageResource(R.drawable.icon_user);
     }
 
     @Override
@@ -57,11 +53,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgUser;
-        TextView tvTenNguoiDung;
+        TextView tvTenNguoiDung,tvUser;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgUser=itemView.findViewById(R.id.img_ava_user);
-            tvTenNguoiDung=itemView.findViewById(R.id.tv_ten_sach);
+            tvTenNguoiDung=itemView.findViewById(R.id.tv_ten_itemUser);
+            tvUser=itemView.findViewById(R.id.tv_user_itemUser);
         }
     }
 }
