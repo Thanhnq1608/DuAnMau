@@ -5,7 +5,10 @@
     <string name="activity_login_edt_username_hint">UserName</string>
     <string name="activity_login_edt_password_hint">PassWord</string>
     <string name="activity_login_btn_login">LogIn</string>
-    <string name="activity_login_btn_signin">SignIn</string>
+    <string name="activity_login_btn_cancel">Cancel</string>
+    <string name="activity_login_tv_signin">Create Account</string>
+    <string name="activity_login_tv_forget">Forget PassWord?</string>
+
     <!--    Signin activity-->
     <string name="activity_signin_edt_repass_hint">Repeat PassWord</string>
     <string name="activity_signin_edt_name_hint">Name</string>
@@ -27,7 +30,7 @@
     <string name="open">open</string>
     <string name="close">close</string>
 
-<!--    thông báo thoát ứng dụng-->
+    <!--    thông báo thoát ứng dụng-->
     <string name="dialog_exit_title">Do you want to exit the application?</string>
     <string name="dialog_exit_yes">Yes</string>
     <string name="dialog_exit_no">No</string>

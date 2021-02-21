@@ -21,11 +21,7 @@
         <activity android:name=".UserActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".SachActivity"
             android:theme="@style/AppTheme.NoActionBar"
@@ -39,7 +35,13 @@
         <activity android:name=".LOGIN.ChangePassActivity" />
         <activity android:name=".LOGIN.FogetPassActivity" />
         <activity android:name=".LOGIN.SignInActivity" />
-        <activity android:name=".LOGIN.LogInActivity" />
+        <activity android:name=".LOGIN.LogInActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ChaoActivity" />
     </application>
 
