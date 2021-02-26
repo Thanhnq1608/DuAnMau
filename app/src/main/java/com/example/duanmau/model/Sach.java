@@ -77,4 +77,17 @@ public class Sach {
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
+
+    @Override
+    public String toString() {
+        return "Sach{" +
+                "maSach='" + maSach + '\'' +
+                ", maTheLoai='" + maTheLoai + '\'' +
+                ", tenSach='" + tenSach + '\'' +
+                ", tacGia='" + tacGia + '\'' +
+                ", NXB='" + NXB + '\'' +
+                ", giaBia=" + giaBia +
+                ", soLuong=" + soLuong +
+                '}';
+    }
 }

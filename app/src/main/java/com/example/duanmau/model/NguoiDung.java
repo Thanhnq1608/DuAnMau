@@ -47,4 +47,14 @@ public class NguoiDung {
     public void setHoTen(String hoTen) {
         this.hoTen = hoTen;
     }
+
+    @Override
+    public String toString() {
+        return "NguoiDung{" +
+                "userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", hoTen='" + hoTen + '\'' +
+                '}';
+    }
 }

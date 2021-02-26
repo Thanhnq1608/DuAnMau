@@ -42,8 +42,8 @@ public class NguoiDungDAO {
     }
 
     //getAll
-    public List<NguoiDung> getAllNguoiDung() {
-        List<NguoiDung> dsNguoiDung = new ArrayList<>();
+    public ArrayList<NguoiDung> getAllNguoiDung() {
+        ArrayList<NguoiDung> dsNguoiDung = new ArrayList<>();
         Cursor c = db.query(TABLE_NAME, null, null, null, null, null, null);
         c.moveToFirst();
         while (c.isAfterLast() == false) {

@@ -59,4 +59,15 @@ public class TheLoaiSach {
     public void setViTri(int viTri) {
         this.viTri = viTri;
     }
+
+    @Override
+    public String toString() {
+        return "TheLoaiSach{" +
+                "maTheLoai='" + maTheLoai + '\'' +
+                ", tenTheLoai='" + tenTheLoai + '\'' +
+                ", moTa='" + moTa + '\'' +
+                ", viTri=" + viTri +
+                ", mauNen=" + mauNen +
+                '}';
+    }
 }

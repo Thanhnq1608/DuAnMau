@@ -50,4 +50,14 @@ public class HoaDonChiTiet {
     public void setSoLuongMua(int soLuongMua) {
         this.soLuongMua = soLuongMua;
     }
+
+    @Override
+    public String toString() {
+        return "HoaDonChiTiet{" +
+                "maHDCT=" + maHDCT +
+                ", hoaDon=" + hoaDon +
+                ", sach=" + sach +
+                ", soLuongMua=" + soLuongMua +
+                '}';
+    }
 }

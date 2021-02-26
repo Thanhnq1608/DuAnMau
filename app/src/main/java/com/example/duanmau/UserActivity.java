@@ -14,7 +14,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.duanmau.DAO.NguoiDungDAO;
 import com.example.duanmau.adapter.UserAdapter;
 import com.example.duanmau.model.NguoiDung;
 import com.example.duanmau.model.Sach;
@@ -30,6 +32,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     NavigationView navigationView;
+    NguoiDungDAO nguoiDungDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +40,13 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_user);
         anhXa();
         Menu();
+        nguoiDungDAO=new NguoiDungDAO(UserActivity.this);
 
         nguoiDungList = new ArrayList<>();
-        addUser();
+//        addUser();
+        nguoiDungList = nguoiDungDAO.getAllNguoiDung();
+        Toast.makeText(this, "day"+nguoiDungDAO.getAllNguoiDung().size(), Toast.LENGTH_SHORT).show();
+//        nguoiDungList.addAll(nguoiDungDAO.getAllNguoiDung());
         userAdapter = new UserAdapter(this, nguoiDungList);
         recUser.setLayoutManager(new GridLayoutManager(this, 1));
         recUser.setAdapter(userAdapter);
@@ -51,19 +58,27 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
 
     private void addUser() {
         NguoiDung sach0 = new NguoiDung("thanhnq", "thanh123", "0332751701", "Quang Thanh");
-        NguoiDung sach1 = new NguoiDung("thanhnq", "thanh123", "0332751701", "Quang Thanh");
-        NguoiDung sach2 = new NguoiDung("thanhnq", "thanh123", "0332751701", "Quang Thanh");
-        NguoiDung sach3 = new NguoiDung("thanhnq", "thanh123", "0332751701", "Quang Thanh");
-        NguoiDung sach4 = new NguoiDung("thanhnq", "thanh123", "0332751701", "Quang Thanh");
-        NguoiDung sach5 = new NguoiDung("thanhnq", "thanh123", "0332751701", "Quang Thanh");
-        NguoiDung sach6 = new NguoiDung("thanhnq", "thanh123", "0332751701", "Quang Thanh");
-        nguoiDungList.add(sach0);
-        nguoiDungList.add(sach1);
-        nguoiDungList.add(sach2);
-        nguoiDungList.add(sach3);
-        nguoiDungList.add(sach4);
-        nguoiDungList.add(sach5);
-        nguoiDungList.add(sach6);
+        NguoiDung sach1 = new NguoiDung("thanhnq1", "thanh123", "0332751701", "Quang Thanh");
+        NguoiDung sach2 = new NguoiDung("thanhnq2", "thanh123", "0332751701", "Quang Thanh");
+        NguoiDung sach3 = new NguoiDung("thanhnq3", "thanh123", "0332751701", "Quang Thanh");
+        NguoiDung sach4 = new NguoiDung("thanhnq4", "thanh123", "0332751701", "Quang Thanh");
+        NguoiDung sach5 = new NguoiDung("thanhnq5", "thanh123", "0332751701", "Quang Thanh");
+        NguoiDung sach6 = new NguoiDung("thanhnq6", "thanh123", "0332751701", "Quang Thanh");
+//        nguoiDungList.add(sach0);
+//        nguoiDungList.add(sach1);
+//        nguoiDungList.add(sach2);
+//        nguoiDungList.add(sach3);
+//        nguoiDungList.add(sach4);
+//        nguoiDungList.add(sach5);
+//        nguoiDungList.add(sach6);
+        nguoiDungDAO.inserNguoiDung(sach0);
+        nguoiDungDAO.inserNguoiDung(sach1);
+        nguoiDungDAO.inserNguoiDung(sach2);
+        nguoiDungDAO.inserNguoiDung(sach3);
+        nguoiDungDAO.inserNguoiDung(sach4);
+        nguoiDungDAO.inserNguoiDung(sach5);
+        nguoiDungDAO.inserNguoiDung(sach6);
+
     }
 
     private void Menu() {

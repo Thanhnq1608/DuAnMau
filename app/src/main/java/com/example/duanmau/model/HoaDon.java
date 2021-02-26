@@ -29,4 +29,12 @@ public class HoaDon {
     public void setNgayMua(Date ngayMua) {
         this.ngayMua = ngayMua;
     }
+
+    @Override
+    public String toString() {
+        return "HoaDon{" +
+                "maHoaDon='" + maHoaDon + '\'' +
+                ", ngayMua=" + ngayMua +
+                '}';
+    }
 }

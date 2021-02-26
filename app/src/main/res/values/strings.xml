@@ -34,6 +34,9 @@
     <string name="dialog_exit_title">Do you want to exit the application?</string>
     <string name="dialog_exit_yes">Yes</string>
     <string name="dialog_exit_no">No</string>
+<!--fogetpass-->
+    <string name="fogetpass_edi_hint_pass">New PassWord</string>
+    <string name="fogetpass_edi_hint_repass">Repeat PassWord</string>
 
 
 </resources>
