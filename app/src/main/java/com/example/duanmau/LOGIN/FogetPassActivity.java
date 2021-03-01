@@ -32,6 +32,7 @@ public class FogetPassActivity extends AppCompatActivity {
         confirm = findViewById(R.id.btn_confirm_foget);
         cancel = findViewById(R.id.btn_cancel_foget);
 
+        nguoiDungDAO=new NguoiDungDAO(FogetPassActivity.this);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,10 +47,10 @@ public class FogetPassActivity extends AppCompatActivity {
                 if (user.getText().toString().equals("") || phone.getText().toString().equals("") || pass.getText().toString().equals("") || rePass.getText().toString().equals("")) {
                     Toast.makeText(FogetPassActivity.this, "Bạn không được bỏ trống dữ liệu!", Toast.LENGTH_SHORT).show();
                 } else if (checkUser(user.getText().toString())) {
-                    Toast.makeText(FogetPassActivity.this, "Tài Khoản hoặc số điện thoại không chính xác!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FogetPassActivity.this, "Tài Khoản hoặc số điện thoại không chính xác1!", Toast.LENGTH_SHORT).show();
                 } else if (checkPhoneNumber(user.getText().toString(), phone.getText().toString())) {
-                    Toast.makeText(FogetPassActivity.this, "Tài Khoản hoặc số điện thoại không chính xác!", Toast.LENGTH_SHORT).show();
-                } else if (pass.getText().toString().length() >= 6) {
+                    Toast.makeText(FogetPassActivity.this, "Tài Khoản hoặc số điện thoại không chính xác2!", Toast.LENGTH_SHORT).show();
+                } else if (pass.getText().toString().length() < 6) {
                     Toast.makeText(FogetPassActivity.this, "Mật khẩu phải có ít nhất 6 kí tự!", Toast.LENGTH_SHORT).show();
                 } else if (!pass.getText().toString().equals(rePass.getText().toString())) {
                     Toast.makeText(FogetPassActivity.this, "Bạn phải nhập lại đúng mật khẩu đã thiết lập!", Toast.LENGTH_SHORT).show();
@@ -57,7 +58,6 @@ public class FogetPassActivity extends AppCompatActivity {
                 } else {
                     SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
                     String strUserName = pref.getString("USERNAME", user.getText().toString());
-                    nguoiDungDAO = new NguoiDungDAO(FogetPassActivity.this);
                     NguoiDung username = new NguoiDung(strUserName, pass.getText().toString(), "",
                             "");
                     if (nguoiDungDAO.changePasswordNguoiDung(username) > 0) {
@@ -75,7 +75,6 @@ public class FogetPassActivity extends AppCompatActivity {
     }
 
     private boolean checkUser(String u) {
-
         for (int i = 0; i < nguoiDungDAO.getAllNguoiDung().size(); i++) {
             if (nguoiDungDAO.getAllNguoiDung().get(i).getUserName().equalsIgnoreCase(u)) {
                 return false;
@@ -85,10 +84,9 @@ public class FogetPassActivity extends AppCompatActivity {
     }
 
     private boolean checkPhoneNumber(String u, String phone) {
-        boolean temp = true;
         for (int i = 0; i < nguoiDungDAO.getAllNguoiDung().size(); i++) {
             if (nguoiDungDAO.getAllNguoiDung().get(i).getUserName().equalsIgnoreCase(u)) {
-                if (nguoiDungDAO.getAllNguoiDung().get(i).getPhone().equals(phone)) {
+                if (nguoiDungDAO.getAllNguoiDung().get(i).getPhone().equalsIgnoreCase(phone)) {
                     return false;
                 }
             }

@@ -74,6 +74,14 @@ public class LogInActivity extends AppCompatActivity {
             }
         });
 
+        fogetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(LogInActivity.this,FogetPassActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
     public void rememberUser(String u ,String p,boolean stutas){
         SharedPreferences sharedPreferences  = getSharedPreferences("USER_FILE",MODE_PRIVATE);

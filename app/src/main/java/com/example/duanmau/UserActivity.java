@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.duanmau.DAO.NguoiDungDAO;
+import com.example.duanmau.LOGIN.LogInActivity;
 import com.example.duanmau.adapter.UserAdapter;
 import com.example.duanmau.model.NguoiDung;
 import com.example.duanmau.model.Sach;
@@ -45,7 +46,6 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         nguoiDungList = new ArrayList<>();
 //        addUser();
         nguoiDungList = nguoiDungDAO.getAllNguoiDung();
-        Toast.makeText(this, "day"+nguoiDungDAO.getAllNguoiDung().size(), Toast.LENGTH_SHORT).show();
 //        nguoiDungList.addAll(nguoiDungDAO.getAllNguoiDung());
         userAdapter = new UserAdapter(this, nguoiDungList);
         recUser.setLayoutManager(new GridLayoutManager(this, 1));
@@ -116,7 +116,8 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
             builder.setPositiveButton(getString(R.string.dialog_exit_yes), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    System.exit(0);
+                    Intent intent=new Intent(UserActivity.this, LogInActivity.class);
+                    startActivity(intent);
                 }
             });
             builder.setNegativeButton(getString(R.string.dialog_exit_no), new DialogInterface.OnClickListener() {

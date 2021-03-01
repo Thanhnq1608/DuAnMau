@@ -39,8 +39,8 @@ public class TheLoaiDAO {
         return 1;
     }
     //getAllTheLoai
-    public List<TheLoaiSach> getAllTheLoai(){
-        List<TheLoaiSach> dsTheLoai = new ArrayList<>();
+    public ArrayList<TheLoaiSach> getAllTheLoai(){
+        ArrayList<TheLoaiSach> dsTheLoai = new ArrayList<>();
         Cursor c = db.query(TABLE_NAME,null,null,null,null,null,null);
         c.moveToFirst();
         while (c.isAfterLast()==false){

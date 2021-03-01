@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.duanmau.LOGIN.LogInActivity;
 import com.example.duanmau.adapter.SachAdapter;
 import com.example.duanmau.model.Sach;
 import com.google.android.material.navigation.NavigationView;
@@ -109,7 +110,8 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
             builder.setPositiveButton(getString(R.string.dialog_exit_yes), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    System.exit(0);
+                    Intent intent=new Intent(SachActivity.this, LogInActivity.class);
+                    startActivity(intent);
                 }
             });
             builder.setNegativeButton(getString(R.string.dialog_exit_no), new DialogInterface.OnClickListener() {

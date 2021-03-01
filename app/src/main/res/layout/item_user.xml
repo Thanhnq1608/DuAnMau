@@ -2,13 +2,14 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
         android:background="@drawable/shadow"
-        android:layout_margin="10dp">
+        android:padding="10dp">
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
@@ -29,7 +30,7 @@
                 android:textColor="@color/login_text"
                 android:textSize="15dp"
                 android:id="@+id/tv_ten_itemUser"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="10dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

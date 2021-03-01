@@ -2,6 +2,7 @@ package com.example.duanmau.LOGIN;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,7 @@ public class SignInActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
+        nguoiDungDAO = new NguoiDungDAO(SignInActivity.this);
 
         userName = findViewById(R.id.ed_user_signin);
         passWord = findViewById(R.id.ed_pass_signin);
@@ -35,56 +37,42 @@ public class SignInActivity extends AppCompatActivity {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(SignInActivity.this, LogInActivity.class);
+                startActivity(intent);
             }
         });
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (userName.getText().equals("") || passWord.getText().equals("") || rePass.getText().equals("") || phone.getText().equals("") || name.getText().equals("")) {
+                if (userName.getText().toString().equals("") || passWord.getText().toString().equals("") || rePass.getText().toString().equals("") || phone.getText().toString().equals("") || name.getText().toString().equals("")) {
                     Toast.makeText(SignInActivity.this, "Bạn không được bỏ trống!", Toast.LENGTH_SHORT).show();
-                    if (userName.getText().equals("")) {
-                        userName.setBackgroundResource(R.color.colorRed);
-                    } else {
-                        userName.setBackgroundColor(0);
-                    }
-                    if (passWord.getText().equals("")) {
-                        passWord.setBackgroundResource(R.color.colorRed);
-                    } else {
-                        passWord.setBackgroundColor(0);
-                    }
-                    if (rePass.getText().equals("")) {
-                        rePass.setBackgroundResource(R.color.colorRed);
-                    } else {
-                        rePass.setBackgroundColor(0);
-                    }
-                    if (phone.getText().equals("")) {
-                        phone.setBackgroundResource(R.color.colorRed);
-                    } else {
-                        phone.setBackgroundColor(0);
-                    }
-                    if (name.getText().equals("")) {
-                        name.setBackgroundResource(R.color.colorRed);
-                    } else {
-                        name.setBackgroundColor(0);
-                    }
                 } else {
-                    if (nguoiDung.getUserName().equalsIgnoreCase(userName.getText().toString())) {
+                    if (checkUser(userName.getText().toString())) {
                         Toast.makeText(SignInActivity.this, "Tên tài khoản đã tồn tại!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        if (passWord.getText().toString().equals(rePass.getText())) {
-                            NguoiDung nguoiDung1 = new NguoiDung();
-                            nguoiDung1.setUserName(userName.getText().toString());
-                            nguoiDung1.setPassword(passWord.getText().toString());
-                            nguoiDung1.setPhone(phone.getText().toString());
-                            nguoiDung1.setHoTen(name.getText().toString());
-                            nguoiDungDAO.inserNguoiDung(nguoiDung1);
-                            Toast.makeText(SignInActivity.this, "Thêm Người Dùng Thành Công!", Toast.LENGTH_SHORT).show();
-                        }
+                    } else if (!passWord.getText().toString().equals(rePass.getText().toString())) {
+                        Toast.makeText(SignInActivity.this, "Bạn phải nhập lại đúng mật khẩu!", Toast.LENGTH_SHORT).show();
+                    }else {
+                        NguoiDung nguoiDung1 = new NguoiDung();
+                        nguoiDung1.setUserName(userName.getText().toString());
+                        nguoiDung1.setPassword(passWord.getText().toString());
+                        nguoiDung1.setPhone(phone.getText().toString());
+                        nguoiDung1.setHoTen(name.getText().toString());
+                        nguoiDungDAO.inserNguoiDung(nguoiDung1);
+                        Toast.makeText(SignInActivity.this, "Thêm Người Dùng Thành Công!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
+    }
+
+    private boolean checkUser(String u) {
+
+        for (int i = 0; i < nguoiDungDAO.getAllNguoiDung().size(); i++) {
+            if (nguoiDungDAO.getAllNguoiDung().get(i).getUserName().equalsIgnoreCase(u)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
