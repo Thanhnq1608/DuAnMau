@@ -43,8 +43,8 @@ public class HoaDonDAO {
     }
 
     //getAll
-    public List<HoaDon> getAllHoaDon() throws ParseException {
-        List<HoaDon> dsHoaDon = new ArrayList<>();
+    public ArrayList<HoaDon> getAllHoaDon() throws ParseException {
+        ArrayList<HoaDon> dsHoaDon = new ArrayList<>();
         Cursor c = db.query(TABLE_NAME, null, null, null, null, null, null);
         c.moveToFirst();
         while (c.isAfterLast() == false) {

@@ -56,6 +56,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
+                        android:id="@+id/tvThongKeNgay"
                         android:text="10000000"
                         android:textColor="@color/login_text"
                         android:textSize="30dp" />

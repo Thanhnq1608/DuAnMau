@@ -30,7 +30,7 @@ public class SettingActivity extends AppCompatActivity implements NavigationView
 
     private void Menu() {
         toolbar = findViewById(R.id.tool_bar);
-        toolbar.setTitle("Thể Loại Sách");
+        toolbar.setTitle(getString(R.string.setting_title));
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer_setting);
         navigationView = findViewById(R.id.navigation_view_setting);

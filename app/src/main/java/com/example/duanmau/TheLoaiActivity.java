@@ -43,50 +43,44 @@ public class TheLoaiActivity extends AppCompatActivity implements NavigationView
     NavigationView navigationView;
     TheLoaiDAO theLoaiDAO;
     Dialog dialog;
-    TheLoaiSach theLoaiSach=new TheLoaiSach();
+    TheLoaiSach theLoaiSach = new TheLoaiSach();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_the_loai_sach);
-//        getSupportActionBar().hide();
         anhXa();
         Menu();
         theLoaiDAO = new TheLoaiDAO(TheLoaiActivity.this);
 
-//        addTheLoai();
+//        addType();
         typeBookAdapter = new TypeBookAdapter(this, theLoaiDAO.getAllTheLoai());
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         recyclerView.setAdapter(typeBookAdapter);
+        typeBookAdapter.notifyDataSetChanged();
     }
 
-    
 
     private void anhXa() {
         recyclerView = findViewById(R.id.recTrangChu);
     }
 
-//    private void addTheLoai() {
-//        TheLoaiSach theLoaiSach = new TheLoaiSach("It1", "Công nghệ Thông tin", "Sách hướng dẫn lập trình", "30", R.color.color_it);
-//        TheLoaiSach theLoaiSach1 = new TheLoaiSach("Hs1", "Lịch Sử", "Sách hướng dẫn lịch sử", "10", R.color.color_his);
-//        TheLoaiSach theLoaiSach2 = new TheLoaiSach("Dl1", "Địa Lý", "Sách hướng dẫn Dịa lý", "50", R.color.color_phy);
-//        TheLoaiSach theLoaiSach3 = new TheLoaiSach("To1", "Toán", "Sách hướng dẫn toán", "31", R.color.color_math);
-//        TheLoaiSach theLoaiSach4 = new TheLoaiSach("TV1", "Tiếng Việt", "Sách hướng dẫn tiếng việt", "13", R.color.color_viet);
-//        TheLoaiSach theLoaiSach5 = new TheLoaiSach("Mk1", "Maketing", "Sách hướng dẫn Maketing", "7", R.color.color_mar);
-//        theLoaiDAO.inserTheLoai(theLoaiSach);
-//        theLoaiDAO.inserTheLoai(theLoaiSach1);
-//        theLoaiDAO.inserTheLoai(theLoaiSach2);
+    private void addType(){
+        TheLoaiSach theLoaiSach = new TheLoaiSach("it1","công nghệ máy tính","sách nói về lập trình",23,R.color.color_it);
+        TheLoaiSach theLoaiSach1 = new TheLoaiSach("hs1","Lịch sử cận đại","sách nói về lịch sử nhà nước",253,R.color.color_his);
+        TheLoaiSach theLoaiSach2 = new TheLoaiSach("ma1","Đại số","sách nói về toán học",93,R.color.color_math);
+        TheLoaiSach theLoaiSach3 = new TheLoaiSach("py1","vật lý kĩ thuật","sách nói về vật lý",23,R.color.color_phy);
+        theLoaiDAO.inserTheLoai(theLoaiSach);
+        theLoaiDAO.inserTheLoai(theLoaiSach1);
+        theLoaiDAO.inserTheLoai(theLoaiSach2);
 //        theLoaiDAO.inserTheLoai(theLoaiSach3);
-//        theLoaiDAO.inserTheLoai(theLoaiSach4);
-//        theLoaiDAO.inserTheLoai(theLoaiSach5);
-//
-//    }
+    }
+
 
     private void Menu() {
         toolbar = findViewById(R.id.tool_bar);
-        toolbar.setTitle("Thể Loại Sách");
+        toolbar.setTitle("Type Book");
         setSupportActionBar(toolbar);
-//        getSupportActionBar().hide();
         drawerLayout = findViewById(R.id.drawer_type);
         navigationView = findViewById(R.id.navigation_view_type);
         actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
@@ -140,38 +134,45 @@ public class TheLoaiActivity extends AppCompatActivity implements NavigationView
         addType.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                dialog=new Dialog(TheLoaiActivity.this);
+                dialog = new Dialog(TheLoaiActivity.this);
                 dialog.setContentView(R.layout.item_add_type_sach);
                 dialog.setCancelable(false);
                 dialog.setTitle("Add Type Book");
-                final EditText id,name,describe,location;
-                id=dialog.findViewById(R.id.edt_id_type_itemType);
-                name=dialog.findViewById(R.id.edt_name_type_itemType);
-                describe=dialog.findViewById(R.id.edt_description_type_itemType);
-                location=dialog.findViewById(R.id.edt_location_type_itemType);
-                final String tvId,tvName,tvDes;
-                tvId=id.getText().toString();
-                tvName=name.getText().toString();
-                tvDes=describe.getText().toString();
+                final EditText id, name, describe, location;
+                id = dialog.findViewById(R.id.edt_id_type_itemType);
+                name = dialog.findViewById(R.id.edt_name_type_itemType);
+                describe = dialog.findViewById(R.id.edt_description_type_itemType);
+                location = dialog.findViewById(R.id.edt_location_type_itemType);
+                final String tvId, tvName, tvDes;
+                tvId = id.getText().toString();
+                tvName = name.getText().toString();
+                tvDes = describe.getText().toString();
 
-                final Button btnSave,btnCancel;
-                btnCancel=dialog.findViewById(R.id.btn_cancel_itemType);
-                btnSave=dialog.findViewById(R.id.btn_save_itemType);
+                final Button btnSave, btnCancel;
+                btnCancel = dialog.findViewById(R.id.btn_cancel_itemType);
+                btnSave = dialog.findViewById(R.id.btn_save_itemType);
                 dialog.show();
 
                 btnSave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        if (tvId.equals("")||tvDes.equals("")||tvName.equals("")||location.getText().toString()){
-//                            Toast.makeText(TheLoaiActivity.this, "Bạn không được bỏ trống", Toast.LENGTH_SHORT).show();
-//                        }else {
+                        if (tvDes.equals("")) {
+                            Toast.makeText(TheLoaiActivity.this, "sai tên", Toast.LENGTH_SHORT).show();
+                            
+                        } else if (tvName.equals("")) {
+                            Toast.makeText(TheLoaiActivity.this, "sai đây", Toast.LENGTH_SHORT).show();
+
+                        } else if (location.getText().toString().equals("")) {
+                            Toast.makeText(TheLoaiActivity.this, "đây", Toast.LENGTH_SHORT).show();
+                        } else {
                             theLoaiSach.setMaTheLoai(tvId);
                             theLoaiSach.setTenTheLoai(tvName);
                             theLoaiSach.setMoTa(tvDes);
                             theLoaiSach.setViTri(Integer.parseInt(location.getText().toString()));
                             theLoaiDAO.inserTheLoai(theLoaiSach);
+                            typeBookAdapter.notifyDataSetChanged();
                             Toast.makeText(TheLoaiActivity.this, "Thêm Thể Loại Thành Công!", Toast.LENGTH_SHORT).show();
-//                        }
+                        }
                     }
                 });
 
@@ -184,6 +185,6 @@ public class TheLoaiActivity extends AppCompatActivity implements NavigationView
                 return false;
             }
         });
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 }

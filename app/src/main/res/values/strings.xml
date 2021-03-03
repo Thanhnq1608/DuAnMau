@@ -34,9 +34,19 @@
     <string name="dialog_exit_title">Do you want to exit the application?</string>
     <string name="dialog_exit_yes">Yes</string>
     <string name="dialog_exit_no">No</string>
-<!--fogetpass-->
+    <!--fogetpass-->
     <string name="fogetpass_edi_hint_pass">New PassWord</string>
     <string name="fogetpass_edi_hint_repass">Repeat PassWord</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    
+<!--    TiTle-->
+    <string name="bill_title">Bill</string>
+    <string name="book_title">Book</string>
+    <string name="setting_title">Setting</string>
+    <string name="setting_btn_languagee">Language</string>
+    <string name="setting_btn_screen">Screen Mode</string>
+    
 
 </resources>

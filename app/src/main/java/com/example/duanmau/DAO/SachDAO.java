@@ -54,8 +54,8 @@ public class SachDAO {
     }
 
     //getAll
-    public List<Sach> getAllSach() {
-        List<Sach> dsSach = new ArrayList<>();
+    public ArrayList<Sach> getAllSach() {
+        ArrayList<Sach> dsSach = new ArrayList<>();
         Cursor c = db.query(TABLE_NAME, null, null, null, null, null, null);
         c.moveToFirst();
         while (c.isAfterLast() == false) {

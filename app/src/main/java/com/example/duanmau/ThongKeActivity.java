@@ -12,7 +12,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.example.duanmau.DAO.HoaDonChiTietDAO;
 import com.example.duanmau.LOGIN.LogInActivity;
 import com.google.android.material.navigation.NavigationView;
 
@@ -21,16 +23,25 @@ public class ThongKeActivity extends AppCompatActivity implements NavigationView
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     NavigationView navigationView;
+    TextView tvNgay, tvThang, tvNam;
+    HoaDonChiTietDAO hoaDonChiTietDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thong_ke);
         Menu();
+        tvNgay = (TextView) findViewById(R.id.tvThongKeNgay);
+        tvThang = (TextView) findViewById(R.id.tv_money_month);
+        tvNam = (TextView) findViewById(R.id.tv_money_year);
+        hoaDonChiTietDAO = new HoaDonChiTietDAO(this);
+        tvNgay.setText("Hôm nay: "+hoaDonChiTietDAO.getDoanhThuTheoNgay());
+        tvThang.setText("Tháng này: "+hoaDonChiTietDAO.getDoanhThuTheoThang());
+        tvNam.setText("Năm này: "+hoaDonChiTietDAO.getDoanhThuTheoNam());
     }
 
     private void Menu() {
         toolbar = findViewById(R.id.tool_bar);
-        toolbar.setTitle("Thể Loại Sách");
+        toolbar.setTitle("Statistical");
         setSupportActionBar(toolbar);
 //        getSupportActionBar().hide();
         drawerLayout = findViewById(R.id.drawer_thongke);

@@ -1,21 +1,26 @@
 package com.example.duanmau.adapter;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.duanmau.DAO.HoaDonDAO;
 import com.example.duanmau.R;
 import com.example.duanmau.model.HoaDon;
 import com.example.duanmau.model.TheLoaiSach;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
@@ -43,7 +48,8 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BillAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BillAdapter.ViewHolder holder, final int position) {
+        final HoaDonDAO hoaDonDAO=new HoaDonDAO(context);
         final HoaDon hoaDon = billList.get(position);
         if (billList == null) {
             return;
@@ -51,6 +57,32 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         holder.imgBill.setBackgroundColor(R.drawable.icon_bill);
         holder.tvNgayMua.setText(String.valueOf(hoaDon.getNgayMua()));
         holder.tvId.setText(hoaDon.getMaHoaDon());
+        holder.imgBill.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                final AlertDialog.Builder builder =new AlertDialog.Builder(context,R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+                builder.setTitle("bạn chắc chắn muốn xóa!");
+                builder.setPositiveButton(String.valueOf(R.string.dialog_exit_yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        try {
+                            hoaDonDAO.deleteHoaDonByID(hoaDonDAO.getAllHoaDon().get(position).getMaHoaDon());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        Toast.makeText(context, "Xóa Thành công!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton(String.valueOf(R.string.dialog_exit_no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
+                return false;
+            }
+        });
     }
 
     @Override

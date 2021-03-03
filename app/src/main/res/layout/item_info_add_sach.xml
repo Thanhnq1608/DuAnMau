@@ -7,33 +7,41 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/img_btn_x"
+            android:layout_gravity="end"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/img_x_info_book"/>
 
-        <Spinner
-            android:id="@+id/spn_ten_type_itemAđSach"
+        <TextView
+            android:id="@+id/tv_id_type_infoBook"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
             />
 
-        <EditText
-            android:id="@+id/edt_id_addBook"
+        <TextView
+            android:id="@+id/tv_id_infoBook"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:hint="mã sách" />
 
-        <EditText
-            android:id="@+id/edt_name_addBook"
+        <TextView
+            android:id="@+id/tv_name_infoBook"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:hint="tên sách" />
 
-        <EditText
-            android:id="@+id/edt_nxb_addBook"
+        <TextView
+            android:id="@+id/tv_nxb_infoBook"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
@@ -41,53 +49,32 @@
 
             android:hint="NXB sách" />
 
-        <EditText
-            android:id="@+id/edt_tacGia_addBook"
+        <TextView
+            android:id="@+id/tv_tacGia_infoBook"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:hint="Tác giả sách" />
 
-        <EditText
+        <TextView
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:id="@+id/edt_soLuong_addBook"
+            android:id="@+id/tv_soLuong_infoBook"
             android:inputType="number"
             android:hint="Số Lượng" />
 
-        <EditText
+        <TextView
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:id="@+id/edt_price_addBook"
+            android:id="@+id/tv_price_infoBook"
             android:inputType="number"
             android:hint="Giá Bán" />
         <!--            android:id="@+id/"-->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_save_itemAddSach"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="50dp"
-                android:text="Save"></Button>
-
-            <Button
-                android:id="@+id/btn_cancel_itemAddSach"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="50dp"
-                android:text="Cancel"></Button>
-        </LinearLayout>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".HoaDonChiTietActivity"></activity>
         <activity
             android:name=".SettingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ThongKeActivity"
             android:screenOrientation="portrait"
@@ -24,10 +25,7 @@
         <activity
             android:name=".UserActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".SachActivity"
             android:screenOrientation="portrait"
@@ -35,21 +33,17 @@
         <activity
             android:name=".TheLoaiActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-<intent-filter>
-    <action android:name="android.intent.action.MAIN" />
-
-    <category android:name="android.intent.category.LAUNCHER" />
-</intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".LOGIN.ChangePassActivity" />
         <activity android:name=".LOGIN.FogetPassActivity" />
         <activity android:name=".LOGIN.SignInActivity" />
-        <activity android:name=".LOGIN.LogInActivity">
-
-        </activity>
+        <activity android:name=".LOGIN.LogInActivity"></activity>
         <activity android:name=".ChaoActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

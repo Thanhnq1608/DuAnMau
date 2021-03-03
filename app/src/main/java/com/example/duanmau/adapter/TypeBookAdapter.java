@@ -1,8 +1,10 @@
 package com.example.duanmau.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +62,28 @@ public class TypeBookAdapter extends RecyclerView.Adapter<TypeBookAdapter.ViewHo
         tv_moTa = view.findViewById(R.id.tv_moTa_infoType);
         tv_location = view.findViewById(R.id.tv_location_infoType);
         final ImageView btn_exit = view.findViewById(R.id.btn_exit);
+        holder.colorBack.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
+                builder.setTitle("bạn chắc chắn muốn xóa!");
+                builder.setPositiveButton(String.valueOf(R.string.dialog_exit_yes), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        theLoaiDAO.deleteTheLoaiByID(theLoaiDAO.getAllTheLoai().get(position).getMaTheLoai());
+                        Toast.makeText(context, "Xóa Thành công!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setNegativeButton(String.valueOf(R.string.dialog_exit_no), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                builder.show();
+                return false;
+            }
+        });
         holder.tvDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +101,9 @@ public class TypeBookAdapter extends RecyclerView.Adapter<TypeBookAdapter.ViewHo
                 });
 
             }
+
         });
+
     }
 
     @Override

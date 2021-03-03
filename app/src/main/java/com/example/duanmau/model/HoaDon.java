@@ -14,6 +14,9 @@ public class HoaDon {
         this.ngayMua = ngayMua;
     }
 
+    public HoaDon(String maHoaDon, int i) {
+    }
+
     public String getMaHoaDon() {
         return maHoaDon;
     }
