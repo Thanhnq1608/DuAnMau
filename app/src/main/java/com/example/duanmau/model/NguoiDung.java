@@ -3,18 +3,9 @@ package com.example.duanmau.model;
 public class NguoiDung {
     private String userName;
     private String password;
+    private String gioiTinh;
     private String phone;
     private String hoTen;
-
-    public NguoiDung() {
-    }
-
-    public NguoiDung(String userName, String password, String phone, String hoTen) {
-        this.userName = userName;
-        this.password = password;
-        this.phone = phone;
-        this.hoTen = hoTen;
-    }
 
     public String getUserName() {
         return userName;
@@ -30,6 +21,14 @@ public class NguoiDung {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getGioiTinh() {
+        return gioiTinh;
+    }
+
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
 
     public String getPhone() {
@@ -48,11 +47,23 @@ public class NguoiDung {
         this.hoTen = hoTen;
     }
 
+    public NguoiDung(String userName, String password, String gioiTinh, String phone, String hoTen) {
+        this.userName = userName;
+        this.password = password;
+        this.gioiTinh = gioiTinh;
+        this.phone = phone;
+        this.hoTen = hoTen;
+    }
+
+    public NguoiDung() {
+    }
+
     @Override
     public String toString() {
         return "NguoiDung{" +
                 "userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
+                ", gioiTinh='" + gioiTinh + '\'' +
                 ", phone='" + phone + '\'' +
                 ", hoTen='" + hoTen + '\'' +
                 '}';

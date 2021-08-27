@@ -16,7 +16,7 @@ public class NguoiDungDAO {
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
     public static final String TABLE_NAME = "NguoiDung";
-    public static final String SQL_NGUOI_DUNG = "CREATE TABLE NguoiDung (username text primary key, password text, phone text, hoten text);";
+    public static final String SQL_NGUOI_DUNG = "CREATE TABLE NguoiDung (username text primary key, password text, phone text, hoten text,gioitinh text);";
     public static final String TAG = "NguoiDungDAO";
 
     public NguoiDungDAO(Context context) {
@@ -31,6 +31,7 @@ public class NguoiDungDAO {
         values.put("password", nd.getPassword());
         values.put("phone", nd.getPhone());
         values.put("hoten", nd.getHoTen());
+        values.put("gioitinh",nd.getGioiTinh());
         try {
             if (db.insert(TABLE_NAME, null, values) == -1) {
                 return -1;
@@ -52,6 +53,7 @@ public class NguoiDungDAO {
             ee.setPassword(c.getString(1));
             ee.setPhone(c.getString(2));
             ee.setHoTen(c.getString(3));
+            ee.setGioiTinh(c.getString(4));
             dsNguoiDung.add(ee);
             Log.d("//=====", ee.toString());
             c.moveToNext();

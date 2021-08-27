@@ -53,7 +53,7 @@ public class TheLoaiActivity extends AppCompatActivity implements NavigationView
         Menu();
         theLoaiDAO = new TheLoaiDAO(TheLoaiActivity.this);
 
-//        addType();
+        addType();
         typeBookAdapter = new TypeBookAdapter(this, theLoaiDAO.getAllTheLoai());
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         recyclerView.setAdapter(typeBookAdapter);
@@ -66,13 +66,14 @@ public class TheLoaiActivity extends AppCompatActivity implements NavigationView
     }
 
     private void addType(){
-        TheLoaiSach theLoaiSach = new TheLoaiSach("it1","công nghệ máy tính","sách nói về lập trình",23,R.color.color_it);
-        TheLoaiSach theLoaiSach1 = new TheLoaiSach("hs1","Lịch sử cận đại","sách nói về lịch sử nhà nước",253,R.color.color_his);
-        TheLoaiSach theLoaiSach2 = new TheLoaiSach("ma1","Đại số","sách nói về toán học",93,R.color.color_math);
-        TheLoaiSach theLoaiSach3 = new TheLoaiSach("py1","vật lý kĩ thuật","sách nói về vật lý",23,R.color.color_phy);
+        TheLoaiSach theLoaiSach = new TheLoaiSach("it1","công nghệ máy tính","sách nói về lập trình",23,"https://i.pinimg.com/564x/fb/67/3b/fb673b887235fbe2ec62a26c138d1a04.jpg");
+        TheLoaiSach theLoaiSach1 = new TheLoaiSach("hs1","Lịch sử cận đại","sách nói về lịch sử nhà nước",253,"https://i.pinimg.com/564x/23/15/d0/2315d04db1530eadb88a76e2351ae4b0.jpg");
+        TheLoaiSach theLoaiSach2 = new TheLoaiSach("ma1","Đại số","sách nói về toán học",93,"https://i.pinimg.com/564x/a7/e6/bb/a7e6bb24e57f1f9b534e4f0ae4d41c92.jpg");
+        TheLoaiSach theLoaiSach3 = new TheLoaiSach("py1","vật lý kĩ thuật","sách nói về vật lý",23,"https://wallpapercave.com/wp/wp2175403.jpg");
         theLoaiDAO.inserTheLoai(theLoaiSach);
         theLoaiDAO.inserTheLoai(theLoaiSach1);
         theLoaiDAO.inserTheLoai(theLoaiSach2);
+        theLoaiDAO.inserTheLoai(theLoaiSach3);
 //        theLoaiDAO.inserTheLoai(theLoaiSach3);
     }
 

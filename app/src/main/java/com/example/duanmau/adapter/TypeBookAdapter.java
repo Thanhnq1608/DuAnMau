@@ -5,6 +5,13 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +26,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.duanmau.DAO.NguoiDungDAO;
 import com.example.duanmau.DAO.TheLoaiDAO;
 import com.example.duanmau.R;
+import com.example.duanmau.SachActivity;
+import com.example.duanmau.TheLoaiActivity;
 import com.example.duanmau.model.TheLoaiSach;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class TypeBookAdapter extends RecyclerView.Adapter<TypeBookAdapter.ViewHolder> {
     private Context context;
+    Bitmap b;
+    BitmapDrawable drawable;
     ArrayList<TheLoaiSach> loaiSachList;
     Dialog dialog;
 
@@ -41,6 +54,7 @@ public class TypeBookAdapter extends RecyclerView.Adapter<TypeBookAdapter.ViewHo
         return viewHolder;
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull TypeBookAdapter.ViewHolder holder, final int position) {
         final TheLoaiDAO theLoaiDAO = new TheLoaiDAO(context);
@@ -49,8 +63,33 @@ public class TypeBookAdapter extends RecyclerView.Adapter<TypeBookAdapter.ViewHo
         if (loaiSachList == null) {
             return;
         }
-        holder.colorBack.setBackgroundResource(theLoaiDAO.getAllTheLoai().get(position).getMauNen());
+        final Thread t1 =  new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // lấy dứ liệu về
+                final Drawable b = ImageLoading(loaiSachList.get(position).getMauNen());
+                //đẩy lên giao diện
+                holder.colorBack.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        holder.colorBack.setBackground(b);
+                    }
+                });
+            }
+        });
+        t1.start();//bắt đầu thực hiện tiến trình
+
+        holder.colorBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(context, SachActivity.class);
+                intent.putExtra("maTheLoai",loaiSachList.get(position).getMaTheLoai());
+                context.startActivity(intent);
+
+            }
+        });
         holder.tvTenLoaiSach.setText(theLoaiSach.getTenTheLoai());
+        holder.tvTenLoaiSach.setShadowLayer(1f, 0f, 0f, Color.parseColor("#ffffff"));
 
         dialog = new Dialog(context);
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -104,6 +143,21 @@ public class TypeBookAdapter extends RecyclerView.Adapter<TypeBookAdapter.ViewHo
 
         });
 
+    }
+
+    public Drawable ImageLoading(String str){
+
+        b =null;
+        URL url;
+        try {
+            url=new URL(str);
+            b = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            drawable = new BitmapDrawable(b);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return drawable;
     }
 
     @Override

@@ -12,7 +12,7 @@ public class Sach {
     public Sach() {
     }
 
-    public Sach(String maSach, String maTheLoai, String tenSach, String tacGia, String NXB, double giaBia, int soLuong) {
+    public Sach( String maTheLoai,String maSach, String tenSach, String tacGia, String NXB, double giaBia, int soLuong) {
         this.maSach = maSach;
         this.maTheLoai = maTheLoai;
         this.tenSach = tenSach;

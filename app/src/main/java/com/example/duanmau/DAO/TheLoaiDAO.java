@@ -16,7 +16,7 @@ public class TheLoaiDAO {
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
     public static final String TABLE_NAME = "TheLoai";
-    public static final String SQL_THE_LOAI ="CREATE TABLE TheLoai (matheloai text primary key, tentheloai text, mota text, vitri int);";
+    public static final String SQL_THE_LOAI ="CREATE TABLE TheLoai (matheloai text primary key, tentheloai text, mota text, vitri int,mauNen text);";
     public static final String TAG = "TheLoaiDAO";
     public TheLoaiDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
@@ -29,6 +29,7 @@ public class TheLoaiDAO {
         values.put("tentheloai",theLoai.getTenTheLoai());
         values.put("mota",theLoai.getMoTa());
         values.put("vitri",theLoai.getViTri());
+        values.put("mauNen",theLoai.getMauNen());
         try {
             if(db.insert(TABLE_NAME,null,values)== -1){
                 return -1;
@@ -49,6 +50,7 @@ public class TheLoaiDAO {
             ee.setTenTheLoai(c.getString(1));
             ee.setMoTa(c.getString(2));
             ee.setViTri(c.getInt(3));
+            ee.setMauNen(c.getString(4));
             dsTheLoai.add(ee);
             Log.d("//=====",ee.toString());
             c.moveToNext();
@@ -63,6 +65,7 @@ public class TheLoaiDAO {
         values.put("tentheloai",theLoai.getTenTheLoai());
         values.put("mota",theLoai.getMoTa());
         values.put("vitri",theLoai.getViTri());
+        values.put("mauNen",theLoai.getMauNen());
         int result = db.update(TABLE_NAME,values,"matheloai=?", new
                 String[]{theLoai.getMaTheLoai()});
         if (result == 0){

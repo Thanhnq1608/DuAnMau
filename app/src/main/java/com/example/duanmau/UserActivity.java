@@ -45,7 +45,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         Menu();
         nguoiDungDAO=new NguoiDungDAO(UserActivity.this);
 
-//        addUser();?
+        addUser();
         userAdapter = new UserAdapter(this,nguoiDungDAO.getAllNguoiDung() );
         recUser.setLayoutManager(new GridLayoutManager(this, 1));
         recUser.setAdapter(userAdapter);
@@ -57,10 +57,10 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void addUser(){
-        NguoiDung nguoiDung =new NguoiDung("Thanh","thanh123","12344","thanh567");
-        NguoiDung nguoiDung1 =new NguoiDung("Thanh12","thanh123","1245344","thanh567");
-        NguoiDung nguoiDung2 =new NguoiDung("Thanh323","thanh123","12365444","thanh567");
-        NguoiDung nguoiDung3 =new NguoiDung("Thanh443","thanh123","12364544","thanh567");
+        NguoiDung nguoiDung =new NguoiDung("Thanh","thanh123","Nam","12344","thanh567");
+        NguoiDung nguoiDung1 =new NguoiDung("Thanh12","thanh123","Nữ","1245344","thanh567");
+        NguoiDung nguoiDung2 =new NguoiDung("Thanh323","thanh123","Nam","12365444","thanh567");
+        NguoiDung nguoiDung3 =new NguoiDung("Thanh443","thanh123","Nữ","12364544","thanh567");
         nguoiDungDAO.inserNguoiDung(nguoiDung);
         nguoiDungDAO.inserNguoiDung(nguoiDung1);
         nguoiDungDAO.inserNguoiDung(nguoiDung2);

@@ -58,7 +58,7 @@ public class FogetPassActivity extends AppCompatActivity {
                 } else {
                     SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
                     String strUserName = pref.getString("USERNAME", user.getText().toString());
-                    NguoiDung username = new NguoiDung(strUserName, pass.getText().toString(), "",
+                    NguoiDung username = new NguoiDung(strUserName, pass.getText().toString(), "","",
                             "");
                     if (nguoiDungDAO.changePasswordNguoiDung(username) > 0) {
                         Toast.makeText(getApplicationContext(), "Lưu thành công",

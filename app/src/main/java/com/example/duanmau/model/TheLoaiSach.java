@@ -7,25 +7,17 @@ public class TheLoaiSach {
     private String tenTheLoai;
     private String moTa;
     private int viTri;
-    private int mauNen;
+    private String mauNen;
 
-    public int getMauNen() {
-        return mauNen;
+    public TheLoaiSach() {
     }
 
-    public void setMauNen(int mauNen) {
-        this.mauNen = mauNen;
-    }
-
-    public TheLoaiSach(String maTheLoai, String tenTheLoai, String moTa, int viTri,int mauNen) {
+    public TheLoaiSach(String maTheLoai, String tenTheLoai, String moTa, int viTri, String mauNen) {
         this.maTheLoai = maTheLoai;
         this.tenTheLoai = tenTheLoai;
         this.moTa = moTa;
         this.viTri = viTri;
-        this.mauNen=mauNen;
-    }
-
-    public TheLoaiSach() {
+        this.mauNen = mauNen;
     }
 
     public String getMaTheLoai() {
@@ -60,6 +52,14 @@ public class TheLoaiSach {
         this.viTri = viTri;
     }
 
+    public String getMauNen() {
+        return mauNen;
+    }
+
+    public void setMauNen(String mauNen) {
+        this.mauNen = mauNen;
+    }
+
     @Override
     public String toString() {
         return "TheLoaiSach{" +
@@ -67,7 +67,7 @@ public class TheLoaiSach {
                 ", tenTheLoai='" + tenTheLoai + '\'' +
                 ", moTa='" + moTa + '\'' +
                 ", viTri=" + viTri +
-                ", mauNen=" + mauNen +
+                ", mauNen='" + mauNen + '\'' +
                 '}';
     }
 }

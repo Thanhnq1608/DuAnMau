@@ -5,4 +5,9 @@
     android:id="@+id/menu_add_book"
     android:title="Add"
     app:showAsAction="ifRoom|collapseActionView"/>
+    <item
+        android:id="@+id/action_menu"
+        android:title="Search"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
 </menu>

@@ -1,5 +1,6 @@
 package com.example.duanmau.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -8,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -22,15 +25,18 @@ import com.example.duanmau.R;
 import com.example.duanmau.model.Sach;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class SachAdapter extends RecyclerView.Adapter<SachAdapter.ViewHolder> {
+public class SachAdapter extends RecyclerView.Adapter<SachAdapter.ViewHolder> implements Filterable {
     private Context context;
     ArrayList<Sach> sachList;
+    ArrayList<Sach> sachListFull;
     Dialog dialog;
 
     public SachAdapter(Context context, ArrayList<Sach> loaiSachList) {
         this.context = context;
         this.sachList = loaiSachList;
+        sachListFull=new ArrayList<>(sachList);
     }
 
     @NonNull
@@ -40,7 +46,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.ViewHolder> {
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
-
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull SachAdapter.ViewHolder holder, final int position) {
         final SachDAO sachDAO =new SachDAO(context);
@@ -75,7 +81,7 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.ViewHolder> {
                 nameSach.setText(sachDAO.getAllSach().get(position).getTenSach());
                 nXBSach.setText(sachDAO.getAllSach().get(position).getNXB());
                 tacGia.setText(sachDAO.getAllSach().get(position).getTacGia());
-                soLuong.setText(sachDAO.getAllSach().get(position).getSoLuong());
+                soLuong.setText(String.valueOf(sachDAO.getAllSach().get(position).getSoLuong()));
                 price.setText(String.valueOf(sachDAO.getAllSach().get(position).getGiaBia()));
                 dialog.setContentView(viewInfo);
                 dialog.show();
@@ -119,6 +125,41 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.ViewHolder> {
         }
         return 0;
     }
+
+    @Override
+    public Filter getFilter() {
+        return mFilter;
+    }
+    private Filter mFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Sach> filteredList = new ArrayList<>();
+
+            if (constraint==null || constraint.length() == 0){
+                filteredList.addAll(sachListFull);
+            }else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Sach item : sachListFull){
+                    if (item.getTenSach().toLowerCase().contains(filterPattern)){
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values=filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            sachList.clear();
+            sachListFull.addAll((List)results.values);
+            notifyDataSetChanged();
+        }
+    };
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgSach;

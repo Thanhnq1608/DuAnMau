@@ -34,8 +34,7 @@ public class ChangePassActivity extends AppCompatActivity {
                 SharedPreferences pref = getSharedPreferences("USER_FILE",MODE_PRIVATE);
                 String strUserName = pref.getString("USERNAME",user.getText().toString());
                 nguoiDungDAO = new NguoiDungDAO(ChangePassActivity.this);
-                NguoiDung username = new NguoiDung(strUserName, pass.getText().toString(), "",
-                        "");
+                NguoiDung username = new NguoiDung(strUserName, pass.getText().toString(), "", "","");
                 try {
                     if (validateForm()>0){
                         if (nguoiDungDAO.changePasswordNguoiDung(username) > 0) {

@@ -28,8 +28,8 @@ public class SachDAO {
     //insert
     public int inserSach(Sach s) {
         ContentValues values = new ContentValues();
-        values.put("maSach", s.getMaSach());
         values.put("maTheLoai", s.getMaTheLoai());
+        values.put("maSach", s.getMaSach());
         values.put("tensach", s.getTenSach());
         values.put("tacGia", s.getTacGia());
         values.put("NXB", s.getNXB());
@@ -60,8 +60,8 @@ public class SachDAO {
         c.moveToFirst();
         while (c.isAfterLast() == false) {
             Sach s = new Sach();
-            s.setMaSach(c.getString(0));
-            s.setMaTheLoai(c.getString(1));
+            s.setMaSach(c.getString(1));
+            s.setMaTheLoai(c.getString(0));
             s.setTenSach(c.getString(2));
             s.setTacGia(c.getString(3));
             s.setNXB(c.getString(4));
@@ -141,8 +141,8 @@ public class SachDAO {
                     null);
             c.moveToFirst();
             while (c.isAfterLast() == false) {
-                s.setMaSach(c.getString(0));
-                s.setMaTheLoai(c.getString(1));
+                s.setMaSach(c.getString(1));
+                s.setMaTheLoai(c.getString(0));
                 s.setTenSach(c.getString(2));
                 s.setTacGia(c.getString(3));
                 s.setNXB(c.getString(4));
@@ -171,8 +171,8 @@ public class SachDAO {
         c.moveToFirst();
         while (c.isAfterLast() == false) {
             s = new Sach();
-            s.setMaSach(c.getString(0));
-            s.setMaTheLoai(c.getString(1));
+            s.setMaSach(c.getString(1));
+            s.setMaTheLoai(c.getString(0));
             s.setTenSach(c.getString(2));
             s.setTacGia(c.getString(3));
             s.setNXB(c.getString(4));
@@ -198,8 +198,8 @@ public class SachDAO {
         while (c.isAfterLast() == false) {
             Log.d("//=====", c.getString(0));
             Sach s = new Sach();
-            s.setMaSach(c.getString(0));
-            s.setSoLuong(c.getInt(1));
+            s.setMaSach(c.getString(1));
+            s.setSoLuong(c.getInt(0));
             s.setGiaBia(0);
             s.setMaTheLoai("");
             s.setTenSach("");

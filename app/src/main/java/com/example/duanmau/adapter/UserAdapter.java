@@ -67,12 +67,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         final View view =inflater.inflate(R.layout.item_info_user,null);
         dialog.setCancelable(false);
         dialog.setTitle("Thông Tin Người Dùng");
-        final TextView tv_user, tv_name, tv_phone, tv_pass;
+        final TextView tv_user, tv_name, tv_phone, tv_pass,tv_sex;
         final ImageView img_ava,img_x;
         tv_user = view.findViewById(R.id.tv_user_info_user);
         tv_pass = view.findViewById(R.id.tv_pass_info_user);
         tv_name = view.findViewById(R.id.tv_name_info_user);
         tv_phone = view.findViewById(R.id.tv_phone_info_user);
+        tv_sex=view.findViewById(R.id.tv_sex_info_user);
         img_ava = view.findViewById(R.id.imgAva_info_user);
         img_x=view.findViewById(R.id.img_btn_x_infoUser);
         holder.imgUser.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +84,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 tv_name.setText(nguoiDungDAO.getAllNguoiDung().get(position).getHoTen());
                 tv_phone.setText(nguoiDungDAO.getAllNguoiDung().get(position).getPhone());
                 tv_pass.setText(nguoiDungDAO.getAllNguoiDung().get(position).getPassword());
+                tv_sex.setText(nguoiDungDAO.getAllNguoiDung().get(position).getGioiTinh());
                 dialog.setContentView(view);
                 dialog.show();
                 img_x.setOnClickListener(new View.OnClickListener() {

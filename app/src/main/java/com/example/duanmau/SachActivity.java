@@ -3,6 +3,7 @@ package com.example.duanmau;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -40,7 +41,7 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     NavigationView navigationView;
     RecyclerView recSach;
-    ArrayList<Sach> sachList;
+    ArrayList<Sach> sachWithTheLoai=new ArrayList<>();
     SachAdapter sachAdapter;
     SachDAO sachDAO;
 
@@ -54,42 +55,29 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
         Menu();
         sachDAO = new SachDAO(SachActivity.this);
 
-//        addSach();
-        sachAdapter = new SachAdapter(this, sachDAO.getAllSach());
-        recSach.setLayoutManager(new GridLayoutManager(this, 2));
-        recSach.setAdapter(sachAdapter);
-        sachAdapter.notifyDataSetChanged();
+        Intent intent = this.getIntent();
+        String maTL=intent.getStringExtra("maTheLoai");
+        if (maTL==null){
+            sachAdapter = new SachAdapter(this, sachDAO.getAllSach());
+            recSach.setLayoutManager(new GridLayoutManager(this, 2));
+            recSach.setAdapter(sachAdapter);
+            sachAdapter.notifyDataSetChanged();
+        }else {
+            for (int i = 0;i<sachDAO.getAllSach().size();i++){
+                if (sachDAO.getAllSach().get(i).getMaTheLoai().equalsIgnoreCase(maTL)){
+                    sachWithTheLoai.add(sachDAO.getAllSach().get(i));
+                    sachAdapter = new SachAdapter(this, sachWithTheLoai);
+                    recSach.setLayoutManager(new GridLayoutManager(this, 2));
+                    recSach.setAdapter(sachAdapter);
+                    sachAdapter.notifyDataSetChanged();
+                }
+            }
+        }
     }
 
     private void anhXa() {
         recSach = findViewById(R.id.recSach);
     }
-
-//    private void addSach() {
-//        Sach sach0 = new Sach("it1", "it1", "yêu công nghệ", "thanh", "kim đồng", 20000, 100);
-//        Sach sach1 = new Sach("it2", "it1", "yêu công nghệ", "thanh", "kim đồng", 20000, 100);
-//        Sach sach2 = new Sach("it3", "it1", "yêu công nghệ", "thanh", "kim đồng", 20000, 100);
-//        Sach sach3 = new Sach("it4", "it1", "yêu công nghệ", "thanh", "kim đồng", 20000, 100);
-//        Sach sach4 = new Sach("it5", "it1", "yêu công nghệ", "thanh", "kim đồng", 20000, 100);
-//        Sach sach5 = new Sach("it6", "it1", "yêu công nghệ", "thanh", "kim đồng", 20000, 100);
-//        Sach sach6 = new Sach("it7", "it1", "yêu công nghệ", "thanh", "kim đồng", 20000, 100);
-//        Sach sach7 = new Sach("it8", "it1", "yêu công nghệ", "thanh", "kim đồng", 20000, 100);
-//        Sach sach8 = new Sach("it9", "it1", "yêu công nghệ", "thanh", "kim đồng", 20000, 100);
-//        Sach sach9 = new Sach("it10", "it1", "yêu công nghệ", "thanh", "kim đồng", 20000, 100);
-//        Sach sach10 = new Sach("it11", "it1", "yêu công nghệ", "thanh", "kim đồng", 20000, 100);
-//        sachDAO.getAllSach().add(sach0);
-//        sachDAO.getAllSach().add(sach1);
-//        sachDAO.getAllSach().add(sach2);
-//        sachDAO.getAllSach().add(sach3);
-//        sachDAO.getAllSach().add(sach4);
-//        sachDAO.getAllSach().add(sach5);
-//        sachDAO.getAllSach().add(sach6);
-//        sachDAO.getAllSach().add(sach7);
-//        sachDAO.getAllSach().add(sach8);
-//        sachDAO.getAllSach().add(sach9);
-//        sachDAO.getAllSach().add(sach10);
-//
-//    }
 
     private void Menu() {
         toolbar = findViewById(R.id.tool_bar);
@@ -144,6 +132,20 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_book, menu);
+        MenuItem searchItem = menu.findItem(R.id.action_menu);
+        androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                sachAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
         return true;
     }
 
@@ -174,8 +176,6 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list);
         adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         spn_type.setAdapter(adapter);
-//        spn_type.setPrompt("Chọn tên thể loại!");
-        Toast.makeText(this, "đây"+theLoaiDAO.getAllTheLoai().size(), Toast.LENGTH_SHORT).show();
 
         switch (item.getItemId()) {
             case R.id.menu_add_book:
@@ -200,8 +200,8 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
                             sach.setTenSach(nameSach.getText().toString());
                             sachDAO.inserSach(sach);
                             Toast.makeText(SachActivity.this, "Thêm sách thành công!", Toast.LENGTH_SHORT).show();
-                            sachAdapter.notifyDataSetChanged();
                             dialog.dismiss();
+                            sachAdapter.notifyDataSetChanged();
                         }
                     }
                 });
@@ -211,6 +211,7 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
                         dialog.dismiss();
                     }
                 });
+                break;
         }
         return super.onOptionsItemSelected(item);
     }

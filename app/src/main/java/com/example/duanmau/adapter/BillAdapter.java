@@ -1,5 +1,6 @@
 package com.example.duanmau.adapter;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -46,7 +47,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         });
         return viewHolder;
     }
-
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull BillAdapter.ViewHolder holder, final int position) {
         final HoaDonDAO hoaDonDAO=new HoaDonDAO(context);
