@@ -3,8 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/activity_change_pass.xml" value="0.10833333333333334" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/activity_foget_pass.xml" value="0.10833333333333334" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/activity_hoa_don_chi_tiet.xml" value="0.264" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/activity_log_in.xml" value="0.10833333333333334" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/activity_sign_in.xml" value="0.10833333333333334" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/activity_thong_ke.xml" value="0.10833333333333334" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/drawer_header.xml" value="0.10833333333333334" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/fragment_date_picker.xml" value="0.10833333333333334" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/item_add_bill.xml" value="0.4" />
         <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/item_add_sach.xml" value="0.2" />
-        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/item_the_loai_sach.xml" value="0.1203125" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/item_add_type_sach.xml" value="0.20199275362318841" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/item_bill.xml" value="0.10833333333333334" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/item_cart.xml" value="0.11614583333333334" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/item_info_add_sach.xml" value="0.20199275362318841" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/item_info_sach.xml" value="0.20199275362318841" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/item_info_type.xml" value="0.4" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/item_sach.xml" value="0.2" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/layout/item_the_loai_sach.xml" value="0.176" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/menu/add_book.xml" value="0.24739583333333334" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/menu/add_type.xml" value="0.21666666666666667" />
+        <entry key="..\:/FPT_POLY/CNTT/DuAnMau/app/src/main/res/menu/drawer_menu.xml" value="0.4" />
       </map>
     </option>
   </component>

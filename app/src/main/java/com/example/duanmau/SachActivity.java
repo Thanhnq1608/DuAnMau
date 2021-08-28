@@ -10,7 +10,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.accounts.AbstractAccountAuthenticator;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -30,7 +29,7 @@ import com.example.duanmau.DAO.SachDAO;
 import com.example.duanmau.DAO.TheLoaiDAO;
 import com.example.duanmau.LOGIN.LogInActivity;
 import com.example.duanmau.adapter.SachAdapter;
-import com.example.duanmau.model.Sach;
+import com.example.duanmau.model.Book;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     NavigationView navigationView;
     RecyclerView recSach;
-    ArrayList<Sach> sachWithTheLoai=new ArrayList<>();
+    ArrayList<Book> bookWithTheLoai =new ArrayList<>();
     SachAdapter sachAdapter;
     SachDAO sachDAO;
 
@@ -65,14 +64,35 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
         }else {
             for (int i = 0;i<sachDAO.getAllSach().size();i++){
                 if (sachDAO.getAllSach().get(i).getMaTheLoai().equalsIgnoreCase(maTL)){
-                    sachWithTheLoai.add(sachDAO.getAllSach().get(i));
-                    sachAdapter = new SachAdapter(this, sachWithTheLoai);
+                    bookWithTheLoai.add(sachDAO.getAllSach().get(i));
+                    sachAdapter = new SachAdapter(this, bookWithTheLoai);
                     recSach.setLayoutManager(new GridLayoutManager(this, 2));
                     recSach.setAdapter(sachAdapter);
                     sachAdapter.notifyDataSetChanged();
                 }
             }
         }
+    }
+
+    private void addSach(){
+//        Book book =new Book("it1","1","Yêu Công Nghệ","Quang Thanh","Kim Đồng",20000,20);
+//        Book book1 =new Book("it1","2","Công Nghệ và Hiện Đại","Thanh","Kim Đồng",120000,20);
+//        Book book2 =new Book("py1","3","Vật Lý Học","Hoàng Anh","Kim Đồng",210000,20);
+//        Book book3 =new Book("py1","4","Những nhà Bác Học","Mạnh Hùng","Kim Đồng",130000,20);
+//        Book book4 =new Book("hs1","5","Lịch Sử Đảng","Nghiêm Đạt","Kim Đồng",250000,20);
+//        Book book5 =new Book("hs1","6","Triết học gia","Xuân Hoàng","Kim Đồng",220000,20);
+//        Book book6 =new Book("ma1","7","Những Con số","Bá Nam","Kim Đồng",150000,20);
+//        Book book7 =new Book("ma1","8","Nghệ thuật logic","Thị Bích","Kim Đồng",120000,20);
+        sachDAO.inserSach(new Book("it1","1","Yêu Công Nghệ","Quang Thanh","Kim Đồng",20000,20));
+//        sachDAO.inserSach(book1);
+//        sachDAO.inserSach(book2);
+//        sachDAO.inserSach(book3);
+//        sachDAO.inserSach(book4);
+//        sachDAO.inserSach(book5);
+//        sachDAO.inserSach(book6);
+//        sachDAO.inserSach(book7);
+
+
     }
 
     private void anhXa() {
@@ -132,40 +152,25 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.add_book, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_menu);
-        androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                sachAdapter.getFilter().filter(newText);
-                return false;
-            }
-        });
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         dialog = new Dialog(SachActivity.this);
-        View view =LayoutInflater.from(this).inflate(R.layout.item_add_sach,null);
         dialog.setCancelable(false);
-        dialog.setContentView(view);
-        final Spinner spn_type = view.findViewById(R.id.spn_ten_type_itemAđSach);
+        dialog.setContentView(R.layout.item_add_sach);
+        final Spinner spn_type = dialog.findViewById(R.id.spn_ten_type_itemAđSach);
         final EditText idSach, nameSach, nXBSach, tacGia, soLuong, price;
-        idSach = view.findViewById(R.id.edt_id_addBook);
-        nameSach = view.findViewById(R.id.edt_name_addBook);
-        nXBSach = view.findViewById(R.id.edt_nxb_addBook);
-        tacGia = view.findViewById(R.id.edt_tacGia_addBook);
-        soLuong = view.findViewById(R.id.edt_soLuong_addBook);
-        price = view.findViewById(R.id.edt_price_addBook);
+        idSach = dialog.findViewById(R.id.edt_id_addBook);
+        nameSach = dialog.findViewById(R.id.edt_name_addBook);
+        nXBSach = dialog.findViewById(R.id.edt_nxb_addBook);
+        tacGia = dialog.findViewById(R.id.edt_tacGia_addBook);
+        soLuong = dialog.findViewById(R.id.edt_soLuong_addBook);
+        price = dialog.findViewById(R.id.edt_price_addBook);
         final Button btn_save, btn_cancel;
-        btn_save = view.findViewById(R.id.btn_save_itemAddSach);
-        btn_cancel = view.findViewById(R.id.btn_cancel_itemAddSach);
+        btn_save = dialog.findViewById(R.id.btn_save_itemAddSach);
+        btn_cancel = dialog.findViewById(R.id.btn_cancel_itemAddSach);
 
         TheLoaiDAO theLoaiDAO = new TheLoaiDAO(SachActivity.this);
         ArrayList<String> list = new ArrayList<String>();
@@ -190,18 +195,18 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
                         } else if (checkid(idSach.getText().toString())) {
                             Toast.makeText(SachActivity.this, "ID đã tồn tại!", Toast.LENGTH_SHORT).show();
                         } else {
-                            Sach sach = new Sach();
-                            sach.setMaSach(idSach.getText().toString());
-                            sach.setMaTheLoai(spn_type.getSelectedItem().toString());
-                            sach.setGiaBia(Integer.parseInt(price.getText().toString()));
-                            sach.setNXB(nXBSach.getText().toString());
-                            sach.setSoLuong(Integer.parseInt(soLuong.getText().toString()));
-                            sach.setTacGia(tacGia.getText().toString());
-                            sach.setTenSach(nameSach.getText().toString());
-                            sachDAO.inserSach(sach);
+                            Book book = new Book();
+                            book.setMaSach(idSach.getText().toString());
+                            book.setMaTheLoai(spn_type.getSelectedItem().toString());
+                            book.setGiaBia(Integer.parseInt(price.getText().toString()));
+                            book.setNXB(nXBSach.getText().toString());
+                            book.setSoLuong(Integer.parseInt(soLuong.getText().toString()));
+                            book.setTacGia(tacGia.getText().toString());
+                            book.setTenSach(nameSach.getText().toString());
+                            sachDAO.inserSach(book);
+                            recreate();
                             Toast.makeText(SachActivity.this, "Thêm sách thành công!", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
-                            sachAdapter.notifyDataSetChanged();
                         }
                     }
                 });

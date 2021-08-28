@@ -1,21 +1,18 @@
 package com.example.duanmau.model;
 
-import com.example.duanmau.model.HoaDon;
-import com.example.duanmau.model.Sach;
-
 public class HoaDonChiTiet {
     private int maHDCT;
     private HoaDon hoaDon;
-    private Sach sach;
+    private Book book;
     private int soLuongMua;
 
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(int maHDCT, HoaDon hoaDon, Sach sach, int soLuongMua) {
+    public HoaDonChiTiet(int maHDCT, HoaDon hoaDon, Book book, int soLuongMua) {
         this.maHDCT = maHDCT;
         this.hoaDon = hoaDon;
-        this.sach = sach;
+        this.book = book;
         this.soLuongMua = soLuongMua;
     }
 
@@ -35,12 +32,12 @@ public class HoaDonChiTiet {
         this.hoaDon = hoaDon;
     }
 
-    public Sach getSach() {
-        return sach;
+    public Book getSach() {
+        return book;
     }
 
-    public void setSach(Sach sach) {
-        this.sach = sach;
+    public void setSach(Book book) {
+        this.book = book;
     }
 
     public int getSoLuongMua() {
@@ -56,7 +53,7 @@ public class HoaDonChiTiet {
         return "HoaDonChiTiet{" +
                 "maHDCT=" + maHDCT +
                 ", hoaDon=" + hoaDon +
-                ", sach=" + sach +
+                ", sach=" + book +
                 ", soLuongMua=" + soLuongMua +
                 '}';
     }

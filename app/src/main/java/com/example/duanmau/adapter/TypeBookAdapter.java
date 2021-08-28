@@ -89,31 +89,22 @@ public class TypeBookAdapter extends RecyclerView.Adapter<TypeBookAdapter.ViewHo
             }
         });
         holder.tvTenLoaiSach.setText(theLoaiSach.getTenTheLoai());
-        holder.tvTenLoaiSach.setShadowLayer(1f, 0f, 0f, Color.parseColor("#ffffff"));
 
-        dialog = new Dialog(context);
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View view = inflater.inflate(R.layout.item_info_type, null);
-        dialog.setTitle("Thông tin Thể Loại");
-        final TextView tv_id, tv_Name, tv_moTa, tv_location;
-        tv_id = view.findViewById(R.id.tv_id_infoType);
-        tv_Name = view.findViewById(R.id.tv_name_infoType);
-        tv_moTa = view.findViewById(R.id.tv_moTa_infoType);
-        tv_location = view.findViewById(R.id.tv_location_infoType);
-        final ImageView btn_exit = view.findViewById(R.id.btn_exit);
         holder.colorBack.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.Theme_AppCompat_DayNight_Dialog_Alert);
                 builder.setTitle("bạn chắc chắn muốn xóa!");
-                builder.setPositiveButton(String.valueOf(R.string.dialog_exit_yes), new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         theLoaiDAO.deleteTheLoaiByID(theLoaiDAO.getAllTheLoai().get(position).getMaTheLoai());
                         Toast.makeText(context, "Xóa Thành công!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context,TheLoaiActivity.class);
+                        context.startActivity(intent);
                     }
                 });
-                builder.setNegativeButton(String.valueOf(R.string.dialog_exit_no), new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -126,11 +117,20 @@ public class TypeBookAdapter extends RecyclerView.Adapter<TypeBookAdapter.ViewHo
         holder.tvDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog = new Dialog(context);
+                dialog.setContentView(R.layout.item_info_type);
+                dialog.setCancelable(false);
+                dialog.setTitle("Thông tin Thể Loại");
+                final TextView tv_id, tv_Name, tv_moTa, tv_location;
+                tv_id = dialog.findViewById(R.id.tv_id_infoType);
+                tv_Name = dialog.findViewById(R.id.tv_name_infoType);
+                tv_moTa = dialog.findViewById(R.id.tv_moTa_infoType);
+                tv_location = dialog.findViewById(R.id.tv_location_infoType);
+                final ImageView btn_exit = dialog.findViewById(R.id.btn_exit);
                 tv_id.setText(theLoaiDAO.getAllTheLoai().get(position).getMaTheLoai());
                 tv_Name.setText(theLoaiDAO.getAllTheLoai().get(position).getTenTheLoai());
                 tv_moTa.setText(theLoaiDAO.getAllTheLoai().get(position).getMoTa());
                 tv_location.setText(String.valueOf(theLoaiDAO.getAllTheLoai().get(position).getViTri()));
-                dialog.setContentView(view);
                 dialog.show();
                 btn_exit.setOnClickListener(new View.OnClickListener() {
                     @Override

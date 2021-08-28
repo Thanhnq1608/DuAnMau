@@ -4,19 +4,15 @@ import java.util.Date;
 
 public class HoaDon {
     private String maHoaDon;
-    private Date ngayMua;
+    private String ngayMua;
 
     public HoaDon() {
     }
 
-    public HoaDon(String maHoaDon, Date  ngayMua) {
+    public HoaDon(String maHoaDon, String  ngayMua) {
         this.maHoaDon = maHoaDon;
         this.ngayMua = ngayMua;
     }
-
-    public HoaDon(String maHoaDon, int i) {
-    }
-
     public String getMaHoaDon() {
         return maHoaDon;
     }
@@ -25,11 +21,11 @@ public class HoaDon {
         this.maHoaDon = maHoaDon;
     }
 
-    public Date getNgayMua() {
+    public String getNgayMua() {
         return ngayMua;
     }
 
-    public void setNgayMua(Date ngayMua) {
+    public void setNgayMua(String ngayMua) {
         this.ngayMua = ngayMua;
     }
 

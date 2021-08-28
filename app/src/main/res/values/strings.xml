@@ -47,6 +47,51 @@
     <string name="setting_title">Setting</string>
     <string name="setting_btn_languagee">Language</string>
     <string name="setting_btn_screen">Screen Mode</string>
-    
 
+<!--việt-->
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<resources>-->
+    <!--    <string name="app_name">DuAnMau</string>-->
+
+    <!--    &lt;!&ndash;    Login Activity&ndash;&gt;-->
+    <!--    <string name="activity_login_edt_username_hint">Tài Khoản</string>-->
+    <!--    <string name="activity_login_edt_password_hint">Mật Khẩu</string>-->
+    <!--    <string name="activity_login_btn_login">Đăng nhập</string>-->
+    <!--    <string name="activity_login_btn_cancel">Thoát</string>-->
+    <!--    <string name="activity_login_tv_signin">Tạo tài khoản</string>-->
+    <!--    <string name="activity_login_tv_forget">Quên Mật khẩu</string>-->
+
+    <!--    &lt;!&ndash;    Signin activity&ndash;&gt;-->
+    <!--    <string name="activity_signin_edt_repass_hint">Nhắc lại mật khẩu</string>-->
+    <!--    <string name="activity_signin_edt_name_hint">Tên người dùng</string>-->
+    <!--    <string name="activity_signin_edt_phone_hint">Số điện thoại</string>-->
+    <!--    <string name="activity_signin_btn_confirm">Xác nhận</string>-->
+    <!--    <string name="activity_signin_btn_cancel">Thoát</string>-->
+    <!--    &lt;!&ndash;    Menu&ndash;&gt;-->
+    <!--    <string name="menu_nav_title_type">Thể loại sách</string>-->
+    <!--    <string name="menu_nav_title_book">Sách</string>-->
+    <!--    <string name="menu_nav_title_bill">Hóa đơn</string>-->
+    <!--    <string name="menu_nav_title_user">Người dùng</string>-->
+    <!--    <string name="menu_nav_title_menu_first">Thể Loại sách</string>-->
+    <!--    <string name="menu_nav_title_settings">Cài đặt</string>-->
+    <!--    <string name="menu_nav_title_statistical">Thống kê</string>-->
+    <!--    <string name="menu_nav_title_exit">THoát</string>-->
+    <!--    <string name="open">Mở</string>-->
+    <!--    <string name="close">Đóng</string>-->
+
+    <!--    &lt;!&ndash;    thông báo thoát ứng dụng&ndash;&gt;-->
+    <!--    <string name="dialog_exit_title">Bạn muốn thoát khỏi ứng dụng</string>-->
+    <!--    <string name="dialog_exit_yes">Có</string>-->
+    <!--    <string name="dialog_exit_no">Không</string>-->
+    <!--    &lt;!&ndash;fogetpass&ndash;&gt;-->
+    <!--    <string name="fogetpass_edi_hint_pass">Mật khẩu mới</string>-->
+
+
+    <!--    &lt;!&ndash;    TiTle&ndash;&gt;-->
+    <!--    <string name="bill_title">Hóa đơn</string>-->
+    <!--    <string name="book_title">Sách</string>-->
+    <!--    <string name="setting_title">Cài đặt</string>-->
+    <!--    <string name="setting_btn_languagee">Ngôn Ngữ</string>-->
+    <!--    <string name="setting_btn_screen">Chế độ Màn hình</string>-->
+    <!--</resources>-->
 </resources>

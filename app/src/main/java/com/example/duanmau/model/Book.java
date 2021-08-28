@@ -1,18 +1,18 @@
 package com.example.duanmau.model;
 
-public class Sach {
+public class Book {
     private String maSach;
     private String maTheLoai;
     private String tenSach;
     private String tacGia;
     private String NXB;
-    private double giaBia;
+    private int giaBia;
     private int soLuong;
 
-    public Sach() {
+    public Book() {
     }
 
-    public Sach( String maTheLoai,String maSach, String tenSach, String tacGia, String NXB, double giaBia, int soLuong) {
+    public Book(String maSach,String maTheLoai,  String tenSach, String tacGia, String NXB, int giaBia, int soLuong) {
         this.maSach = maSach;
         this.maTheLoai = maTheLoai;
         this.tenSach = tenSach;
@@ -62,11 +62,11 @@ public class Sach {
         this.NXB = NXB;
     }
 
-    public double getGiaBia() {
+    public int getGiaBia() {
         return giaBia;
     }
 
-    public void setGiaBia(double giaBia) {
+    public void setGiaBia(int giaBia) {
         this.giaBia = giaBia;
     }
 

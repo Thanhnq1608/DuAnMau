@@ -15,7 +15,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.example.duanmau.DAO.NguoiDungDAO;
 import com.example.duanmau.LOGIN.ChangePassActivity;
@@ -23,10 +22,7 @@ import com.example.duanmau.LOGIN.LogInActivity;
 import com.example.duanmau.LOGIN.SignInActivity;
 import com.example.duanmau.adapter.UserAdapter;
 import com.example.duanmau.model.NguoiDung;
-import com.example.duanmau.model.Sach;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.ArrayList;
 
 public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     RecyclerView recUser;

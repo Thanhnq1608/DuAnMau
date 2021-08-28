@@ -53,7 +53,6 @@ public class TheLoaiActivity extends AppCompatActivity implements NavigationView
         Menu();
         theLoaiDAO = new TheLoaiDAO(TheLoaiActivity.this);
 
-        addType();
         typeBookAdapter = new TypeBookAdapter(this, theLoaiDAO.getAllTheLoai());
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         recyclerView.setAdapter(typeBookAdapter);
@@ -139,15 +138,12 @@ public class TheLoaiActivity extends AppCompatActivity implements NavigationView
                 dialog.setContentView(R.layout.item_add_type_sach);
                 dialog.setCancelable(false);
                 dialog.setTitle("Add Type Book");
-                final EditText id, name, describe, location;
+                final EditText id, name, describe, location,bg;
                 id = dialog.findViewById(R.id.edt_id_type_itemType);
                 name = dialog.findViewById(R.id.edt_name_type_itemType);
                 describe = dialog.findViewById(R.id.edt_description_type_itemType);
                 location = dialog.findViewById(R.id.edt_location_type_itemType);
-                final String tvId, tvName, tvDes;
-                tvId = id.getText().toString();
-                tvName = name.getText().toString();
-                tvDes = describe.getText().toString();
+                bg=dialog.findViewById(R.id.edt_background_type_itemType);
 
                 final Button btnSave, btnCancel;
                 btnCancel = dialog.findViewById(R.id.btn_cancel_itemType);
@@ -157,22 +153,20 @@ public class TheLoaiActivity extends AppCompatActivity implements NavigationView
                 btnSave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (tvDes.equals("")) {
-                            Toast.makeText(TheLoaiActivity.this, "sai tên", Toast.LENGTH_SHORT).show();
-                            
-                        } else if (tvName.equals("")) {
-                            Toast.makeText(TheLoaiActivity.this, "sai đây", Toast.LENGTH_SHORT).show();
-
-                        } else if (location.getText().toString().equals("")) {
-                            Toast.makeText(TheLoaiActivity.this, "đây", Toast.LENGTH_SHORT).show();
+                        if (id.getText().toString()==null || name.getText().toString()==null || describe.getText().toString()==null || location.getText().toString()==null) {
+                            Toast.makeText(TheLoaiActivity.this, "Bạn không được bỏ trống thông tin!", Toast.LENGTH_SHORT).show();
                         } else {
-                            theLoaiSach.setMaTheLoai(tvId);
-                            theLoaiSach.setTenTheLoai(tvName);
-                            theLoaiSach.setMoTa(tvDes);
-                            theLoaiSach.setViTri(Integer.parseInt(location.getText().toString()));
-                            theLoaiDAO.inserTheLoai(theLoaiSach);
+                            TheLoaiSach theLoaiSach1 =new TheLoaiSach();
+                            theLoaiSach1.setMaTheLoai(id.getText().toString());
+                            theLoaiSach1.setTenTheLoai(name.getText().toString());
+                            theLoaiSach1.setMoTa(describe.getText().toString());
+                            theLoaiSach1.setViTri(Integer.parseInt(location.getText().toString()));
+                            theLoaiSach1.setMauNen(bg.getText().toString());
+                            theLoaiDAO.inserTheLoai(theLoaiSach1);
                             typeBookAdapter.notifyDataSetChanged();
                             Toast.makeText(TheLoaiActivity.this, "Thêm Thể Loại Thành Công!", Toast.LENGTH_SHORT).show();
+                            recreate();
+                            dialog.dismiss();
                         }
                     }
                 });

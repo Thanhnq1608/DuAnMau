@@ -18,9 +18,8 @@ public class HoaDonDAO {
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
     public static final String TABLE_NAME = "HoaDon";
-    public static final String SQL_HOA_DON = "CREATE TABLE HoaDon (mahoadon text primary key, ngaymua date);";
+    public static final String SQL_HOA_DON = "CREATE TABLE HoaDon (mahoadon text primary key, ngaymua text);";
     public static final String TAG = "HoaDonDAO";
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public HoaDonDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
@@ -31,7 +30,7 @@ public class HoaDonDAO {
     public int inserHoaDon(HoaDon hd) {
         ContentValues values = new ContentValues();
         values.put("mahoadon", hd.getMaHoaDon());
-        values.put("ngaymua", sdf.format(hd.getNgayMua()));
+        values.put("ngaymua", hd.getNgayMua());
         try {
             if (db.insert(TABLE_NAME, null, values) == -1) {
                 return -1;
@@ -50,7 +49,7 @@ public class HoaDonDAO {
         while (c.isAfterLast() == false) {
             HoaDon ee = new HoaDon();
             ee.setMaHoaDon(c.getString(0));
-            ee.setNgayMua(sdf.parse(c.getString(1)));
+            ee.setNgayMua(c.getString(1));
             dsHoaDon.add(ee);
             Log.d("//=====", ee.toString());
             c.moveToNext();
@@ -63,7 +62,7 @@ public class HoaDonDAO {
     public int updateHoaDon(HoaDon hd) {
         ContentValues values = new ContentValues();
         values.put("mahoadon", hd.getMaHoaDon());
-        values.put("ngaymua", hd.getNgayMua().toString());
+        values.put("ngaymua", hd.getNgayMua());
         int result = db.update(TABLE_NAME, values, "mahoadon=?", new
                 String[]{hd.getMaHoaDon()});
         if (result == 0) {

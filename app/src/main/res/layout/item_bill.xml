@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="mã bill"
             android:id="@+id/tv_id_bill_itemBill"
-            android:textColor="@color/login_text"
+            android:textColor="@color/black"
             android:layout_marginLeft="10dp"/>
         <ImageView
             android:layout_width="70dp"
@@ -31,7 +31,7 @@
             android:layout_gravity="center_horizontal"
             android:gravity="center_horizontal"
             android:text="ngày mua"
-            android:textColor="@color/login_text"
+            android:textColor="@color/black"
             android:textSize="20dp"
             android:id="@+id/tv_ngay_mua_itemBill"/>
     </LinearLayout>

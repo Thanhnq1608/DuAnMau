@@ -23,13 +23,23 @@
             android:layout_height="wrap_content"
             android:text="Tên Thể loại"
             android:textSize="30dp"
+            android:shadowColor="@color/colorWhỉte"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="10"
             android:textColor="@color/login_text"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Xem Chi Tiêt ..."
             android:layout_marginTop="80dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
             android:layout_gravity="end"
+            android:shadowColor="@color/colorWhỉte"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="2"
             android:id="@+id/tv_detail_type"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

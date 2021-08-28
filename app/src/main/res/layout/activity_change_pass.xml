@@ -26,7 +26,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
             android:hint="@string/activity_login_edt_username_hint"
-            android:textColor="@color/login_text" />
+            android:textColor="@color/black" />
         <EditText
             android:id="@+id/ed_pass_changepass"
             android:layout_width="300dp"
@@ -34,7 +34,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
             android:hint="@string/activity_login_edt_password_hint"
-            android:textColor="@color/login_text" />
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/ed_repass_changepass"
@@ -43,7 +43,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="50dp"
             android:hint="@string/activity_signin_edt_repass_hint"
-            android:textColor="@color/login_text" />
+            android:textColor="@color/black" />
 
         <LinearLayout
             android:layout_width="match_parent"

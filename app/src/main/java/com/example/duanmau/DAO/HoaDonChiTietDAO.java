@@ -9,7 +9,7 @@ import android.util.Log;
 import com.example.duanmau.database.DatabaseHelper;
 import com.example.duanmau.model.HoaDon;
 import com.example.duanmau.model.HoaDonChiTiet;
-import com.example.duanmau.model.Sach;
+import com.example.duanmau.model.Book;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,17 +49,17 @@ public class HoaDonChiTietDAO {
     public List<HoaDonChiTiet> getAllHoaDonChiTiet() {
         List<HoaDonChiTiet> dsHoaDonChiTiet = new ArrayList<>();
         String sSQL = "SELECT maHDCT, HoaDon.maHoaDon,HoaDon.ngayMua, " +
-                "Sach.maSach, Sach.maTheLoai, Sach.tenSach, Sach.tacGia, Sach.NXB, Sach.giaBia, " +
-        "Sach.soLuong,HoaDonChiTiet.soLuong FROM HoaDonChiTiet INNER JOIN HoaDon " +
-        "on HoaDonChiTiet.maHoaDon = HoaDon.maHoaDon INNER JOIN Sach on Sach.maSach = HoaDonChiTiet.maSach ";
+                "Book.maSach, Book.maTheLoai, Book.tenSach, Book.tacGia, Book.NXB, Book.giaBia, " +
+        "Book.soLuong,HoaDonChiTiet.soLuong FROM HoaDonChiTiet INNER JOIN HoaDon " +
+        "on HoaDonChiTiet.maHoaDon = HoaDon.maHoaDon INNER JOIN Book on Book.maSach = HoaDonChiTiet.maSach ";
         Cursor c = db.rawQuery(sSQL, null);
         c.moveToFirst();
         try {
             while (c.isAfterLast() == false) {
                 HoaDonChiTiet ee = new HoaDonChiTiet();
                 ee.setMaHDCT(c.getInt(0));
-                ee.setHoaDon(new HoaDon(c.getString(1), sdf.parse(c.getString(2))));
-                ee.setSach(new Sach(c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getInt(8), c.getInt(9)));
+                ee.setHoaDon(new HoaDon(c.getString(1), c.getString(2)));
+                ee.setSach(new Book(c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getInt(8), c.getInt(9)));
                 ee.setSoLuongMua(c.getInt(10));
                 dsHoaDonChiTiet.add(ee);
                 Log.d("//=====", ee.toString());
@@ -85,9 +85,9 @@ public class HoaDonChiTietDAO {
             while (c.isAfterLast() == false) {
                 HoaDonChiTiet ee = new HoaDonChiTiet();
                 ee.setMaHDCT(c.getInt(0));
-                ee.setHoaDon(new HoaDon(c.getString(1), sdf.parse(c.getString(2))));
+                ee.setHoaDon(new HoaDon(c.getString(1), c.getString(2)));
                 ee.setSach(new
-                        Sach(c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getInt(8), c.getInt(9)));
+                        Book(c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getInt(8), c.getInt(9)));
                 ee.setSoLuongMua(c.getInt(10));
                 dsHoaDonChiTiet.add(ee);
                 Log.d("//=====", ee.toString());

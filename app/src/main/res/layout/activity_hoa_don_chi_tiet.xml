@@ -6,22 +6,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".HoaDonChiTietActivity">
-    <EditText
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="300dp"
+        android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:text="mã hóa đơn"
+        android:layout_marginTop="20dp"
         android:id="@+id/edMaHoaDon"
         />
-    <EditText
-        android:layout_width="match_parent"
+    <Spinner
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/edMaSach"
         android:hint="Mã sách"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
         />
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:id="@+id/edSoLuongMua"
         android:hint="Số Lượng"
+        android:textColor="@color/black"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
         android:inputType="number"
         />
     <LinearLayout
@@ -50,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="36px"
+        android:textSize="20dp"
         android:textStyle="bold"
         android:text="Thành tiền:"
         />

@@ -21,7 +21,7 @@
             android:layout_height="50dp"
             android:hint="@string/activity_login_edt_username_hint"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/login_text"
+            android:textColor="@color/black"
             android:layout_marginTop="50dp"
             android:id="@+id/ed_user_signin"/>
         <EditText
@@ -29,7 +29,7 @@
             android:layout_height="50dp"
             android:hint="@string/activity_login_edt_password_hint"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/login_text"
+            android:textColor="@color/black"
             android:id="@+id/ed_pass_signin"
             android:layout_marginTop="20dp"/>
         <EditText
@@ -37,7 +37,7 @@
             android:layout_height="50dp"
             android:hint="@string/activity_signin_edt_repass_hint"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/login_text"
+            android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:id="@+id/ed_repass_signin"/>
 
@@ -48,13 +48,13 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:hint="@string/activity_signin_edt_name_hint"
-            android:textColor="@color/login_text" />
+            android:textColor="@color/black" />
         <EditText
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:hint="@string/activity_signin_edt_phone_hint"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/login_text"
+            android:textColor="@color/black"
             android:id="@+id/ed_phone_signin"
             android:layout_marginTop="20dp"/>
         <LinearLayout

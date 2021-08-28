@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -17,6 +19,9 @@
             android:id="@+id/img_x_info_book"/>
 
         <TextView
+            android:paddingLeft="20dp"
+            android:textColor="@color/black"
+            android:textSize="25dp"
             android:id="@+id/tv_id_type_infoBook"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -25,6 +30,9 @@
             />
 
         <TextView
+            android:paddingLeft="20dp"
+            android:textColor="@color/black"
+            android:textSize="25dp"
             android:id="@+id/tv_id_infoBook"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -33,6 +41,9 @@
             android:hint="mã sách" />
 
         <TextView
+            android:paddingLeft="20dp"
+            android:textColor="@color/black"
+            android:textSize="25dp"
             android:id="@+id/tv_name_infoBook"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -46,10 +57,15 @@
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-
+            android:paddingLeft="20dp"
+            android:textColor="@color/black"
+            android:textSize="25dp"
             android:hint="NXB sách" />
 
         <TextView
+            android:paddingLeft="20dp"
+            android:textColor="@color/black"
+            android:textSize="25dp"
             android:id="@+id/tv_tacGia_infoBook"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -58,23 +74,27 @@
             android:hint="Tác giả sách" />
 
         <TextView
+            android:paddingLeft="20dp"
+            android:textColor="@color/black"
+            android:textSize="25dp"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:id="@+id/tv_soLuong_infoBook"
-            android:inputType="number"
             android:hint="Số Lượng" />
 
         <TextView
+            android:paddingLeft="20dp"
+            android:textColor="@color/black"
+            android:textSize="25dp"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:id="@+id/tv_price_infoBook"
-            android:inputType="number"
             android:hint="Giá Bán" />
         <!--            android:id="@+id/"-->
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

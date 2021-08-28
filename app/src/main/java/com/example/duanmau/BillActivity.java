@@ -56,56 +56,18 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_bill);
         Menu();
         AnhXa();
-        hoaDonDAO=new HoaDonDAO(BillActivity.this);
+        hoaDonDAO = new HoaDonDAO(BillActivity.this);
 
 //        addBill();
         try {
-            billAdapter=new BillAdapter(this,hoaDonDAO.getAllHoaDon());
+            billAdapter = new BillAdapter(this, hoaDonDAO.getAllHoaDon());
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        recBill.setLayoutManager(new GridLayoutManager(this,2));
+        recBill.setLayoutManager(new GridLayoutManager(this, 2));
         recBill.setAdapter(billAdapter);
 
 
-    }
-
-    private void addBill() {
-//        HoaDon hoaDon1 = new HoaDon("1", 2100 12 12);
-        HoaDon hoaDon2 = new HoaDon("2", 15-8-2018);
-        hoaDonDAO.inserHoaDon(hoaDon2);
-//        HoaDon hoaDon3 = new HoaDon("3", "21/10/2010");
-//        HoaDon hoaDon4 = new HoaDon("4", "21/10/2010");
-//        HoaDon hoaDon5 = new HoaDon("5", "21/10/2010");
-//        HoaDon hoaDon6 = new HoaDon("6", "21/10/2010");
-//        HoaDon hoaDon7 = new HoaDon("7", "21/10/2010");
-//        HoaDon hoaDon8 = new HoaDon("8", "21/10/2010");
-//        HoaDon hoaDon9 = new HoaDon("9", "21/10/2010");
-//        HoaDon hoaDon10 = new HoaDon("10", "21/10/2010");
-//        HoaDon hoaDon11 = new HoaDon("11", "21/10/2010");
-//        HoaDon hoaDon12 = new HoaDon("12", "21/10/2010");
-//        HoaDon hoaDon13 = new HoaDon("13", "21/10/2010");
-//        HoaDon hoaDon14 = new HoaDon("14", "21/10/2010");
-//        HoaDon hoaDon15 = new HoaDon("15", "21/10/2010");
-//        HoaDon hoaDon16 = new HoaDon("16", "21/10/2010");
-//        HoaDon hoaDon17 = new HoaDon("17", "21/10/2010");
-//        hoaDonArrayList.add(hoaDon1);
-//        hoaDonArrayList.add(hoaDon2);
-//        hoaDonArrayList.add(hoaDon3);
-//        hoaDonArrayList.add(hoaDon4);
-//        hoaDonArrayList.add(hoaDon5);
-//        hoaDonArrayList.add(hoaDon6);
-//        hoaDonArrayList.add(hoaDon7);
-//        hoaDonArrayList.add(hoaDon8);
-//        hoaDonArrayList.add(hoaDon9);
-//        hoaDonArrayList.add(hoaDon10);
-//        hoaDonArrayList.add(hoaDon11);
-//        hoaDonArrayList.add(hoaDon12);
-//        hoaDonArrayList.add(hoaDon13);
-//        hoaDonArrayList.add(hoaDon14);
-//        hoaDonArrayList.add(hoaDon15);
-//        hoaDonArrayList.add(hoaDon16);
-//        hoaDonArrayList.add(hoaDon17);
     }
 
     private void AnhXa() {
@@ -148,7 +110,7 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
             builder.setPositiveButton(getString(R.string.dialog_exit_yes), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent intent=new Intent(BillActivity.this, LogInActivity.class);
+                    Intent intent = new Intent(BillActivity.this, LogInActivity.class);
                     startActivity(intent);
                 }
             });
@@ -165,61 +127,64 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.add_bill,menu);
+        getMenuInflater().inflate(R.menu.add_bill, menu);
         return true;
     }
 
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-                dialog=new Dialog(BillActivity.this);
-                View view=LayoutInflater.from(this).inflate(R.layout.item_add_bill,null);
-                dialog.setCancelable(false);
-                final EditText idBill,date;
-                idBill=view.findViewById(R.id.edt_id_bill_addBill);
-                date=view.findViewById(R.id.edt_date_addBill);
-                final Button btnDate,btnSave;
-                btnDate=view.findViewById(R.id.btn_date_addBill);
-                btnSave=view.findViewById(R.id.btn_save_addBill);
-                final ImageView img_x=view.findViewById(R.id.img_x_addBill);
-                dialog.setContentView(view);
-                dialog.show();
-                btnSave.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (date.getText().toString().equals("")||idBill.getText().toString().equals("")){
-                            Toast.makeText(BillActivity.this, "Bạn phải nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
+        dialog = new Dialog(BillActivity.this);
+        dialog.setContentView(R.layout.item_add_bill);
+        dialog.setCancelable(false);
+        final EditText idBill;
+        DatePicker date;
+        idBill = dialog.findViewById(R.id.edt_id_bill_addBill);
+        date = dialog.findViewById(R.id.date_picker_bill);
+        final Button btnDate, btnSave;
+//        btnDate = dialog.findViewById(R.id.btn_date_addBill);
+        btnSave = dialog.findViewById(R.id.btn_save_addBill);
+        final ImageView img_x = dialog.findViewById(R.id.img_x_addBill);
+        img_x.setOnClickListener(new View.OnClickListener() {
+                                     @Override
+                                     public void onClick(View v) {
+                                         dialog.dismiss();
+                                     }
+                                 });
+        dialog.show();
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (String.valueOf(date.getDayOfMonth()).equals("") || idBill.getText().toString().equals("")) {
+                    Toast.makeText(BillActivity.this, "Bạn phải nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
 
-                        }else {
-                            try {
-                                if (checkIdBill(idBill.getText().toString())){
-                                    Toast.makeText(BillActivity.this, "Mã Hóa Đơn đã tồn tại!", Toast.LENGTH_SHORT).show();
-                                }else {
-                                    HoaDon hoaDon = new HoaDon();
-                                    hoaDon.setMaHoaDon(idBill.getText().toString());
-                                    hoaDon.setNgayMua(sdf.parse(date.getText().toString()));
-                                    hoaDonDAO.inserHoaDon(hoaDon);
-                                    billAdapter.notifyDataSetChanged();
-                                    Intent intent = new
-                                            Intent(BillActivity.this,HoaDonChiTietActivity.class);
-                                    Bundle b = new Bundle();
-                                    b.putString("MAHOADON", idBill.getText().toString());
-                                    intent.putExtras(b);
-                                    startActivity(intent);
-                                    Toast.makeText(BillActivity.this, "Thêm hóa đơn thành công!", Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            }
+                } else {
+                    try {
+                        if (checkIdBill(idBill.getText().toString())) {
+                            Toast.makeText(BillActivity.this, "Mã Hóa Đơn đã tồn tại!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            HoaDon hoaDon = new HoaDon();
+                            hoaDon.setMaHoaDon(idBill.getText().toString());
+                            hoaDon.setNgayMua(date.getDayOfMonth()+"/"+date.getMonth()+"/"+date.getYear());
+                            hoaDonDAO.inserHoaDon(hoaDon);
+                            billAdapter.notifyDataSetChanged();
+                            Intent intent = new  Intent(BillActivity.this, HoaDonChiTietActivity.class);
+                            intent.putExtra("MAHOADON", idBill.getText().toString());
+                            startActivity(intent);
+                            Toast.makeText(BillActivity.this, "Thêm hóa đơn thành công!", Toast.LENGTH_SHORT).show();
                         }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
                     }
-                });
+                }
+            }
+        });
         return super.onOptionsItemSelected(item);
     }
 
     private boolean checkIdBill(String id) throws ParseException {
-        for (int i=0;i<hoaDonDAO.getAllHoaDon().size();i++){
-            if (id.equalsIgnoreCase(hoaDonDAO.getAllHoaDon().get(i).getMaHoaDon())){
+        for (int i = 0; i < hoaDonDAO.getAllHoaDon().size(); i++) {
+            if (id.equalsIgnoreCase(hoaDonDAO.getAllHoaDon().get(i).getMaHoaDon())) {
                 return true;
             }
         }

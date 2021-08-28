@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="Người Dùng"
             android:textSize="20dp"
-            android:textColor="@color/login_text"
+            android:textColor="@color/black"
             android:layout_marginLeft="20dp"
             android:id="@+id/tv_name_drawer_header"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
@@ -35,7 +35,7 @@
             android:layout_marginLeft="20dp"
             android:text="thanh@gmail.com"
             android:textSize="20dp"
-            android:textColor="@color/login_text"
+            android:textColor="@color/black"
             android:id="@+id/tv_email_drawer_header"
             />
     </LinearLayout>

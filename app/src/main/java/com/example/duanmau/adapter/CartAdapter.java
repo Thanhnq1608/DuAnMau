@@ -1,4 +1,4 @@
-package com.example.duanmau;
+package com.example.duanmau.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.duanmau.DAO.HoaDonChiTietDAO;
+import com.example.duanmau.R;
 import com.example.duanmau.model.HoaDonChiTiet;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class CartAdapter extends BaseAdapter {
         TextView txtMaSach;
         TextView txtSoLuong;
         TextView txtGiaBia;
-        TextView txtThanhTien;
+        TextView txtThanhTien,tvBill,tvDateBill;
         ImageView imgDelete;
     }
     @Override
@@ -58,6 +59,8 @@ public class CartAdapter extends BaseAdapter {
             holder.txtSoLuong = (TextView) convertView.findViewById(R.id.tvSoLuong);
             holder.txtGiaBia = (TextView) convertView.findViewById(R.id.tvGiaBia);
             holder.txtThanhTien = (TextView) convertView.findViewById(R.id.tvThanhTien);
+            holder.tvBill=convertView.findViewById(R.id.tvMaBill);
+            holder.tvDateBill=convertView.findViewById(R.id.tvDateBill);
             holder.imgDelete = (ImageView)convertView.findViewById(R.id.ivDelete);
             holder.imgDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,6 +76,8 @@ public class CartAdapter extends BaseAdapter {
         else
             holder=(ViewHolder)convertView.getTag();
         HoaDonChiTiet _entry = (HoaDonChiTiet) arrHoaDonChiTiet.get(position);
+        holder.tvBill.setText("Mã Hóa đơn: "+_entry.getHoaDon().getMaHoaDon());
+        holder.tvDateBill.setText("Ngày mua: "+_entry.getHoaDon().getNgayMua());
         holder.txtMaSach.setText("Mã sách: "+_entry.getSach().getMaSach());
         holder.txtSoLuong.setText("Số lượng: "+_entry.getSoLuongMua());
         holder.txtGiaBia.setText("Giá bìa: "+_entry.getSach().getGiaBia() +" vnd");
