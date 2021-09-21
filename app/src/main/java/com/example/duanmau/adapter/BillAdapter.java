@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.duanmau.BillActivity;
 import com.example.duanmau.DAO.HoaDonDAO;
+import com.example.duanmau.HoaDonChiTietActivity;
 import com.example.duanmau.R;
 import com.example.duanmau.model.HoaDon;
 import com.example.duanmau.model.TheLoaiSach;
@@ -57,7 +60,16 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         }
         holder.imgBill.setBackgroundColor(R.drawable.icon_bill);
         holder.tvNgayMua.setText(String.valueOf(hoaDon.getNgayMua()));
-        holder.tvId.setText(hoaDon.getMaHoaDon());
+        holder.tvId.setText(String.valueOf(hoaDon.getMaHoaDon()));
+
+        holder.imgBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new  Intent(context, HoaDonChiTietActivity.class);
+                intent.putExtra("MAHOADON", String.valueOf(hoaDon.getMaHoaDon()));
+                context.startActivity(intent);
+            }
+        });
         holder.imgBill.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -66,11 +78,8 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
                 builder.setPositiveButton(String.valueOf(R.string.dialog_exit_yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        try {
-                            hoaDonDAO.deleteHoaDonByID(hoaDonDAO.getAllHoaDon().get(position).getMaHoaDon());
-                        } catch (ParseException e) {
-                            e.printStackTrace();
-                        }
+                            hoaDonDAO.deleteHoaDonByID(String.valueOf(hoaDonDAO.getAllHoaDon().get(position).getMaHoaDon()));
+
                         Toast.makeText(context, "Xóa Thành công!", Toast.LENGTH_SHORT).show();
                     }
                 });

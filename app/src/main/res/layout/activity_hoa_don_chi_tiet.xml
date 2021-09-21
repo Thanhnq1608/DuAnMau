@@ -6,17 +6,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".HoaDonChiTietActivity">
-    <TextView
-        android:layout_width="300dp"
-        android:layout_gravity="center"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:text="mã hóa đơn"
         android:layout_marginTop="20dp"
-        android:id="@+id/edMaHoaDon"
-        />
+        android:gravity="center"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:text="mã hóa đơn:"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:id="@+id/edMaHoaDon"/>
+    </LinearLayout>
     <Spinner
         android:layout_width="300dp"
         android:layout_height="wrap_content"

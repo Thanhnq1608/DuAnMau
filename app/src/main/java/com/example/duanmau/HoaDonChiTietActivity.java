@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -20,10 +19,9 @@ import com.example.duanmau.DAO.TheLoaiDAO;
 import com.example.duanmau.adapter.CartAdapter;
 import com.example.duanmau.model.HoaDon;
 import com.example.duanmau.model.HoaDonChiTiet;
-import com.example.duanmau.model.Book;
+import com.example.duanmau.model.Sach;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class HoaDonChiTietActivity extends AppCompatActivity {
@@ -34,37 +32,35 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
     SachDAO sachDAO;
     TheLoaiDAO theLoaiDAO;
     HoaDonDAO hoaDonDAO;
-    public ArrayList<HoaDonChiTiet> dsHDCT = new ArrayList<>();
     ListView lvCart;
     boolean temp = true;
     HoaDon hoaDon;
-    List<Book> listBook = new ArrayList<>();
+    List<Sach> listSach = new ArrayList<>();
     CartAdapter adapter = null;
-    double thanhTien = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hoa_don_chi_tiet);
-        theLoaiDAO = new TheLoaiDAO(this);
-        sachDAO = new SachDAO(this);
-        hoaDonDAO = new HoaDonDAO(this);
-        hoaDonChiTietDAO = new HoaDonChiTietDAO(this);
+        theLoaiDAO = new TheLoaiDAO(HoaDonChiTietActivity.this);
+        sachDAO = new SachDAO(HoaDonChiTietActivity.this);
+        hoaDonChiTietDAO = new HoaDonChiTietDAO(HoaDonChiTietActivity.this);
+        sachDAO = new SachDAO(HoaDonChiTietActivity.this);
 
 
         spnMaSach = findViewById(R.id.edMaSach);
         edMaHoaDon = findViewById(R.id.edMaHoaDon);
         edSoLuong = findViewById(R.id.edSoLuongMua);
         lvCart = findViewById(R.id.lvCart);
-        tvThanhTien = findViewById(R.id.tvThanhTien);
-        adapter = new CartAdapter(this, dsHDCT);
+        tvThanhTien = findViewById(R.id.tv_ThanhTien);
+        adapter = new CartAdapter(HoaDonChiTietActivity.this, hoaDonChiTietDAO.getAllHoaDonChiTiet());
         lvCart.setAdapter(adapter);
 
         //LẤY mã hóa đơn
         Intent in = getIntent();
         String b = in.getStringExtra("MAHOADON");
         if (b != null) {
-            edMaHoaDon.setText("Mã Hóa Đơn: " + b);
+            edMaHoaDon.setText(b);
         }
 
 
@@ -88,53 +84,40 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
     public void ADDHoaDonCHITIET(View view) {
         //các loại sách đã mua
         String[] temp = spnMaSach.getSelectedItem().toString().split("_", 3);
-        listBook.add(sachDAO.getSachByID(temp[1]));
-        hoaDonChiTietDAO = new HoaDonChiTietDAO(HoaDonChiTietActivity.this);
-        sachDAO = new SachDAO(HoaDonChiTietActivity.this);
-        try {
-            if (!spnMaSach.getSelectedItem().toString().equalsIgnoreCase("Chọn Sách cần mua.")) {
-                for (int i = 0; i < hoaDonDAO.getAllHoaDon().size(); i++) {
-                    if (hoaDonDAO.getAllHoaDon().get(i).getMaHoaDon().equalsIgnoreCase(edMaHoaDon.getText().toString())) {
-                        hoaDon = new HoaDon(edMaHoaDon.getText().toString(), hoaDonDAO.getAllHoaDon().get(i).getNgayMua());
-//                        temp = false;
-                        break;
-                    }
-                }
-                if (Integer.parseInt(edSoLuong.getText().toString()) <= listBook.get(0).getSoLuong()) {
+        listSach.add(sachDAO.getSachByID(temp[1]));
+        hoaDonDAO = new HoaDonDAO(HoaDonChiTietActivity.this);
+        if (!spnMaSach.getSelectedItem().toString().equalsIgnoreCase("Chọn Sách cần mua.")) {
+//            for (int i = 0; i < hoaDonDAO.getAllHoaDon().size(); i++) {
+//                if (hoaDonDAO.getAllHoaDon().get(i).getMaHoaDon() == Integer.parseInt(edMaHoaDon.getText().toString())) {
+//
+//                    break;
+//                }
+//            }
+            if (Integer.parseInt(edSoLuong.getText().toString()) <= listSach.get(0).getSoLuong()) {
 
-                    HoaDonChiTiet hoaDonChiTiet = new
-                            HoaDonChiTiet(hoaDonChiTietDAO.getAllHoaDonChiTiet().size() + 1, hoaDon, listBook.get(0), Integer.parseInt(edSoLuong.getText().toString()));
-//                    if (pos>=0){
-//                        int soluong = dsHDCT.get(pos).getSoLuongMua();
-//                        hoaDonChiTiet.setSoLuongMua(soluong + Integer.parseInt(edSoLuong.getText().toString()));
-//                        dsHDCT.set(pos,hoaDonChiTiet);
-//                    }else {
-                    dsHDCT.add(hoaDonChiTiet);
-//                    }
-                    adapter.changeDataset(dsHDCT);
-                    Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(getApplicationContext(), "Mã sách không tồn tại", Toast.LENGTH_SHORT).show();
+                HoaDonChiTiet hoaDonChiTiet = new
+                        HoaDonChiTiet(hoaDonChiTietDAO.getAllHoaDonChiTiet().size() + 1, Integer.parseInt(edMaHoaDon.getText().toString()), listSach.get(0), Integer.parseInt(edSoLuong.getText().toString()));
+                hoaDonChiTietDAO.inserHoaDonChiTiet(hoaDonChiTiet);
+                adapter.changeDataset(hoaDonChiTietDAO.getAllHoaDonChiTiet());
+                Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
             }
-        } catch (Exception ex) {
-            Log.e("Error", ex.toString());
+
+        } else {
+            Toast.makeText(getApplicationContext(), "Mã sách không tồn tại", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void thanhToanHoaDon(View view) {
         hoaDonChiTietDAO = new HoaDonChiTietDAO(HoaDonChiTietActivity.this);
         //tinh tien
-        thanhTien = 0;
-        try {
-            for (HoaDonChiTiet hd : dsHDCT) {
-                hoaDonChiTietDAO.inserHoaDonChiTiet(hd);
-                thanhTien += hd.getSoLuongMua() * hd.getSach().getGiaBia();
-            }
-            tvThanhTien.setText("Tổng tiền: " + thanhTien);
-        } catch (Exception ex) {
-            Log.e("Error", ex.toString());
+        int thanhTien = 0;
+
+        for (HoaDonChiTiet hd : hoaDonChiTietDAO.getAllHoaDonChiTiet()) {
+            thanhTien += hd.getSoLuongMua() * hd.getSach().getGiaBia();
         }
+        tvThanhTien.setText("Thành tiền: "+thanhTien);
+
+
     }
 
     public int checkMaSach(ArrayList<HoaDonChiTiet> lsHD, String maSach) {

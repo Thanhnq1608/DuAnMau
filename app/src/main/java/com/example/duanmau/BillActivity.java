@@ -58,12 +58,8 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
         AnhXa();
         hoaDonDAO = new HoaDonDAO(BillActivity.this);
 
-//        addBill();
-        try {
             billAdapter = new BillAdapter(this, hoaDonDAO.getAllHoaDon());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
         recBill.setLayoutManager(new GridLayoutManager(this, 2));
         recBill.setAdapter(billAdapter);
 
@@ -160,11 +156,11 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
 
                 } else {
                     try {
-                        if (checkIdBill(idBill.getText().toString())) {
+                        if (checkIdBill(Integer.parseInt(idBill.getText().toString()))) {
                             Toast.makeText(BillActivity.this, "Mã Hóa Đơn đã tồn tại!", Toast.LENGTH_SHORT).show();
                         } else {
                             HoaDon hoaDon = new HoaDon();
-                            hoaDon.setMaHoaDon(idBill.getText().toString());
+                            hoaDon.setMaHoaDon(Integer.parseInt(idBill.getText().toString()));
                             hoaDon.setNgayMua(date.getDayOfMonth()+"/"+date.getMonth()+"/"+date.getYear());
                             hoaDonDAO.inserHoaDon(hoaDon);
                             billAdapter.notifyDataSetChanged();
@@ -182,9 +178,9 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean checkIdBill(String id) throws ParseException {
+    private boolean checkIdBill(int id) throws ParseException {
         for (int i = 0; i < hoaDonDAO.getAllHoaDon().size(); i++) {
-            if (id.equalsIgnoreCase(hoaDonDAO.getAllHoaDon().get(i).getMaHoaDon())) {
+            if (id==hoaDonDAO.getAllHoaDon().get(i).getMaHoaDon()) {
                 return true;
             }
         }

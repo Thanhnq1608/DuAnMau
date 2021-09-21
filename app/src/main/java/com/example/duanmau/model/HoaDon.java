@@ -3,21 +3,21 @@ package com.example.duanmau.model;
 import java.util.Date;
 
 public class HoaDon {
-    private String maHoaDon;
+    private int maHoaDon;
     private String ngayMua;
 
     public HoaDon() {
     }
 
-    public HoaDon(String maHoaDon, String  ngayMua) {
+    public HoaDon(int maHoaDon, String  ngayMua) {
         this.maHoaDon = maHoaDon;
         this.ngayMua = ngayMua;
     }
-    public String getMaHoaDon() {
+    public int getMaHoaDon() {
         return maHoaDon;
     }
 
-    public void setMaHoaDon(String maHoaDon) {
+    public void setMaHoaDon(int maHoaDon) {
         this.maHoaDon = maHoaDon;
     }
 

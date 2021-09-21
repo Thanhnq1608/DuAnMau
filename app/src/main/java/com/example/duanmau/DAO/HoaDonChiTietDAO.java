@@ -7,20 +7,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.duanmau.database.DatabaseHelper;
-import com.example.duanmau.model.HoaDon;
 import com.example.duanmau.model.HoaDonChiTiet;
-import com.example.duanmau.model.Book;
+import com.example.duanmau.model.Sach;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class HoaDonChiTietDAO {
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
     public static final String TABLE_NAME = "HoaDonChiTiet";
     public static final String SQL_HOA_DON_CHI_TIET = "CREATE TABLE HoaDonChiTiet( maHDCT INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "maHoaDon text NOT NULL, maSach text NOT NULL, soLuong INTEGER);";
+            "maHoaDon text , maSach text NOT NULL, soLuong INTEGER);";
     public static final String TAG = "HoaDonChiTiet";
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -32,7 +30,7 @@ public class HoaDonChiTietDAO {
     //insert
     public int inserHoaDonChiTiet(HoaDonChiTiet hd) {
         ContentValues values = new ContentValues();
-        values.put("mahoadon", hd.getHoaDon().getMaHoaDon());
+        values.put("mahoadon", hd.getMahoaDon());
         values.put("maSach", hd.getSach().getMaSach());
         values.put("soLuong", hd.getSoLuongMua());
         try {
@@ -46,21 +44,21 @@ public class HoaDonChiTietDAO {
     }
 
     //getAll
-    public List<HoaDonChiTiet> getAllHoaDonChiTiet() {
-        List<HoaDonChiTiet> dsHoaDonChiTiet = new ArrayList<>();
+    public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
+        ArrayList<HoaDonChiTiet> dsHoaDonChiTiet = new ArrayList<>();
         String sSQL = "SELECT maHDCT, HoaDon.maHoaDon,HoaDon.ngayMua, " +
-                "Book.maSach, Book.maTheLoai, Book.tenSach, Book.tacGia, Book.NXB, Book.giaBia, " +
-        "Book.soLuong,HoaDonChiTiet.soLuong FROM HoaDonChiTiet INNER JOIN HoaDon " +
-        "on HoaDonChiTiet.maHoaDon = HoaDon.maHoaDon INNER JOIN Book on Book.maSach = HoaDonChiTiet.maSach ";
+                "Sach.maSach, Sach.maTheLoai, Sach.tenSach, Sach.tacGia, Sach.NXB, Sach.giaBia, " +
+        "Sach.soLuong,HoaDonChiTiet.soLuong FROM HoaDonChiTiet INNER JOIN HoaDon " +
+        "on HoaDonChiTiet.maHoaDon = HoaDon.maHoaDon INNER JOIN Sach on Sach.maSach = HoaDonChiTiet.maSach ";
         Cursor c = db.rawQuery(sSQL, null);
         c.moveToFirst();
         try {
             while (c.isAfterLast() == false) {
                 HoaDonChiTiet ee = new HoaDonChiTiet();
                 ee.setMaHDCT(c.getInt(0));
-                ee.setHoaDon(new HoaDon(c.getString(1), c.getString(2)));
-                ee.setSach(new Book(c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getInt(8), c.getInt(9)));
-                ee.setSoLuongMua(c.getInt(10));
+                ee.setMahoaDon(c.getInt(1));
+                ee.setSach(new Sach(c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getInt(7), c.getInt(8)));
+                ee.setSoLuongMua(c.getInt(9));
                 dsHoaDonChiTiet.add(ee);
                 Log.d("//=====", ee.toString());
                 c.moveToNext();
@@ -73,8 +71,8 @@ public class HoaDonChiTietDAO {
     }
 
     //getAll
-    public List<HoaDonChiTiet> getAllHoaDonChiTietByID(String maHoaDon) {
-        List<HoaDonChiTiet> dsHoaDonChiTiet = new ArrayList<>();
+    public ArrayList<HoaDonChiTiet> getAllHoaDonChiTietByID(String maHoaDon) {
+        ArrayList<HoaDonChiTiet> dsHoaDonChiTiet = new ArrayList<>();
         String sSQL = "SELECT maHDCT, HoaDon.maHoaDon,HoaDon.ngayMua, " +
                 "Sach.maSach, Sach.maTheLoai, Sach.tenSach, Sach.tacGia, Sach.NXB, Sach.giaBia, " +
         "Sach.soLuong,HoaDonChiTiet.soLuong FROM HoaDonChiTiet INNER JOIN HoaDon " +
@@ -85,10 +83,10 @@ public class HoaDonChiTietDAO {
             while (c.isAfterLast() == false) {
                 HoaDonChiTiet ee = new HoaDonChiTiet();
                 ee.setMaHDCT(c.getInt(0));
-                ee.setHoaDon(new HoaDon(c.getString(1), c.getString(2)));
+                ee.setMahoaDon(c.getInt(1));
                 ee.setSach(new
-                        Book(c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getInt(8), c.getInt(9)));
-                ee.setSoLuongMua(c.getInt(10));
+                        Sach(c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getInt(7), c.getInt(8)));
+                ee.setSoLuongMua(c.getInt(9));
                 dsHoaDonChiTiet.add(ee);
                 Log.d("//=====", ee.toString());
                 c.moveToNext();
@@ -104,7 +102,7 @@ public class HoaDonChiTietDAO {
     public int updateHoaDonChiTiet(HoaDonChiTiet hd) {
         ContentValues values = new ContentValues();
         values.put("maHDCT", hd.getMaHDCT());
-        values.put("mahoadon", hd.getHoaDon().getMaHoaDon());
+        values.put("mahoadon", hd.getMahoaDon());
         values.put("maSach", hd.getSach().getMaSach());
         values.put("soLuong", hd.getSoLuongMua());
         int result = db.update(TABLE_NAME, values, "maHDCT=?", new

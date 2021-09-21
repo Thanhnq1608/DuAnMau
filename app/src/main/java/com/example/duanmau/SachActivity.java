@@ -3,7 +3,6 @@ package com.example.duanmau;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -15,7 +14,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +27,7 @@ import com.example.duanmau.DAO.SachDAO;
 import com.example.duanmau.DAO.TheLoaiDAO;
 import com.example.duanmau.LOGIN.LogInActivity;
 import com.example.duanmau.adapter.SachAdapter;
-import com.example.duanmau.model.Book;
+import com.example.duanmau.model.Sach;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -40,7 +38,7 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     NavigationView navigationView;
     RecyclerView recSach;
-    ArrayList<Book> bookWithTheLoai =new ArrayList<>();
+    ArrayList<Sach> sachWithTheLoai =new ArrayList<>();
     SachAdapter sachAdapter;
     SachDAO sachDAO;
 
@@ -64,8 +62,8 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
         }else {
             for (int i = 0;i<sachDAO.getAllSach().size();i++){
                 if (sachDAO.getAllSach().get(i).getMaTheLoai().equalsIgnoreCase(maTL)){
-                    bookWithTheLoai.add(sachDAO.getAllSach().get(i));
-                    sachAdapter = new SachAdapter(this, bookWithTheLoai);
+                    sachWithTheLoai.add(sachDAO.getAllSach().get(i));
+                    sachAdapter = new SachAdapter(this, sachWithTheLoai);
                     recSach.setLayoutManager(new GridLayoutManager(this, 2));
                     recSach.setAdapter(sachAdapter);
                     sachAdapter.notifyDataSetChanged();
@@ -83,7 +81,7 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
 //        Book book5 =new Book("hs1","6","Triết học gia","Xuân Hoàng","Kim Đồng",220000,20);
 //        Book book6 =new Book("ma1","7","Những Con số","Bá Nam","Kim Đồng",150000,20);
 //        Book book7 =new Book("ma1","8","Nghệ thuật logic","Thị Bích","Kim Đồng",120000,20);
-        sachDAO.inserSach(new Book("it1","1","Yêu Công Nghệ","Quang Thanh","Kim Đồng",20000,20));
+        sachDAO.inserSach(new Sach("it1","1","Yêu Công Nghệ","Quang Thanh","Kim Đồng",20000,20));
 //        sachDAO.inserSach(book1);
 //        sachDAO.inserSach(book2);
 //        sachDAO.inserSach(book3);
@@ -195,15 +193,15 @@ public class SachActivity extends AppCompatActivity implements NavigationView.On
                         } else if (checkid(idSach.getText().toString())) {
                             Toast.makeText(SachActivity.this, "ID đã tồn tại!", Toast.LENGTH_SHORT).show();
                         } else {
-                            Book book = new Book();
-                            book.setMaSach(idSach.getText().toString());
-                            book.setMaTheLoai(spn_type.getSelectedItem().toString());
-                            book.setGiaBia(Integer.parseInt(price.getText().toString()));
-                            book.setNXB(nXBSach.getText().toString());
-                            book.setSoLuong(Integer.parseInt(soLuong.getText().toString()));
-                            book.setTacGia(tacGia.getText().toString());
-                            book.setTenSach(nameSach.getText().toString());
-                            sachDAO.inserSach(book);
+                            Sach sach = new Sach();
+                            sach.setMaSach(idSach.getText().toString());
+                            sach.setMaTheLoai(spn_type.getSelectedItem().toString());
+                            sach.setGiaBia(Integer.parseInt(price.getText().toString()));
+                            sach.setNXB(nXBSach.getText().toString());
+                            sach.setSoLuong(Integer.parseInt(soLuong.getText().toString()));
+                            sach.setTacGia(tacGia.getText().toString());
+                            sach.setTenSach(nameSach.getText().toString());
+                            sachDAO.inserSach(sach);
                             recreate();
                             Toast.makeText(SachActivity.this, "Thêm sách thành công!", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();

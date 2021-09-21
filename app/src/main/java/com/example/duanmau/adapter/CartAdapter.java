@@ -75,13 +75,12 @@ public class CartAdapter extends BaseAdapter {
         }
         else
             holder=(ViewHolder)convertView.getTag();
-        HoaDonChiTiet _entry = (HoaDonChiTiet) arrHoaDonChiTiet.get(position);
-        holder.tvBill.setText("Mã Hóa đơn: "+_entry.getHoaDon().getMaHoaDon());
-        holder.tvDateBill.setText("Ngày mua: "+_entry.getHoaDon().getNgayMua());
-        holder.txtMaSach.setText("Mã sách: "+_entry.getSach().getMaSach());
-        holder.txtSoLuong.setText("Số lượng: "+_entry.getSoLuongMua());
-        holder.txtGiaBia.setText("Giá bìa: "+_entry.getSach().getGiaBia() +" vnd");
-        holder.txtThanhTien.setText("Thành tiền:"+_entry.getSoLuongMua()*_entry.getSach().getGiaBia()+" vnd");
+        HoaDonChiTiet hoaDonChiTiet = arrHoaDonChiTiet.get(position);
+        holder.tvBill.setText("Mã Hóa đơn: "+hoaDonChiTiet.getMahoaDon());
+        holder.txtMaSach.setText("Mã sách: "+hoaDonChiTiet.getSach().getMaSach());
+        holder.txtSoLuong.setText("Số lượng: "+hoaDonChiTiet.getSoLuongMua());
+        holder.txtGiaBia.setText("Giá bìa: "+hoaDonChiTiet.getSach().getGiaBia() +" vnd");
+        holder.txtThanhTien.setText("Thành tiền:"+hoaDonChiTiet.getSoLuongMua()*hoaDonChiTiet.getSach().getGiaBia()+" vnd");
         return convertView;
     }
     @Override

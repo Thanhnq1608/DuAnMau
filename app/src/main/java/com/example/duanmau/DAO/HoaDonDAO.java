@@ -18,7 +18,7 @@ public class HoaDonDAO {
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
     public static final String TABLE_NAME = "HoaDon";
-    public static final String SQL_HOA_DON = "CREATE TABLE HoaDon (mahoadon text primary key, ngaymua text);";
+    public static final String SQL_HOA_DON = "CREATE TABLE HoaDon (mahoadon int primary key, ngaymua text);";
     public static final String TAG = "HoaDonDAO";
 
     public HoaDonDAO(Context context) {
@@ -42,16 +42,15 @@ public class HoaDonDAO {
     }
 
     //getAll
-    public ArrayList<HoaDon> getAllHoaDon() throws ParseException {
+    public ArrayList<HoaDon> getAllHoaDon(){
         ArrayList<HoaDon> dsHoaDon = new ArrayList<>();
         Cursor c = db.query(TABLE_NAME, null, null, null, null, null, null);
         c.moveToFirst();
         while (c.isAfterLast() == false) {
             HoaDon ee = new HoaDon();
-            ee.setMaHoaDon(c.getString(0));
+            ee.setMaHoaDon(c.getInt(0));
             ee.setNgayMua(c.getString(1));
             dsHoaDon.add(ee);
-            Log.d("//=====", ee.toString());
             c.moveToNext();
         }
         c.close();
@@ -64,7 +63,7 @@ public class HoaDonDAO {
         values.put("mahoadon", hd.getMaHoaDon());
         values.put("ngaymua", hd.getNgayMua());
         int result = db.update(TABLE_NAME, values, "mahoadon=?", new
-                String[]{hd.getMaHoaDon()});
+                String[]{String.valueOf(hd.getMaHoaDon())});
         if (result == 0) {
             return -1;
         }

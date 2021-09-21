@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.duanmau.database.DatabaseHelper;
-import com.example.duanmau.model.Book;
+import com.example.duanmau.model.Sach;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +15,10 @@ import java.util.List;
 public class SachDAO {
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
-    public static final String TABLE_NAME = "Book";
-    public static final String SQL_SACH = "CREATE TABLE Book (maSach text primary key, maTheLoai text, tensach text," +
+    public static final String TABLE_NAME = "Sach";
+    public static final String SQL_SACH = "CREATE TABLE Sach (maSach text primary key, maTheLoai text, tensach text," +
             "tacGia text, NXB text, giaBia double, soLuong number);";
-    public static final String TAG = "BookDAO";
+    public static final String TAG = "SachDAO";
 
     public SachDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
@@ -26,7 +26,7 @@ public class SachDAO {
     }
 
     //insert
-    public int inserSach(Book s) {
+    public int inserSach(Sach s) {
         ContentValues values = new ContentValues();
         values.put("maTheLoai", s.getMaTheLoai());
         values.put("maSach", s.getMaSach());
@@ -54,12 +54,12 @@ public class SachDAO {
     }
 
     //getAll
-    public ArrayList<Book> getAllSach() {
-        ArrayList<Book> dsBooks = new ArrayList<>();
+    public ArrayList<Sach> getAllSach() {
+        ArrayList<Sach> dsSaches = new ArrayList<>();
         Cursor c = db.query(TABLE_NAME, null, null, null, null, null, null);
         c.moveToFirst();
         while (c.isAfterLast() == false) {
-            Book s = new Book();
+            Sach s = new Sach();
             s.setMaSach(c.getString(0));
             s.setMaTheLoai(c.getString(1));
             s.setTenSach(c.getString(2));
@@ -67,17 +67,17 @@ public class SachDAO {
             s.setNXB(c.getString(4));
             s.setGiaBia(c.getInt(5));
             s.setSoLuong(c.getInt(6));
-            dsBooks.add(s);
+            dsSaches.add(s);
             Log.d("//=====", s.toString());
             c.moveToNext();
         }
         c.close();
-        return dsBooks;
+        return dsSaches;
     }
 
     //getAll sach by Thể loại
-    public ArrayList<Book> getSachByType(String maTheLoai) {
-        ArrayList<Book> dsBooks = new ArrayList<>();
+    public ArrayList<Sach> getSachByType(String maTheLoai) {
+        ArrayList<Sach> dsSaches = new ArrayList<>();
         //WHERE clause
         String selection = "maTheLoai=?";
         //WHERE clause arguments
@@ -86,7 +86,7 @@ public class SachDAO {
         Log.d("getSachByType", "===>" + c.getCount());
         c.moveToFirst();
         while (c.isAfterLast() == false) {
-            Book s = new Book();
+            Sach s = new Sach();
             s.setMaSach(c.getString(0));
             s.setMaTheLoai(c.getString(1));
             s.setTenSach(c.getString(2));
@@ -94,15 +94,15 @@ public class SachDAO {
             s.setNXB(c.getString(4));
             s.setGiaBia(c.getInt(5));
             s.setSoLuong(c.getInt(6));
-            dsBooks.add(s);
+            dsSaches.add(s);
             c.moveToNext();
         }
         c.close();
-        return dsBooks;
+        return dsSaches;
     }
 
     //update
-    public int updateSach(Book s) {
+    public int updateSach(Sach s) {
         ContentValues values = new ContentValues();
         values.put("maSach", s.getMaSach());
         values.put("maTheLoai", s.getMaTheLoai());
@@ -153,8 +153,8 @@ public class SachDAO {
     }
 
     //check
-    public Book checkBook(String strPrimaryKey) {
-        Book s = new Book();
+    public Sach checkBook(String strPrimaryKey) {
+        Sach s = new Sach();
         //SELECT
         String[] columns = {"masach"};
         //WHERE clause
@@ -186,8 +186,8 @@ public class SachDAO {
     }
 
     //getAll
-    public Book getSachByID(String maSach) {
-        Book s = null;
+    public Sach getSachByID(String maSach) {
+        Sach s = null;
         //WHERE clause
         String selection = "masach=?";
         //WHERE clause arguments
@@ -196,7 +196,7 @@ public class SachDAO {
         Log.d("getSachByID", "===>" + c.getCount());
         c.moveToFirst();
         while (c.isAfterLast() == false) {
-            s = new Book();
+            s = new Sach();
             s.setMaSach(c.getString(0));
             s.setMaTheLoai(c.getString(1));
             s.setTenSach(c.getString(2));
@@ -213,8 +213,8 @@ public class SachDAO {
 
 
     //getAll
-    public List<Book> getSachTop10(String month) {
-        List<Book> dsBooks = new ArrayList<>();
+    public List<Sach> getSachTop10(String month) {
+        List<Sach> dsSaches = new ArrayList<>();
         if (Integer.parseInt(month) < 10) {
             month = "0" + month;
         }
@@ -225,7 +225,7 @@ public class SachDAO {
         c.moveToFirst();
         while (c.isAfterLast() == false) {
             Log.d("//=====", c.getString(0));
-            Book s = new Book();
+            Sach s = new Sach();
             s.setMaSach(c.getString(0));
             s.setSoLuong(c.getInt(1));
             s.setGiaBia(0);
@@ -233,10 +233,10 @@ public class SachDAO {
             s.setTenSach("");
             s.setTacGia("");
             s.setNXB("");
-            dsBooks.add(s);
+            dsSaches.add(s);
             c.moveToNext();
         }
         c.close();
-        return dsBooks;
+        return dsSaches;
     }
 }

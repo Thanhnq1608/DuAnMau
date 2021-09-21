@@ -2,18 +2,26 @@ package com.example.duanmau.model;
 
 public class HoaDonChiTiet {
     private int maHDCT;
-    private HoaDon hoaDon;
-    private Book book;
+    private int mahoaDon;
+    private Sach sach;
     private int soLuongMua;
 
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(int maHDCT, HoaDon hoaDon, Book book, int soLuongMua) {
+    public HoaDonChiTiet(int maHDCT, int mahoaDon, Sach sach, int soLuongMua) {
         this.maHDCT = maHDCT;
-        this.hoaDon = hoaDon;
-        this.book = book;
+        this.mahoaDon = mahoaDon;
+        this.sach = sach;
         this.soLuongMua = soLuongMua;
+    }
+
+    public int getMahoaDon() {
+        return mahoaDon;
+    }
+
+    public void setMahoaDon(int mahoaDon) {
+        this.mahoaDon = mahoaDon;
     }
 
     public int getMaHDCT() {
@@ -24,20 +32,13 @@ public class HoaDonChiTiet {
         this.maHDCT = maHDCT;
     }
 
-    public HoaDon getHoaDon() {
-        return hoaDon;
+
+    public Sach getSach() {
+        return sach;
     }
 
-    public void setHoaDon(HoaDon hoaDon) {
-        this.hoaDon = hoaDon;
-    }
-
-    public Book getSach() {
-        return book;
-    }
-
-    public void setSach(Book book) {
-        this.book = book;
+    public void setSach(Sach sach) {
+        this.sach = sach;
     }
 
     public int getSoLuongMua() {
@@ -52,8 +53,8 @@ public class HoaDonChiTiet {
     public String toString() {
         return "HoaDonChiTiet{" +
                 "maHDCT=" + maHDCT +
-                ", hoaDon=" + hoaDon +
-                ", sach=" + book +
+                ", mahoaDon=" + mahoaDon +
+                ", book=" + sach +
                 ", soLuongMua=" + soLuongMua +
                 '}';
     }
