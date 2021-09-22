@@ -73,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="50dp"
-                        android:text="Tháng nay:"
+                        android:text="Tháng này:"
                         android:textColor="@color/black"
                         android:textSize="30dp" />
 

@@ -3,17 +3,27 @@ package com.example.duanmau.model;
 public class HoaDonChiTiet {
     private int maHDCT;
     private int mahoaDon;
+    private String purchaseDate;
     private Sach sach;
     private int soLuongMua;
 
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(int maHDCT, int mahoaDon, Sach sach, int soLuongMua) {
+    public HoaDonChiTiet(int maHDCT, int mahoaDon,String purchaseDate,Sach sach, int soLuongMua) {
         this.maHDCT = maHDCT;
         this.mahoaDon = mahoaDon;
+        this.purchaseDate=purchaseDate;
         this.sach = sach;
         this.soLuongMua = soLuongMua;
+    }
+
+    public String getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(String purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 
     public int getMahoaDon() {

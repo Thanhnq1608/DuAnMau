@@ -34,9 +34,9 @@ public class ThongKeActivity extends AppCompatActivity implements NavigationView
         tvThang = (TextView) findViewById(R.id.tv_money_month);
         tvNam = (TextView) findViewById(R.id.tv_money_year);
         hoaDonChiTietDAO = new HoaDonChiTietDAO(this);
-        tvNgay.setText("Hôm nay: "+hoaDonChiTietDAO.getDoanhThuTheoNgay());
-        tvThang.setText("Tháng này: "+hoaDonChiTietDAO.getDoanhThuTheoThang());
-        tvNam.setText("Năm này: "+hoaDonChiTietDAO.getDoanhThuTheoNam());
+        tvNgay.setText(""+hoaDonChiTietDAO.getDoanhThuTheoNgay()+" VNĐ");
+        tvThang.setText(""+hoaDonChiTietDAO.getDoanhThuTheoThang()+" VNĐ");
+        tvNam.setText(""+hoaDonChiTietDAO.getDoanhThuTheoNam()+" VNĐ");
     }
 
     private void Menu() {

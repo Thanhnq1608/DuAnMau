@@ -10,17 +10,19 @@ import com.example.duanmau.database.DatabaseHelper;
 import com.example.duanmau.model.HoaDonChiTiet;
 import com.example.duanmau.model.Sach;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HoaDonChiTietDAO {
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
     public static final String TABLE_NAME = "HoaDonChiTiet";
     public static final String SQL_HOA_DON_CHI_TIET = "CREATE TABLE HoaDonChiTiet( maHDCT INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "maHoaDon text , maSach text NOT NULL, soLuong INTEGER);";
+            "maHoaDon text ,purchaseDate text, maSach text NOT NULL, soLuong INTEGER);";
     public static final String TAG = "HoaDonChiTiet";
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public HoaDonChiTietDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
@@ -31,6 +33,7 @@ public class HoaDonChiTietDAO {
     public int inserHoaDonChiTiet(HoaDonChiTiet hd) {
         ContentValues values = new ContentValues();
         values.put("mahoadon", hd.getMahoaDon());
+        values.put("purchaseDate",hd.getPurchaseDate());
         values.put("maSach", hd.getSach().getMaSach());
         values.put("soLuong", hd.getSoLuongMua());
         try {
@@ -57,8 +60,9 @@ public class HoaDonChiTietDAO {
                 HoaDonChiTiet ee = new HoaDonChiTiet();
                 ee.setMaHDCT(c.getInt(0));
                 ee.setMahoaDon(c.getInt(1));
-                ee.setSach(new Sach(c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getInt(7), c.getInt(8)));
-                ee.setSoLuongMua(c.getInt(9));
+                ee.setPurchaseDate(c.getString(2));
+                ee.setSach(new Sach(c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getInt(8), c.getInt(9)));
+                ee.setSoLuongMua(c.getInt(10));
                 dsHoaDonChiTiet.add(ee);
                 Log.d("//=====", ee.toString());
                 c.moveToNext();
@@ -84,9 +88,9 @@ public class HoaDonChiTietDAO {
                 HoaDonChiTiet ee = new HoaDonChiTiet();
                 ee.setMaHDCT(c.getInt(0));
                 ee.setMahoaDon(c.getInt(1));
-                ee.setSach(new
-                        Sach(c.getString(2), c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getInt(7), c.getInt(8)));
-                ee.setSoLuongMua(c.getInt(9));
+                ee.setPurchaseDate(c.getString(2));
+                ee.setSach(new Sach(c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getInt(8), c.getInt(9)));
+                ee.setSoLuongMua(c.getInt(10));
                 dsHoaDonChiTiet.add(ee);
                 Log.d("//=====", ee.toString());
                 c.moveToNext();
@@ -145,12 +149,20 @@ public class HoaDonChiTietDAO {
             return false;
         }
     }
+    public String getDateNow(){
+        String sql = "SELECT date('now')";
+        Cursor c = db.rawQuery(sql,null);
+        c.moveToFirst();
+        String date=c.getString(0);
+        c.close();
+        return date;
+    }
 
     public double getDoanhThuTheoNgay() {
         double doanhThu = 0;
         String sSQL = "SELECT SUM(tongtien) from (SELECT SUM(Sach.giaBia * HoaDonChiTiet.soLuong)as 'tongtien' " +
         "FROM HoaDon INNER JOIN HoaDonChiTiet on HoaDon.maHoaDon = HoaDonChiTiet.maHoaDon " +
-        "INNER JOIN Sach on HoaDonChiTiet.maSach = Sach.maSach where HoaDon.ngayMua = date('now') GROUP BY HoaDonChiTiet.maSach)tmp ";
+        "INNER JOIN Sach on HoaDonChiTiet.maSach = Sach.maSach WHERE HoaDon.ngayMua = date('now') GROUP BY HoaDonChiTiet.maSach)tmp ";
         Cursor c = db.rawQuery(sSQL, null);
         c.moveToFirst();
         while (c.isAfterLast() == false) {

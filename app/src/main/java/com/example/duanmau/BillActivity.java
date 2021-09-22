@@ -64,6 +64,13 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
         recBill.setAdapter(billAdapter);
 
 
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        billAdapter.notifyDataSetChanged();
     }
 
     private void AnhXa() {
@@ -127,6 +134,11 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        billAdapter.notifyDataSetChanged();
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -161,13 +173,15 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
                         } else {
                             HoaDon hoaDon = new HoaDon();
                             hoaDon.setMaHoaDon(Integer.parseInt(idBill.getText().toString()));
-                            hoaDon.setNgayMua(date.getDayOfMonth()+"/"+date.getMonth()+"/"+date.getYear());
+                            Date date1=new SimpleDateFormat("yyyy-mm-dd").parse(date.getYear()+"-"+date.getMonth()+"-"+date.getDayOfMonth());
+                            hoaDon.setNgayMua(date1);
                             hoaDonDAO.inserHoaDon(hoaDon);
                             billAdapter.notifyDataSetChanged();
                             Intent intent = new  Intent(BillActivity.this, HoaDonChiTietActivity.class);
                             intent.putExtra("MAHOADON", idBill.getText().toString());
                             startActivity(intent);
                             Toast.makeText(BillActivity.this, "Thêm hóa đơn thành công!", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
                         }
                     } catch (ParseException e) {
                         e.printStackTrace();

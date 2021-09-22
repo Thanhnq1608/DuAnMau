@@ -21,7 +21,10 @@ import com.example.duanmau.model.HoaDon;
 import com.example.duanmau.model.HoaDonChiTiet;
 import com.example.duanmau.model.Sach;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class HoaDonChiTietActivity extends AppCompatActivity {
@@ -81,25 +84,30 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
 
     }
 
+
     public void ADDHoaDonCHITIET(View view) {
         //các loại sách đã mua
         String[] temp = spnMaSach.getSelectedItem().toString().split("_", 3);
         listSach.add(sachDAO.getSachByID(temp[1]));
         hoaDonDAO = new HoaDonDAO(HoaDonChiTietActivity.this);
         if (!spnMaSach.getSelectedItem().toString().equalsIgnoreCase("Chọn Sách cần mua.")) {
-//            for (int i = 0; i < hoaDonDAO.getAllHoaDon().size(); i++) {
-//                if (hoaDonDAO.getAllHoaDon().get(i).getMaHoaDon() == Integer.parseInt(edMaHoaDon.getText().toString())) {
-//
-//                    break;
-//                }
-//            }
-            if (Integer.parseInt(edSoLuong.getText().toString()) <= listSach.get(0).getSoLuong()) {
+            for (int i = 0; i < hoaDonDAO.getAllHoaDon().size(); i++) {
+                if (hoaDonDAO.getAllHoaDon().get(i).getMaHoaDon() == Integer.parseInt(edMaHoaDon.getText().toString())) {
+                    if (Integer.parseInt(edSoLuong.getText().toString()) <= listSach.get(0).getSoLuong()) {
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+                        String strDate = dateFormat.format(hoaDonDAO.getAllHoaDon().get(i).getNgayMua());
+                        HoaDonChiTiet hoaDonChiTiet = new
+                                HoaDonChiTiet(hoaDonChiTietDAO.getAllHoaDonChiTiet().size() + 1,
+                                Integer.parseInt(edMaHoaDon.getText().toString()),
+                                strDate,listSach.get(0),
+                                Integer.parseInt(edSoLuong.getText().toString()));
+                        hoaDonChiTietDAO.inserHoaDonChiTiet(hoaDonChiTiet);
+                        adapter.changeDataset(hoaDonChiTietDAO.getAllHoaDonChiTiet());
+                        Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    }
 
-                HoaDonChiTiet hoaDonChiTiet = new
-                        HoaDonChiTiet(hoaDonChiTietDAO.getAllHoaDonChiTiet().size() + 1, Integer.parseInt(edMaHoaDon.getText().toString()), listSach.get(0), Integer.parseInt(edSoLuong.getText().toString()));
-                hoaDonChiTietDAO.inserHoaDonChiTiet(hoaDonChiTiet);
-                adapter.changeDataset(hoaDonChiTietDAO.getAllHoaDonChiTiet());
-                Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+                    break;
+                }
             }
 
         } else {
@@ -110,6 +118,7 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
     public void thanhToanHoaDon(View view) {
         hoaDonChiTietDAO = new HoaDonChiTietDAO(HoaDonChiTietActivity.this);
         //tinh tien
+        Toast.makeText(this, ""+hoaDonChiTietDAO.getDateNow(), Toast.LENGTH_SHORT).show();
         int thanhTien = 0;
 
         for (HoaDonChiTiet hd : hoaDonChiTietDAO.getAllHoaDonChiTiet()) {

@@ -24,7 +24,9 @@ import com.example.duanmau.R;
 import com.example.duanmau.model.HoaDon;
 import com.example.duanmau.model.TheLoaiSach;
 
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
@@ -58,8 +60,9 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
         if (billList == null) {
             return;
         }
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         holder.imgBill.setBackgroundColor(R.drawable.icon_bill);
-        holder.tvNgayMua.setText(String.valueOf(hoaDon.getNgayMua()));
+        holder.tvNgayMua.setText(dateFormat.format(hoaDon.getNgayMua()));
         holder.tvId.setText(String.valueOf(hoaDon.getMaHoaDon()));
 
         holder.imgBill.setOnClickListener(new View.OnClickListener() {
@@ -79,8 +82,8 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                             hoaDonDAO.deleteHoaDonByID(String.valueOf(hoaDonDAO.getAllHoaDon().get(position).getMaHoaDon()));
-
                         Toast.makeText(context, "Xóa Thành công!", Toast.LENGTH_SHORT).show();
+                        notifyDataSetChanged();
                     }
                 });
                 builder.setNegativeButton(String.valueOf(R.string.dialog_exit_no), new DialogInterface.OnClickListener() {
