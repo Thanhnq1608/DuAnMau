@@ -13,20 +13,18 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.duanmau.DAO.NguoiDungDAO;
+import com.example.duanmau.DAO.UserDAO;
 import com.example.duanmau.R;
-import com.example.duanmau.model.NguoiDung;
-import com.google.android.gms.maps.model.TileOverlay;
+import com.example.duanmau.model.User;
 
-import java.io.FileInputStream;
 import java.util.ArrayList;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private Context context;
-    ArrayList<NguoiDung> userList;
+    ArrayList<User> userList;
     Dialog dialog;
 
-    public UserAdapter(Context context, ArrayList<NguoiDung> userList) {
+    public UserAdapter(Context context, ArrayList<User> userList) {
         this.context = context;
         this.userList = userList;
     }
@@ -42,19 +40,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final NguoiDungDAO nguoiDungDAO = new NguoiDungDAO(context);
-        NguoiDung nguoiDung = userList.get(position);
+        final UserDAO userDAO = new UserDAO(context);
+        User user = userList.get(position);
 
-        if (nguoiDung == null) {
+        if (user == null) {
             return;
         }
-        holder.tvTenNguoiDung.setText(nguoiDung.getHoTen());
-        holder.tvUser.setText(nguoiDung.getUserName());
+        holder.tvTenNguoiDung.setText(user.getHoTen());
+        holder.tvUser.setText(user.getUserName());
         holder.imgUser.setImageResource(R.drawable.icon_user);
         holder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nguoiDungDAO.deleteNguoiDungByID(userList.get(position).getUserName());
+                userDAO.deleteNguoiDungByID(userList.get(position).getUserName());
                 userList.remove(position);
                 Toast.makeText(context, "Xóa Thành Công!", Toast.LENGTH_SHORT).show();
                 notifyDataSetChanged();
@@ -80,11 +78,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 img_ava.setImageResource(R.drawable.icon_user);
-                tv_user.setText(nguoiDungDAO.getAllNguoiDung().get(position).getUserName());
-                tv_name.setText(nguoiDungDAO.getAllNguoiDung().get(position).getHoTen());
-                tv_phone.setText(nguoiDungDAO.getAllNguoiDung().get(position).getPhone());
-                tv_pass.setText(nguoiDungDAO.getAllNguoiDung().get(position).getPassword());
-                tv_sex.setText(nguoiDungDAO.getAllNguoiDung().get(position).getGioiTinh());
+                tv_user.setText(userDAO.getAllNguoiDung().get(position).getUserName());
+                tv_name.setText(userDAO.getAllNguoiDung().get(position).getHoTen());
+                tv_phone.setText(userDAO.getAllNguoiDung().get(position).getPhone());
+                tv_pass.setText(userDAO.getAllNguoiDung().get(position).getPassword());
+                tv_sex.setText(userDAO.getAllNguoiDung().get(position).getGioiTinh());
                 dialog.setContentView(view);
                 dialog.show();
                 img_x.setOnClickListener(new View.OnClickListener() {

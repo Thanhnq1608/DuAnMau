@@ -1,20 +1,20 @@
 package com.example.duanmau.model;
 
-public class HoaDonChiTiet {
+public class BillDetail {
     private int maHDCT;
     private int mahoaDon;
     private String purchaseDate;
-    private Sach sach;
+    private Book book;
     private int soLuongMua;
 
-    public HoaDonChiTiet() {
+    public BillDetail() {
     }
 
-    public HoaDonChiTiet(int maHDCT, int mahoaDon,String purchaseDate,Sach sach, int soLuongMua) {
+    public BillDetail(int maHDCT, int mahoaDon, String purchaseDate, Book book, int soLuongMua) {
         this.maHDCT = maHDCT;
         this.mahoaDon = mahoaDon;
         this.purchaseDate=purchaseDate;
-        this.sach = sach;
+        this.book = book;
         this.soLuongMua = soLuongMua;
     }
 
@@ -43,12 +43,12 @@ public class HoaDonChiTiet {
     }
 
 
-    public Sach getSach() {
-        return sach;
+    public Book getSach() {
+        return book;
     }
 
-    public void setSach(Sach sach) {
-        this.sach = sach;
+    public void setSach(Book book) {
+        this.book = book;
     }
 
     public int getSoLuongMua() {
@@ -64,7 +64,7 @@ public class HoaDonChiTiet {
         return "HoaDonChiTiet{" +
                 "maHDCT=" + maHDCT +
                 ", mahoaDon=" + mahoaDon +
-                ", book=" + sach +
+                ", book=" + book +
                 ", soLuongMua=" + soLuongMua +
                 '}';
     }

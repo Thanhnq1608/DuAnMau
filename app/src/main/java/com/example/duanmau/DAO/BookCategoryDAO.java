@@ -7,23 +7,22 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.duanmau.database.DatabaseHelper;
-import com.example.duanmau.model.TheLoaiSach;
+import com.example.duanmau.model.BookCategory;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class TheLoaiDAO {
+public class BookCategoryDAO {
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
     public static final String TABLE_NAME = "TheLoai";
     public static final String SQL_THE_LOAI ="CREATE TABLE TheLoai (matheloai text primary key, tentheloai text, mota text, vitri int,mauNen text);";
     public static final String TAG = "TheLoaiDAO";
-    public TheLoaiDAO(Context context) {
+    public BookCategoryDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
         db = dbHelper.getWritableDatabase();
     }
     //insert
-    public int inserTheLoai(TheLoaiSach theLoai){
+    public int inserTheLoai(BookCategory theLoai){
         ContentValues values = new ContentValues();
         values.put("matheloai",theLoai.getMaTheLoai());
         values.put("tentheloai",theLoai.getTenTheLoai());
@@ -40,12 +39,12 @@ public class TheLoaiDAO {
         return 1;
     }
     //getAllTheLoai
-    public ArrayList<TheLoaiSach> getAllTheLoai(){
-        ArrayList<TheLoaiSach> dsTheLoai = new ArrayList<>();
+    public ArrayList<BookCategory> getAllTheLoai(){
+        ArrayList<BookCategory> dsTheLoai = new ArrayList<>();
         Cursor c = db.query(TABLE_NAME,null,null,null,null,null,null);
         c.moveToFirst();
         while (c.isAfterLast()==false){
-            TheLoaiSach ee = new TheLoaiSach();
+            BookCategory ee = new BookCategory();
             ee.setMaTheLoai(c.getString(0));
             ee.setTenTheLoai(c.getString(1));
             ee.setMoTa(c.getString(2));
@@ -59,7 +58,7 @@ public class TheLoaiDAO {
         return dsTheLoai;
     }
     //update
-    public int updateTheLoai(TheLoaiSach theLoai){
+    public int updateTheLoai(BookCategory theLoai){
         ContentValues values = new ContentValues();
         values.put("matheloai",theLoai.getMaTheLoai());
         values.put("tentheloai",theLoai.getTenTheLoai());

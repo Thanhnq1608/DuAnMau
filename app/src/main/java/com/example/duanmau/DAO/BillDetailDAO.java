@@ -7,16 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.duanmau.database.DatabaseHelper;
-import com.example.duanmau.model.HoaDonChiTiet;
-import com.example.duanmau.model.Sach;
+import com.example.duanmau.model.BillDetail;
+import com.example.duanmau.model.Book;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class HoaDonChiTietDAO {
+public class BillDetailDAO {
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
     public static final String TABLE_NAME = "HoaDonChiTiet";
@@ -24,13 +20,13 @@ public class HoaDonChiTietDAO {
             "maHoaDon text ,purchaseDate text, maSach text NOT NULL, soLuong INTEGER);";
     public static final String TAG = "HoaDonChiTiet";
 
-    public HoaDonChiTietDAO(Context context) {
+    public BillDetailDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
         db = dbHelper.getWritableDatabase();
     }
 
     //insert
-    public int inserHoaDonChiTiet(HoaDonChiTiet hd) {
+    public int inserHoaDonChiTiet(BillDetail hd) {
         ContentValues values = new ContentValues();
         values.put("mahoadon", hd.getMahoaDon());
         values.put("purchaseDate",hd.getPurchaseDate());
@@ -47,8 +43,8 @@ public class HoaDonChiTietDAO {
     }
 
     //getAll
-    public ArrayList<HoaDonChiTiet> getAllHoaDonChiTiet() {
-        ArrayList<HoaDonChiTiet> dsHoaDonChiTiet = new ArrayList<>();
+    public ArrayList<BillDetail> getAllHoaDonChiTiet() {
+        ArrayList<BillDetail> dsBillDetail = new ArrayList<>();
         String sSQL = "SELECT maHDCT, HoaDon.maHoaDon,HoaDon.ngayMua, " +
                 "Sach.maSach, Sach.maTheLoai, Sach.tenSach, Sach.tacGia, Sach.NXB, Sach.giaBia, " +
         "Sach.soLuong,HoaDonChiTiet.soLuong FROM HoaDonChiTiet INNER JOIN HoaDon " +
@@ -57,13 +53,13 @@ public class HoaDonChiTietDAO {
         c.moveToFirst();
         try {
             while (c.isAfterLast() == false) {
-                HoaDonChiTiet ee = new HoaDonChiTiet();
+                BillDetail ee = new BillDetail();
                 ee.setMaHDCT(c.getInt(0));
                 ee.setMahoaDon(c.getInt(1));
                 ee.setPurchaseDate(c.getString(2));
-                ee.setSach(new Sach(c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getInt(8), c.getInt(9)));
+                ee.setSach(new Book(c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getInt(8), c.getInt(9)));
                 ee.setSoLuongMua(c.getInt(10));
-                dsHoaDonChiTiet.add(ee);
+                dsBillDetail.add(ee);
                 Log.d("//=====", ee.toString());
                 c.moveToNext();
             }
@@ -71,12 +67,12 @@ public class HoaDonChiTietDAO {
         } catch (Exception e) {
             Log.d(TAG, e.toString());
         }
-        return dsHoaDonChiTiet;
+        return dsBillDetail;
     }
 
     //getAll
-    public ArrayList<HoaDonChiTiet> getAllHoaDonChiTietByID(String maHoaDon) {
-        ArrayList<HoaDonChiTiet> dsHoaDonChiTiet = new ArrayList<>();
+    public ArrayList<BillDetail> getAllHoaDonChiTietByID(String maHoaDon) {
+        ArrayList<BillDetail> dsBillDetail = new ArrayList<>();
         String sSQL = "SELECT maHDCT, HoaDon.maHoaDon,HoaDon.ngayMua, " +
                 "Sach.maSach, Sach.maTheLoai, Sach.tenSach, Sach.tacGia, Sach.NXB, Sach.giaBia, " +
         "Sach.soLuong,HoaDonChiTiet.soLuong FROM HoaDonChiTiet INNER JOIN HoaDon " +
@@ -85,13 +81,13 @@ public class HoaDonChiTietDAO {
         c.moveToFirst();
         try {
             while (c.isAfterLast() == false) {
-                HoaDonChiTiet ee = new HoaDonChiTiet();
+                BillDetail ee = new BillDetail();
                 ee.setMaHDCT(c.getInt(0));
                 ee.setMahoaDon(c.getInt(1));
                 ee.setPurchaseDate(c.getString(2));
-                ee.setSach(new Sach(c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getInt(8), c.getInt(9)));
+                ee.setSach(new Book(c.getString(3), c.getString(4), c.getString(5), c.getString(6), c.getString(7), c.getInt(8), c.getInt(9)));
                 ee.setSoLuongMua(c.getInt(10));
-                dsHoaDonChiTiet.add(ee);
+                dsBillDetail.add(ee);
                 Log.d("//=====", ee.toString());
                 c.moveToNext();
             }
@@ -99,11 +95,11 @@ public class HoaDonChiTietDAO {
         } catch (Exception e) {
             Log.d(TAG, e.toString());
         }
-        return dsHoaDonChiTiet;
+        return dsBillDetail;
     }
 
     //update
-    public int updateHoaDonChiTiet(HoaDonChiTiet hd) {
+    public int updateHoaDonChiTiet(BillDetail hd) {
         ContentValues values = new ContentValues();
         values.put("maHDCT", hd.getMaHDCT());
         values.put("mahoadon", hd.getMahoaDon());

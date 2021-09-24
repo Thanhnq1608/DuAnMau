@@ -1,6 +1,6 @@
 package com.example.duanmau.model;
 
-public class NguoiDung {
+public class User {
     private String userName;
     private String password;
     private String gioiTinh;
@@ -47,7 +47,7 @@ public class NguoiDung {
         this.hoTen = hoTen;
     }
 
-    public NguoiDung(String userName, String password, String gioiTinh, String phone, String hoTen) {
+    public User(String userName, String password, String gioiTinh, String phone, String hoTen) {
         this.userName = userName;
         this.password = password;
         this.gioiTinh = gioiTinh;
@@ -55,7 +55,7 @@ public class NguoiDung {
         this.hoTen = hoTen;
     }
 
-    public NguoiDung() {
+    public User() {
     }
 
     @Override

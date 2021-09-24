@@ -12,43 +12,43 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.duanmau.DAO.HoaDonChiTietDAO;
-import com.example.duanmau.DAO.HoaDonDAO;
-import com.example.duanmau.DAO.SachDAO;
-import com.example.duanmau.DAO.TheLoaiDAO;
-import com.example.duanmau.adapter.CartAdapter;
-import com.example.duanmau.model.HoaDon;
-import com.example.duanmau.model.HoaDonChiTiet;
-import com.example.duanmau.model.Sach;
+import com.example.duanmau.DAO.BillDetailDAO;
+import com.example.duanmau.DAO.BillDAO;
+import com.example.duanmau.DAO.BookDAO;
+import com.example.duanmau.DAO.BookCategoryDAO;
+import com.example.duanmau.adapter.UnpaidBillsAdapter;
+import com.example.duanmau.model.Bill;
+import com.example.duanmau.model.BillDetail;
+import com.example.duanmau.model.Book;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class HoaDonChiTietActivity extends AppCompatActivity {
+public class BillDetailActivity extends AppCompatActivity {
     EditText edSoLuong;
     TextView edMaHoaDon, tvThanhTien;
     Spinner spnMaSach;
-    HoaDonChiTietDAO hoaDonChiTietDAO;
-    SachDAO sachDAO;
-    TheLoaiDAO theLoaiDAO;
-    HoaDonDAO hoaDonDAO;
+    BillDetailDAO billDetailDAO;
+    BookDAO bookDAO;
+    ArrayList<BillDetail> listUnpaidBill=new ArrayList<>();
+    BookCategoryDAO bookCategoryDAO;
+    BillDAO billDAO;
     ListView lvCart;
     boolean temp = true;
-    HoaDon hoaDon;
-    List<Sach> listSach = new ArrayList<>();
-    CartAdapter adapter = null;
+    Bill bill;
+    List<Book> listBooks = new ArrayList<>();
+    UnpaidBillsAdapter adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hoa_don_chi_tiet);
-        theLoaiDAO = new TheLoaiDAO(HoaDonChiTietActivity.this);
-        sachDAO = new SachDAO(HoaDonChiTietActivity.this);
-        hoaDonChiTietDAO = new HoaDonChiTietDAO(HoaDonChiTietActivity.this);
-        sachDAO = new SachDAO(HoaDonChiTietActivity.this);
+        setContentView(R.layout.activity_bill_detail);
+        bookCategoryDAO = new BookCategoryDAO(BillDetailActivity.this);
+        bookDAO = new BookDAO(BillDetailActivity.this);
+        billDetailDAO = new BillDetailDAO(BillDetailActivity.this);
+        bookDAO = new BookDAO(BillDetailActivity.this);
 
 
         spnMaSach = findViewById(R.id.edMaSach);
@@ -56,7 +56,7 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
         edSoLuong = findViewById(R.id.edSoLuongMua);
         lvCart = findViewById(R.id.lvCart);
         tvThanhTien = findViewById(R.id.tv_ThanhTien);
-        adapter = new CartAdapter(HoaDonChiTietActivity.this, hoaDonChiTietDAO.getAllHoaDonChiTiet());
+        adapter = new UnpaidBillsAdapter(BillDetailActivity.this, listUnpaidBill);
         lvCart.setAdapter(adapter);
 
         //LẤY mã hóa đơn
@@ -70,10 +70,10 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
         //Spiner sách cần mua
         ArrayList<String> listSP = new ArrayList<>();
         listSP.add("Chọn Sách cần mua.");
-        for (int i = 0; i < theLoaiDAO.getAllTheLoai().size(); i++) {
-            String idType = theLoaiDAO.getAllTheLoai().get(i).getMaTheLoai();
-            for (int j = 0; j < sachDAO.getSachByType(idType).size(); j++) {
-                String sach = idType + "_" + sachDAO.getSachByType(idType).get(j).getMaSach() + "_" + sachDAO.getSachByType(idType).get(j).getTenSach() + "_" + sachDAO.getSachByType(idType).get(j).getGiaBia() + "đ";
+        for (int i = 0; i < bookCategoryDAO.getAllTheLoai().size(); i++) {
+            String idType = bookCategoryDAO.getAllTheLoai().get(i).getMaTheLoai();
+            for (int j = 0; j < bookDAO.getSachByType(idType).size(); j++) {
+                String sach = idType + "_" + bookDAO.getSachByType(idType).get(j).getMaSach() + "_" + bookDAO.getSachByType(idType).get(j).getTenSach() + "_" + bookDAO.getSachByType(idType).get(j).getGiaBia() + "đ";
                 listSP.add(sach);
             }
         }
@@ -88,21 +88,21 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
     public void ADDHoaDonCHITIET(View view) {
         //các loại sách đã mua
         String[] temp = spnMaSach.getSelectedItem().toString().split("_", 3);
-        listSach.add(sachDAO.getSachByID(temp[1]));
-        hoaDonDAO = new HoaDonDAO(HoaDonChiTietActivity.this);
+        listBooks.add(bookDAO.getSachByID(temp[1]));
+        billDAO = new BillDAO(BillDetailActivity.this);
         if (!spnMaSach.getSelectedItem().toString().equalsIgnoreCase("Chọn Sách cần mua.")) {
-            for (int i = 0; i < hoaDonDAO.getAllHoaDon().size(); i++) {
-                if (hoaDonDAO.getAllHoaDon().get(i).getMaHoaDon() == Integer.parseInt(edMaHoaDon.getText().toString())) {
-                    if (Integer.parseInt(edSoLuong.getText().toString()) <= listSach.get(0).getSoLuong()) {
+            for (int i = 0; i < billDAO.getAllHoaDon().size(); i++) {
+                if (billDAO.getAllHoaDon().get(i).getMaHoaDon() == Integer.parseInt(edMaHoaDon.getText().toString())) {
+                    if (Integer.parseInt(edSoLuong.getText().toString()) <= listBooks.get(0).getSoLuong()) {
                         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-                        String strDate = dateFormat.format(hoaDonDAO.getAllHoaDon().get(i).getNgayMua());
-                        HoaDonChiTiet hoaDonChiTiet = new
-                                HoaDonChiTiet(hoaDonChiTietDAO.getAllHoaDonChiTiet().size() + 1,
+                        String strDate = dateFormat.format(billDAO.getAllHoaDon().get(i).getNgayMua());
+                        BillDetail billDetail = new
+                                BillDetail(billDetailDAO.getAllHoaDonChiTiet().size() + 1,
                                 Integer.parseInt(edMaHoaDon.getText().toString()),
-                                strDate,listSach.get(0),
+                                strDate, listBooks.get(0),
                                 Integer.parseInt(edSoLuong.getText().toString()));
-                        hoaDonChiTietDAO.inserHoaDonChiTiet(hoaDonChiTiet);
-                        adapter.changeDataset(hoaDonChiTietDAO.getAllHoaDonChiTiet());
+                        listUnpaidBill.add(billDetail);
+                        adapter.changeDataset(listUnpaidBill);
                         Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
                     }
 
@@ -116,23 +116,31 @@ public class HoaDonChiTietActivity extends AppCompatActivity {
     }
 
     public void thanhToanHoaDon(View view) {
-        hoaDonChiTietDAO = new HoaDonChiTietDAO(HoaDonChiTietActivity.this);
-        //tinh tien
-        Toast.makeText(this, ""+hoaDonChiTietDAO.getDateNow(), Toast.LENGTH_SHORT).show();
+        billDetailDAO = new BillDetailDAO(BillDetailActivity.this);
+
         int thanhTien = 0;
 
-        for (HoaDonChiTiet hd : hoaDonChiTietDAO.getAllHoaDonChiTiet()) {
+        for (BillDetail hd : listUnpaidBill) {
             thanhTien += hd.getSoLuongMua() * hd.getSach().getGiaBia();
         }
         tvThanhTien.setText("Thành tiền: "+thanhTien);
-
-
+        Toast.makeText(this, "Bạn đã thanh toán hóa đơn thành công", Toast.LENGTH_SHORT).show();
+        if (!listUnpaidBill.isEmpty()){
+            int temp = listUnpaidBill.size();
+            for (int i = 0;i<temp;i++){
+                billDetailDAO.inserHoaDonChiTiet(listUnpaidBill.get(i));
+                listUnpaidBill.remove(i);
+            }
+            adapter.notifyDataSetChanged();
+        }else {
+            Toast.makeText(this, "Bạn không có hóa đơn nào cần thanh toán!", Toast.LENGTH_SHORT).show();
+        }
     }
 
-    public int checkMaSach(ArrayList<HoaDonChiTiet> lsHD, String maSach) {
+    public int checkMaSach(ArrayList<BillDetail> lsHD, String maSach) {
         int pos = -1;
         for (int i = 0; i < lsHD.size(); i++) {
-            HoaDonChiTiet hd = lsHD.get(i);
+            BillDetail hd = lsHD.get(i);
             if (hd.getSach().getMaSach().equalsIgnoreCase(maSach)) {
                 pos = i;
                 break;

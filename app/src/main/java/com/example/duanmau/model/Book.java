@@ -1,6 +1,6 @@
 package com.example.duanmau.model;
 
-public class Sach {
+public class Book {
     private String maSach;
     private String maTheLoai;
     private String tenSach;
@@ -9,10 +9,10 @@ public class Sach {
     private int giaBia;
     private int soLuong;
 
-    public Sach() {
+    public Book() {
     }
 
-    public Sach(String maSach, String maTheLoai, String tenSach, String tacGia, String NXB, int giaBia, int soLuong) {
+    public Book(String maSach, String maTheLoai, String tenSach, String tacGia, String NXB, int giaBia, int soLuong) {
         this.maSach = maSach;
         this.maTheLoai = maTheLoai;
         this.tenSach = tenSach;

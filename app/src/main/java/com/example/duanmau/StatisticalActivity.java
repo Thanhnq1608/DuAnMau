@@ -14,29 +14,29 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.duanmau.DAO.HoaDonChiTietDAO;
+import com.example.duanmau.DAO.BillDetailDAO;
 import com.example.duanmau.LOGIN.LogInActivity;
 import com.google.android.material.navigation.NavigationView;
 
-public class ThongKeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class StatisticalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     NavigationView navigationView;
     TextView tvNgay, tvThang, tvNam;
-    HoaDonChiTietDAO hoaDonChiTietDAO;
+    BillDetailDAO billDetailDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thong_ke);
+        setContentView(R.layout.activity_statistical);
         Menu();
         tvNgay = (TextView) findViewById(R.id.tvThongKeNgay);
         tvThang = (TextView) findViewById(R.id.tv_money_month);
         tvNam = (TextView) findViewById(R.id.tv_money_year);
-        hoaDonChiTietDAO = new HoaDonChiTietDAO(this);
-        tvNgay.setText(""+hoaDonChiTietDAO.getDoanhThuTheoNgay()+" VNĐ");
-        tvThang.setText(""+hoaDonChiTietDAO.getDoanhThuTheoThang()+" VNĐ");
-        tvNam.setText(""+hoaDonChiTietDAO.getDoanhThuTheoNam()+" VNĐ");
+        billDetailDAO = new BillDetailDAO(this);
+        tvNgay.setText(""+ billDetailDAO.getDoanhThuTheoNgay()+" VNĐ");
+        tvThang.setText(""+ billDetailDAO.getDoanhThuTheoThang()+" VNĐ");
+        tvNam.setText(""+ billDetailDAO.getDoanhThuTheoNam()+" VNĐ");
     }
 
     private void Menu() {
@@ -56,25 +56,25 @@ public class ThongKeActivity extends AppCompatActivity implements NavigationView
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.user_menu) {
-            startActivity(new Intent(ThongKeActivity.this, UserActivity.class));
+            startActivity(new Intent(StatisticalActivity.this, UserActivity.class));
         } else if (item.getItemId() == R.id.type_menu) {
-            startActivity(new Intent(ThongKeActivity.this, TheLoaiActivity.class));
+            startActivity(new Intent(StatisticalActivity.this, BookCategoryActivity.class));
         } else if (item.getItemId() == R.id.book_menu) {
-            startActivity(new Intent(ThongKeActivity.this, SachActivity.class));
+            startActivity(new Intent(StatisticalActivity.this, BookActivity.class));
         } else if (item.getItemId() == R.id.bill_menu) {
-            startActivity(new Intent(ThongKeActivity.this, BillActivity.class));
+            startActivity(new Intent(StatisticalActivity.this, BillActivity.class));
         } else if (item.getItemId() == R.id.statistical_menu) {
-            startActivity(new Intent(ThongKeActivity.this, ThongKeActivity.class));
+            startActivity(new Intent(StatisticalActivity.this, StatisticalActivity.class));
         } else if (item.getItemId() == R.id.settings_menu) {
-            startActivity(new Intent(ThongKeActivity.this, SettingActivity.class));
+            startActivity(new Intent(StatisticalActivity.this, SettingActivity.class));
         } else if (item.getItemId() == R.id.exit_menu) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(ThongKeActivity.this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(StatisticalActivity.this, android.R.style.Theme_DeviceDefault_Light_Dialog);
             builder.setTitle(R.string.dialog_exit_title);
             builder.setIcon(R.drawable.icon_exit);
             builder.setPositiveButton(getString(R.string.dialog_exit_yes), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent intent=new Intent(ThongKeActivity.this, LogInActivity.class);
+                    Intent intent=new Intent(StatisticalActivity.this, LogInActivity.class);
                     startActivity(intent);
                 }
             });

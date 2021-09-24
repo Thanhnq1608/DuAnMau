@@ -15,48 +15,45 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.duanmau.DAO.TheLoaiDAO;
+import com.example.duanmau.DAO.BookCategoryDAO;
 import com.example.duanmau.LOGIN.LogInActivity;
-import com.example.duanmau.adapter.TypeBookAdapter;
-import com.example.duanmau.model.TheLoaiSach;
+import com.example.duanmau.adapter.BookCategoryAdapter;
+import com.example.duanmau.model.BookCategory;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 
-public class TheLoaiActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class BookCategoryActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     RecyclerView recyclerView;
-    ArrayList<TheLoaiSach> theloaiList;
-    TypeBookAdapter typeBookAdapter;
+    ArrayList<BookCategory> theloaiList;
+    BookCategoryAdapter bookCategoryAdapter;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     NavigationView navigationView;
-    TheLoaiDAO theLoaiDAO;
+    BookCategoryDAO bookCategoryDAO;
     Dialog dialog;
-    TheLoaiSach theLoaiSach = new TheLoaiSach();
+    BookCategory bookCategory = new BookCategory();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_the_loai_sach);
+        setContentView(R.layout.activity_book_category);
         anhXa();
         Menu();
-        theLoaiDAO = new TheLoaiDAO(TheLoaiActivity.this);
+        bookCategoryDAO = new BookCategoryDAO(BookCategoryActivity.this);
 
-        typeBookAdapter = new TypeBookAdapter(this, theLoaiDAO.getAllTheLoai());
+        bookCategoryAdapter = new BookCategoryAdapter(this, bookCategoryDAO.getAllTheLoai());
         recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
-        recyclerView.setAdapter(typeBookAdapter);
-        typeBookAdapter.notifyDataSetChanged();
+        recyclerView.setAdapter(bookCategoryAdapter);
+        bookCategoryAdapter.notifyDataSetChanged();
     }
 
 
@@ -65,14 +62,14 @@ public class TheLoaiActivity extends AppCompatActivity implements NavigationView
     }
 
     private void addType(){
-        TheLoaiSach theLoaiSach = new TheLoaiSach("it1","công nghệ máy tính","sách nói về lập trình",23,"https://i.pinimg.com/564x/fb/67/3b/fb673b887235fbe2ec62a26c138d1a04.jpg");
-        TheLoaiSach theLoaiSach1 = new TheLoaiSach("hs1","Lịch sử cận đại","sách nói về lịch sử nhà nước",253,"https://i.pinimg.com/564x/23/15/d0/2315d04db1530eadb88a76e2351ae4b0.jpg");
-        TheLoaiSach theLoaiSach2 = new TheLoaiSach("ma1","Đại số","sách nói về toán học",93,"https://i.pinimg.com/564x/a7/e6/bb/a7e6bb24e57f1f9b534e4f0ae4d41c92.jpg");
-        TheLoaiSach theLoaiSach3 = new TheLoaiSach("py1","vật lý kĩ thuật","sách nói về vật lý",23,"https://wallpapercave.com/wp/wp2175403.jpg");
-        theLoaiDAO.inserTheLoai(theLoaiSach);
-        theLoaiDAO.inserTheLoai(theLoaiSach1);
-        theLoaiDAO.inserTheLoai(theLoaiSach2);
-        theLoaiDAO.inserTheLoai(theLoaiSach3);
+        BookCategory bookCategory = new BookCategory("it1","công nghệ máy tính","sách nói về lập trình",23,"https://i.pinimg.com/564x/fb/67/3b/fb673b887235fbe2ec62a26c138d1a04.jpg");
+        BookCategory bookCategory1 = new BookCategory("hs1","Lịch sử cận đại","sách nói về lịch sử nhà nước",253,"https://i.pinimg.com/564x/23/15/d0/2315d04db1530eadb88a76e2351ae4b0.jpg");
+        BookCategory bookCategory2 = new BookCategory("ma1","Đại số","sách nói về toán học",93,"https://i.pinimg.com/564x/a7/e6/bb/a7e6bb24e57f1f9b534e4f0ae4d41c92.jpg");
+        BookCategory bookCategory3 = new BookCategory("py1","vật lý kĩ thuật","sách nói về vật lý",23,"https://wallpapercave.com/wp/wp2175403.jpg");
+        bookCategoryDAO.inserTheLoai(bookCategory);
+        bookCategoryDAO.inserTheLoai(bookCategory1);
+        bookCategoryDAO.inserTheLoai(bookCategory2);
+        bookCategoryDAO.inserTheLoai(bookCategory3);
 //        theLoaiDAO.inserTheLoai(theLoaiSach3);
     }
 
@@ -94,25 +91,25 @@ public class TheLoaiActivity extends AppCompatActivity implements NavigationView
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.user_menu) {
-            startActivity(new Intent(TheLoaiActivity.this, UserActivity.class));
+            startActivity(new Intent(BookCategoryActivity.this, UserActivity.class));
         } else if (item.getItemId() == R.id.type_menu) {
-            startActivity(new Intent(TheLoaiActivity.this, TheLoaiActivity.class));
+            startActivity(new Intent(BookCategoryActivity.this, BookCategoryActivity.class));
         } else if (item.getItemId() == R.id.bill_menu) {
-            startActivity(new Intent(TheLoaiActivity.this, BillActivity.class));
+            startActivity(new Intent(BookCategoryActivity.this, BillActivity.class));
         } else if (item.getItemId() == R.id.book_menu) {
-            startActivity(new Intent(TheLoaiActivity.this, SachActivity.class));
+            startActivity(new Intent(BookCategoryActivity.this, BookActivity.class));
         } else if (item.getItemId() == R.id.statistical_menu) {
-            startActivity(new Intent(TheLoaiActivity.this, ThongKeActivity.class));
+            startActivity(new Intent(BookCategoryActivity.this, StatisticalActivity.class));
         } else if (item.getItemId() == R.id.settings_menu) {
-            startActivity(new Intent(TheLoaiActivity.this, SettingActivity.class));
+            startActivity(new Intent(BookCategoryActivity.this, SettingActivity.class));
         } else if (item.getItemId() == R.id.exit_menu) {
-            final AlertDialog.Builder builder = new AlertDialog.Builder(TheLoaiActivity.this, android.R.style.Theme_DeviceDefault_Light_Dialog);
+            final AlertDialog.Builder builder = new AlertDialog.Builder(BookCategoryActivity.this, android.R.style.Theme_DeviceDefault_Light_Dialog);
             builder.setTitle(R.string.dialog_exit_title);
             builder.setIcon(R.drawable.icon_exit);
             builder.setPositiveButton(getString(R.string.dialog_exit_yes), new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(TheLoaiActivity.this, LogInActivity.class);
+                    Intent intent = new Intent(BookCategoryActivity.this, LogInActivity.class);
                     startActivity(intent);
                 }
             });
@@ -134,8 +131,8 @@ public class TheLoaiActivity extends AppCompatActivity implements NavigationView
         addType.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                dialog = new Dialog(TheLoaiActivity.this);
-                dialog.setContentView(R.layout.item_add_type_sach);
+                dialog = new Dialog(BookCategoryActivity.this);
+                dialog.setContentView(R.layout.item_add_book_category);
                 dialog.setCancelable(false);
                 dialog.setTitle("Add Type Book");
                 final EditText id, name, describe, location,bg;
@@ -154,17 +151,17 @@ public class TheLoaiActivity extends AppCompatActivity implements NavigationView
                     @Override
                     public void onClick(View v) {
                         if (id.getText().toString()==null || name.getText().toString()==null || describe.getText().toString()==null || location.getText().toString()==null) {
-                            Toast.makeText(TheLoaiActivity.this, "Bạn không được bỏ trống thông tin!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(BookCategoryActivity.this, "Bạn không được bỏ trống thông tin!", Toast.LENGTH_SHORT).show();
                         } else {
-                            TheLoaiSach theLoaiSach1 =new TheLoaiSach();
-                            theLoaiSach1.setMaTheLoai(id.getText().toString());
-                            theLoaiSach1.setTenTheLoai(name.getText().toString());
-                            theLoaiSach1.setMoTa(describe.getText().toString());
-                            theLoaiSach1.setViTri(Integer.parseInt(location.getText().toString()));
-                            theLoaiSach1.setMauNen(bg.getText().toString());
-                            theLoaiDAO.inserTheLoai(theLoaiSach1);
-                            typeBookAdapter.notifyDataSetChanged();
-                            Toast.makeText(TheLoaiActivity.this, "Thêm Thể Loại Thành Công!", Toast.LENGTH_SHORT).show();
+                            BookCategory bookCategory1 =new BookCategory();
+                            bookCategory1.setMaTheLoai(id.getText().toString());
+                            bookCategory1.setTenTheLoai(name.getText().toString());
+                            bookCategory1.setMoTa(describe.getText().toString());
+                            bookCategory1.setViTri(Integer.parseInt(location.getText().toString()));
+                            bookCategory1.setMauNen(bg.getText().toString());
+                            bookCategoryDAO.inserTheLoai(bookCategory1);
+                            bookCategoryAdapter.notifyDataSetChanged();
+                            Toast.makeText(BookCategoryActivity.this, "Thêm Thể Loại Thành Công!", Toast.LENGTH_SHORT).show();
                             recreate();
                             dialog.dismiss();
                         }

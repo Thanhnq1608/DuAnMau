@@ -10,31 +10,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.duanmau.BillActivity;
-import com.example.duanmau.DAO.HoaDonDAO;
-import com.example.duanmau.HoaDonChiTietActivity;
+import com.example.duanmau.DAO.BillDAO;
+import com.example.duanmau.BillDetailActivity;
 import com.example.duanmau.R;
-import com.example.duanmau.model.HoaDon;
-import com.example.duanmau.model.TheLoaiSach;
+import com.example.duanmau.model.Bill;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
     private Context context;
-    ArrayList<HoaDon> billList;
+    ArrayList<Bill> billList;
     Dialog dialog;
 
-    public BillAdapter(Context context, ArrayList<HoaDon> billList) {
+    public BillAdapter(Context context, ArrayList<Bill> billList) {
         this.context = context;
         this.billList = billList;
     }
@@ -55,21 +51,21 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
     @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull BillAdapter.ViewHolder holder, final int position) {
-        final HoaDonDAO hoaDonDAO=new HoaDonDAO(context);
-        final HoaDon hoaDon = billList.get(position);
+        final BillDAO billDAO =new BillDAO(context);
+        final Bill bill = billList.get(position);
         if (billList == null) {
             return;
         }
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
         holder.imgBill.setBackgroundColor(R.drawable.icon_bill);
-        holder.tvNgayMua.setText(dateFormat.format(hoaDon.getNgayMua()));
-        holder.tvId.setText(String.valueOf(hoaDon.getMaHoaDon()));
+        holder.tvNgayMua.setText(dateFormat.format(bill.getNgayMua()));
+        holder.tvId.setText(String.valueOf(bill.getMaHoaDon()));
 
         holder.imgBill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new  Intent(context, HoaDonChiTietActivity.class);
-                intent.putExtra("MAHOADON", String.valueOf(hoaDon.getMaHoaDon()));
+                Intent intent = new  Intent(context, BillDetailActivity.class);
+                intent.putExtra("MAHOADON", String.valueOf(bill.getMaHoaDon()));
                 context.startActivity(intent);
             }
         });
@@ -81,7 +77,7 @@ public class BillAdapter extends RecyclerView.Adapter<BillAdapter.ViewHolder> {
                 builder.setPositiveButton(String.valueOf(R.string.dialog_exit_yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                            hoaDonDAO.deleteHoaDonByID(String.valueOf(hoaDonDAO.getAllHoaDon().get(position).getMaHoaDon()));
+                            billDAO.deleteHoaDonByID(String.valueOf(billDAO.getAllHoaDon().get(position).getMaHoaDon()));
                         Toast.makeText(context, "Xóa Thành công!", Toast.LENGTH_SHORT).show();
                         notifyDataSetChanged();
                     }

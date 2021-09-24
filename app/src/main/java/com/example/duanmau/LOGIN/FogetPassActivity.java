@@ -5,21 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.duanmau.DAO.NguoiDungDAO;
+import com.example.duanmau.DAO.UserDAO;
 import com.example.duanmau.R;
-import com.example.duanmau.model.NguoiDung;
+import com.example.duanmau.model.User;
 
 public class FogetPassActivity extends AppCompatActivity {
     EditText user, phone, pass, rePass;
     Button confirm, cancel;
-    NguoiDungDAO nguoiDungDAO;
-    NguoiDung nguoiDung;
+    UserDAO userDAO;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,7 @@ public class FogetPassActivity extends AppCompatActivity {
         confirm = findViewById(R.id.btn_confirm_foget);
         cancel = findViewById(R.id.btn_cancel_foget);
 
-        nguoiDungDAO=new NguoiDungDAO(FogetPassActivity.this);
+        userDAO =new UserDAO(FogetPassActivity.this);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,9 +57,9 @@ public class FogetPassActivity extends AppCompatActivity {
                 } else {
                     SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
                     String strUserName = pref.getString("USERNAME", user.getText().toString());
-                    NguoiDung username = new NguoiDung(strUserName, pass.getText().toString(), "","",
+                    User username = new User(strUserName, pass.getText().toString(), "","",
                             "");
-                    if (nguoiDungDAO.changePasswordNguoiDung(username) > 0) {
+                    if (userDAO.changePasswordNguoiDung(username) > 0) {
                         Toast.makeText(getApplicationContext(), "Lưu thành công",
                                 Toast.LENGTH_SHORT).show();
                     } else {
@@ -75,8 +74,8 @@ public class FogetPassActivity extends AppCompatActivity {
     }
 
     private boolean checkUser(String u) {
-        for (int i = 0; i < nguoiDungDAO.getAllNguoiDung().size(); i++) {
-            if (nguoiDungDAO.getAllNguoiDung().get(i).getUserName().equalsIgnoreCase(u)) {
+        for (int i = 0; i < userDAO.getAllNguoiDung().size(); i++) {
+            if (userDAO.getAllNguoiDung().get(i).getUserName().equalsIgnoreCase(u)) {
                 return false;
             }
         }
@@ -84,9 +83,9 @@ public class FogetPassActivity extends AppCompatActivity {
     }
 
     private boolean checkPhoneNumber(String u, String phone) {
-        for (int i = 0; i < nguoiDungDAO.getAllNguoiDung().size(); i++) {
-            if (nguoiDungDAO.getAllNguoiDung().get(i).getUserName().equalsIgnoreCase(u)) {
-                if (nguoiDungDAO.getAllNguoiDung().get(i).getPhone().equalsIgnoreCase(phone)) {
+        for (int i = 0; i < userDAO.getAllNguoiDung().size(); i++) {
+            if (userDAO.getAllNguoiDung().get(i).getUserName().equalsIgnoreCase(u)) {
+                if (userDAO.getAllNguoiDung().get(i).getPhone().equalsIgnoreCase(phone)) {
                     return false;
                 }
             }

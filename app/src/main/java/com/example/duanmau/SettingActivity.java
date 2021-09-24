@@ -46,13 +46,13 @@ public class SettingActivity extends AppCompatActivity implements NavigationView
         if (item.getItemId() == R.id.user_menu) {
             startActivity(new Intent(SettingActivity.this, UserActivity.class));
         } else if (item.getItemId() == R.id.type_menu) {
-            startActivity(new Intent(SettingActivity.this, TheLoaiActivity.class));
+            startActivity(new Intent(SettingActivity.this, BookCategoryActivity.class));
         } else if (item.getItemId() == R.id.book_menu) {
-            startActivity(new Intent(SettingActivity.this, SachActivity.class));
+            startActivity(new Intent(SettingActivity.this, BookActivity.class));
         } else if (item.getItemId() == R.id.bill_menu) {
             startActivity(new Intent(SettingActivity.this, BillActivity.class));
         } else if (item.getItemId() == R.id.statistical_menu) {
-            startActivity(new Intent(SettingActivity.this, ThongKeActivity.class));
+            startActivity(new Intent(SettingActivity.this, StatisticalActivity.class));
         } else if (item.getItemId() == R.id.settings_menu) {
             startActivity(new Intent(SettingActivity.this, SettingActivity.class));
         } else if (item.getItemId() == R.id.exit_menu) {

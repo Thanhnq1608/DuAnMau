@@ -9,33 +9,32 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.duanmau.DAO.HoaDonChiTietDAO;
+import com.example.duanmau.DAO.BillDetailDAO;
 import com.example.duanmau.R;
-import com.example.duanmau.model.HoaDonChiTiet;
+import com.example.duanmau.model.BillDetail;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class CartAdapter extends BaseAdapter {
-    ArrayList<HoaDonChiTiet> arrHoaDonChiTiet;
+public class UnpaidBillsAdapter extends BaseAdapter {
+    ArrayList<BillDetail> arrBillDetail;
     public Activity context;
     public LayoutInflater inflater;
-    HoaDonChiTietDAO hoaDonChiTietDAO;
-    public CartAdapter(Activity context, ArrayList<HoaDonChiTiet> arrayHoaDonChiTiet) {
+    BillDetailDAO billDetailDAO;
+    public UnpaidBillsAdapter(Activity context, ArrayList<BillDetail> arrayBillDetail) {
         super();
         this.context = context;
-        this.arrHoaDonChiTiet = arrayHoaDonChiTiet;
+        this.arrBillDetail = arrayBillDetail;
         this.inflater =
                 (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        hoaDonChiTietDAO = new HoaDonChiTietDAO(context);
+        billDetailDAO = new BillDetailDAO(context);
     }
     @Override
     public int getCount() {
-        return arrHoaDonChiTiet.size();
+        return arrBillDetail.size();
     }
     @Override
     public Object getItem(int position) {
-        return arrHoaDonChiTiet.get(position);
+        return arrBillDetail.get(position);
     }
     @Override
     public long getItemId(int position) {
@@ -66,8 +65,8 @@ public class CartAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v) {
 
-                    hoaDonChiTietDAO.deleteHoaDonChiTietByID(String.valueOf(arrHoaDonChiTiet.get(position).getMaHDCT()));
-                    arrHoaDonChiTiet.remove(position);
+                    billDetailDAO.deleteHoaDonChiTietByID(String.valueOf(arrBillDetail.get(position).getMaHDCT()));
+                    arrBillDetail.remove(position);
                     notifyDataSetChanged();
                 }
             });
@@ -75,20 +74,20 @@ public class CartAdapter extends BaseAdapter {
         }
         else
             holder=(ViewHolder)convertView.getTag();
-        HoaDonChiTiet hoaDonChiTiet = arrHoaDonChiTiet.get(position);
-        holder.tvBill.setText("Mã Hóa đơn: "+hoaDonChiTiet.getMahoaDon());
-        holder.txtMaSach.setText("Mã sách: "+hoaDonChiTiet.getSach().getMaSach());
-        holder.txtSoLuong.setText("Số lượng: "+hoaDonChiTiet.getSoLuongMua());
-        holder.txtGiaBia.setText("Giá bìa: "+hoaDonChiTiet.getSach().getGiaBia() +" vnd");
-        holder.txtThanhTien.setText("Thành tiền:"+hoaDonChiTiet.getSoLuongMua()*hoaDonChiTiet.getSach().getGiaBia()+" vnd");
+        BillDetail billDetail = arrBillDetail.get(position);
+        holder.tvBill.setText("Mã Hóa đơn: "+ billDetail.getMahoaDon());
+        holder.txtMaSach.setText("Mã sách: "+ billDetail.getSach().getMaSach());
+        holder.txtSoLuong.setText("Số lượng: "+ billDetail.getSoLuongMua());
+        holder.txtGiaBia.setText("Giá bìa: "+ billDetail.getSach().getGiaBia() +" vnd");
+        holder.txtThanhTien.setText("Thành tiền:"+ billDetail.getSoLuongMua()* billDetail.getSach().getGiaBia()+" vnd");
         return convertView;
     }
     @Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
     }
-    public void changeDataset(ArrayList<HoaDonChiTiet> items){
-        this.arrHoaDonChiTiet = items;
+    public void changeDataset(ArrayList<BillDetail> items){
+        this.arrBillDetail = items;
         notifyDataSetChanged();
     }
 }

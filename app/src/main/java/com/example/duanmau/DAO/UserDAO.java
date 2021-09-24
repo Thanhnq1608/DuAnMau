@@ -7,25 +7,24 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.duanmau.database.DatabaseHelper;
-import com.example.duanmau.model.NguoiDung;
+import com.example.duanmau.model.User;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class NguoiDungDAO {
+public class UserDAO {
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
     public static final String TABLE_NAME = "NguoiDung";
     public static final String SQL_NGUOI_DUNG = "CREATE TABLE NguoiDung (username text primary key, password text, phone text, hoten text,gioitinh text);";
     public static final String TAG = "NguoiDungDAO";
 
-    public NguoiDungDAO(Context context) {
+    public UserDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
         db = dbHelper.getWritableDatabase();
     }
 
     //insert
-    public int inserNguoiDung(NguoiDung nd) {
+    public int inserNguoiDung(User nd) {
         ContentValues values = new ContentValues();
         values.put("username", nd.getUserName());
         values.put("password", nd.getPassword());
@@ -43,27 +42,27 @@ public class NguoiDungDAO {
     }
 
     //getAll
-    public ArrayList<NguoiDung> getAllNguoiDung() {
-        ArrayList<NguoiDung> dsNguoiDung = new ArrayList<>();
+    public ArrayList<User> getAllNguoiDung() {
+        ArrayList<User> dsUser = new ArrayList<>();
         Cursor c = db.query(TABLE_NAME, null, null, null, null, null, null);
         c.moveToFirst();
         while (c.isAfterLast() == false) {
-            NguoiDung ee = new NguoiDung();
+            User ee = new User();
             ee.setUserName(c.getString(0));
             ee.setPassword(c.getString(1));
             ee.setPhone(c.getString(2));
             ee.setHoTen(c.getString(3));
             ee.setGioiTinh(c.getString(4));
-            dsNguoiDung.add(ee);
+            dsUser.add(ee);
             Log.d("//=====", ee.toString());
             c.moveToNext();
         }
         c.close();
-        return dsNguoiDung;
+        return dsUser;
     }
 
     //update
-    public int updateNguoiDung(NguoiDung nd) {
+    public int updateNguoiDung(User nd) {
         ContentValues values = new ContentValues();
         values.put("username", nd.getUserName());
         values.put("password", nd.getPassword());
@@ -77,7 +76,7 @@ public class NguoiDungDAO {
         return 1;
     }
 
-    public int changePasswordNguoiDung(NguoiDung nd) {
+    public int changePasswordNguoiDung(User nd) {
         ContentValues values = new ContentValues();
         values.put("username", nd.getUserName());
         values.put("password", nd.getPassword());

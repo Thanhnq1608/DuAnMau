@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".HoaDonChiTietActivity"
+            android:name=".BillDetailActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
@@ -22,7 +22,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ThongKeActivity"
+            android:name=".StatisticalActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -40,23 +40,23 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".SachActivity"
+            android:name=".BookActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
 
         <activity
-            android:name=".TheLoaiActivity"
+            android:name=".BookCategoryActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity android:name=".LOGIN.ChangePassActivity" />
         <activity android:name=".LOGIN.FogetPassActivity" />
-        <activity android:name=".LOGIN.SignInActivity" />
+        <activity android:name=".LOGIN.CreateAccountActivity" />
         <activity android:name=".LOGIN.LogInActivity"></activity>
-        <activity android:name=".ChaoActivity">
+        <activity android:name=".WelcomeActivity">
 
         </activity>
     </application>

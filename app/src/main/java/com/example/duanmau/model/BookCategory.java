@@ -2,17 +2,17 @@ package com.example.duanmau.model;
 
 import android.graphics.Color;
 
-public class TheLoaiSach {
+public class BookCategory {
     private String maTheLoai;
     private String tenTheLoai;
     private String moTa;
     private int viTri;
     private String mauNen;
 
-    public TheLoaiSach() {
+    public BookCategory() {
     }
 
-    public TheLoaiSach(String maTheLoai, String tenTheLoai, String moTa, int viTri, String mauNen) {
+    public BookCategory(String maTheLoai, String tenTheLoai, String moTa, int viTri, String mauNen) {
         this.maTheLoai = maTheLoai;
         this.tenTheLoai = tenTheLoai;
         this.moTa = moTa;

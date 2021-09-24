@@ -2,14 +2,14 @@ package com.example.duanmau.model;
 
 import java.util.Date;
 
-public class HoaDon {
+public class Bill {
     private int maHoaDon;
     private Date ngayMua;
 
-    public HoaDon() {
+    public Bill() {
     }
 
-    public HoaDon(int maHoaDon, Date  ngayMua) {
+    public Bill(int maHoaDon, Date  ngayMua) {
         this.maHoaDon = maHoaDon;
         this.ngayMua = ngayMua;
     }

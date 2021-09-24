@@ -6,10 +6,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -23,42 +21,41 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.duanmau.DAO.NguoiDungDAO;
-import com.example.duanmau.DAO.TheLoaiDAO;
+import com.example.duanmau.DAO.BookCategoryDAO;
 import com.example.duanmau.R;
-import com.example.duanmau.SachActivity;
-import com.example.duanmau.TheLoaiActivity;
-import com.example.duanmau.model.TheLoaiSach;
+import com.example.duanmau.BookActivity;
+import com.example.duanmau.BookCategoryActivity;
+import com.example.duanmau.model.BookCategory;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class TypeBookAdapter extends RecyclerView.Adapter<TypeBookAdapter.ViewHolder> {
+public class BookCategoryAdapter extends RecyclerView.Adapter<BookCategoryAdapter.ViewHolder> {
     private Context context;
     Bitmap b;
     BitmapDrawable drawable;
-    ArrayList<TheLoaiSach> loaiSachList;
+    ArrayList<BookCategory> loaiSachList;
     Dialog dialog;
 
-    public TypeBookAdapter(Context context, ArrayList<TheLoaiSach> loaiSachList) {
+    public BookCategoryAdapter(Context context, ArrayList<BookCategory> loaiSachList) {
         this.context = context;
         this.loaiSachList = loaiSachList;
     }
 
     @NonNull
     @Override
-    public TypeBookAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_the_loai_sach, parent, false);
+    public BookCategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book_category, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @SuppressLint("RecyclerView")
     @Override
-    public void onBindViewHolder(@NonNull TypeBookAdapter.ViewHolder holder, final int position) {
-        final TheLoaiDAO theLoaiDAO = new TheLoaiDAO(context);
-        TheLoaiSach theLoaiSach = loaiSachList.get(position);
+    public void onBindViewHolder(@NonNull BookCategoryAdapter.ViewHolder holder, final int position) {
+        final BookCategoryDAO bookCategoryDAO = new BookCategoryDAO(context);
+        BookCategory bookCategory = loaiSachList.get(position);
 
         if (loaiSachList == null) {
             return;
@@ -82,13 +79,13 @@ public class TypeBookAdapter extends RecyclerView.Adapter<TypeBookAdapter.ViewHo
         holder.colorBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(context, SachActivity.class);
+                Intent intent =new Intent(context, BookActivity.class);
                 intent.putExtra("maTheLoai",loaiSachList.get(position).getMaTheLoai());
                 context.startActivity(intent);
 
             }
         });
-        holder.tvTenLoaiSach.setText(theLoaiSach.getTenTheLoai());
+        holder.tvTenLoaiSach.setText(bookCategory.getTenTheLoai());
 
         holder.colorBack.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -98,9 +95,9 @@ public class TypeBookAdapter extends RecyclerView.Adapter<TypeBookAdapter.ViewHo
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        theLoaiDAO.deleteTheLoaiByID(theLoaiDAO.getAllTheLoai().get(position).getMaTheLoai());
+                        bookCategoryDAO.deleteTheLoaiByID(bookCategoryDAO.getAllTheLoai().get(position).getMaTheLoai());
                         Toast.makeText(context, "Xóa Thành công!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(context,TheLoaiActivity.class);
+                        Intent intent = new Intent(context, BookCategoryActivity.class);
                         context.startActivity(intent);
                     }
                 });
@@ -127,10 +124,10 @@ public class TypeBookAdapter extends RecyclerView.Adapter<TypeBookAdapter.ViewHo
                 tv_moTa = dialog.findViewById(R.id.tv_moTa_infoType);
                 tv_location = dialog.findViewById(R.id.tv_location_infoType);
                 final ImageView btn_exit = dialog.findViewById(R.id.btn_exit);
-                tv_id.setText(theLoaiDAO.getAllTheLoai().get(position).getMaTheLoai());
-                tv_Name.setText(theLoaiDAO.getAllTheLoai().get(position).getTenTheLoai());
-                tv_moTa.setText(theLoaiDAO.getAllTheLoai().get(position).getMoTa());
-                tv_location.setText(String.valueOf(theLoaiDAO.getAllTheLoai().get(position).getViTri()));
+                tv_id.setText(bookCategoryDAO.getAllTheLoai().get(position).getMaTheLoai());
+                tv_Name.setText(bookCategoryDAO.getAllTheLoai().get(position).getTenTheLoai());
+                tv_moTa.setText(bookCategoryDAO.getAllTheLoai().get(position).getMoTa());
+                tv_location.setText(String.valueOf(bookCategoryDAO.getAllTheLoai().get(position).getViTri()));
                 dialog.show();
                 btn_exit.setOnClickListener(new View.OnClickListener() {
                     @Override

@@ -7,15 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.duanmau.database.DatabaseHelper;
-import com.example.duanmau.model.HoaDon;
+import com.example.duanmau.model.Bill;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
-public class HoaDonDAO {
+public class BillDAO {
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
     public static final String TABLE_NAME = "HoaDon";
@@ -24,13 +23,13 @@ public class HoaDonDAO {
     DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
     String date;
 
-    public HoaDonDAO(Context context) {
+    public BillDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
         db = dbHelper.getWritableDatabase();
     }
 
     //insert
-    public int inserHoaDon(HoaDon hd) {
+    public int inserHoaDon(Bill hd) {
         date = dateFormat.format(hd.getNgayMua());
         ContentValues values = new ContentValues();
         values.put("mahoadon", hd.getMaHoaDon());
@@ -46,27 +45,27 @@ public class HoaDonDAO {
     }
 
     //getAll
-    public ArrayList<HoaDon> getAllHoaDon(){
-        ArrayList<HoaDon> dsHoaDon = new ArrayList<>();
+    public ArrayList<Bill> getAllHoaDon(){
+        ArrayList<Bill> dsBill = new ArrayList<>();
         Cursor c = db.query(TABLE_NAME, null, null, null, null, null, null);
         c.moveToFirst();
         while (c.isAfterLast() == false) {
-            HoaDon ee = new HoaDon();
+            Bill ee = new Bill();
             ee.setMaHoaDon(c.getInt(0));
             try {
                 ee.setNgayMua(new SimpleDateFormat("yyyy-mm-dd").parse(c.getString(1)));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            dsHoaDon.add(ee);
+            dsBill.add(ee);
             c.moveToNext();
         }
         c.close();
-        return dsHoaDon;
+        return dsBill;
     }
 
     //update
-    public int updateHoaDon(HoaDon hd) {
+    public int updateHoaDon(Bill hd) {
         date = dateFormat.format(hd.getNgayMua());
         ContentValues values = new ContentValues();
         values.put("mahoadon", hd.getMaHoaDon());

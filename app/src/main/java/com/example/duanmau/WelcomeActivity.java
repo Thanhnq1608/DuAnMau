@@ -8,12 +8,12 @@ import android.os.Handler;
 
 import com.example.duanmau.LOGIN.LogInActivity;
 
-public class ChaoActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chao);
+        setContentView(R.layout.activity_welcome);
         getSupportActionBar().hide();
 
         new Handler().postDelayed(new Runnable() {

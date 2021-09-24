@@ -16,51 +16,51 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.duanmau.DAO.SachDAO;
+import com.example.duanmau.DAO.BookDAO;
 import com.example.duanmau.R;
-import com.example.duanmau.SachActivity;
-import com.example.duanmau.model.Sach;
+import com.example.duanmau.BookActivity;
+import com.example.duanmau.model.Book;
 
 import java.util.ArrayList;
 
-public class SachAdapter extends RecyclerView.Adapter<SachAdapter.ViewHolder>{
+public class BookAdapter extends RecyclerView.Adapter<BookAdapter.ViewHolder>{
     private Context context;
-    ArrayList<Sach> sachList;
+    ArrayList<Book> bookList;
     Dialog dialog;
 
-    public SachAdapter(Context context, ArrayList<Sach> sachList) {
+    public BookAdapter(Context context, ArrayList<Book> bookList) {
         this.context = context;
-        this.sachList = sachList;
+        this.bookList = bookList;
     }
 
     @NonNull
     @Override
-    public SachAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_sach, parent, false);
+    public BookAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_book, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @SuppressLint("RecyclerView")
     @Override
-    public void onBindViewHolder(@NonNull SachAdapter.ViewHolder holder, final int position) {
-        final SachDAO sachDAO = new SachDAO(context);
-        Sach sach = sachList.get(position);
-        if (sachList == null) {
+    public void onBindViewHolder(@NonNull BookAdapter.ViewHolder holder, final int position) {
+        final BookDAO bookDAO = new BookDAO(context);
+        Book book = bookList.get(position);
+        if (bookList == null) {
             return;
         }
 //        holder.colorBack.setBackgroundColor(sach.getMauNen());
-        holder.tvTenSach.setText(sach.getTenSach());
+        holder.tvTenSach.setText(book.getTenSach());
         holder.imgSach.setImageResource(R.drawable.icon_book);
-        holder.tvLoaiSach.setText(sach.getMaTheLoai());
-        holder.tvMaSach.setText(String.valueOf(sach.getMaSach()));
+        holder.tvLoaiSach.setText(book.getMaTheLoai());
+        holder.tvMaSach.setText(String.valueOf(book.getMaSach()));
 
 
         holder.imgSach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog = new Dialog(context);
-                dialog.setContentView(R.layout.item_info_sach);
+                dialog.setContentView(R.layout.item_book_infomation);
 
                 final ImageView img_x = dialog.findViewById(R.id.img_x_info_book);
                 final TextView idTypeBook, idSach, nameSach, nXBSach, tacGia, soLuong, price;
@@ -73,13 +73,13 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.ViewHolder>{
                 price = dialog.findViewById(R.id.tv_price_infoBook);
                 idTypeBook = dialog.findViewById(R.id.tv_id_type_infoBook);
 
-                idSach.setText("Mã sách: "+ sach.getMaSach());
-                idTypeBook.setText("Mã thể loại: "+ sach.getMaTheLoai());
-                nameSach.setText("Tên sách: "+ sach.getTenSach());
-                nXBSach.setText("Nhà XB: "+ sach.getNXB());
-                tacGia.setText("Tác giả: "+ sach.getTacGia());
-                soLuong.setText("Số lượng: "+ sach.getSoLuong());
-                price.setText("Giá bán: "+ sach.getGiaBia());
+                idSach.setText("Mã sách: "+ book.getMaSach());
+                idTypeBook.setText("Mã thể loại: "+ book.getMaTheLoai());
+                nameSach.setText("Tên sách: "+ book.getTenSach());
+                nXBSach.setText("Nhà XB: "+ book.getNXB());
+                tacGia.setText("Tác giả: "+ book.getTacGia());
+                soLuong.setText("Số lượng: "+ book.getSoLuong());
+                price.setText("Giá bán: "+ book.getGiaBia());
 
                 img_x.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -101,8 +101,8 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.ViewHolder>{
                 builder.setPositiveButton(String.valueOf(R.string.dialog_exit_yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        sachDAO.deleteSachByID(sachDAO.getAllSach().get(position).getMaSach());
-                        Intent intent = new Intent(context, SachActivity.class);
+                        bookDAO.deleteSachByID(bookDAO.getAllSach().get(position).getMaSach());
+                        Intent intent = new Intent(context, BookActivity.class);
                         context.startActivity(intent);
                         Toast.makeText(context, "Xóa Thành công!", Toast.LENGTH_SHORT).show();
                     }
@@ -121,8 +121,8 @@ public class SachAdapter extends RecyclerView.Adapter<SachAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        if (sachList != null) {
-            return sachList.size();
+        if (bookList != null) {
+            return bookList.size();
         }
         return 0;
     }

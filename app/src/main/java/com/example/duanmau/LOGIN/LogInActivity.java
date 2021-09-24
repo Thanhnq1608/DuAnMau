@@ -1,13 +1,10 @@
 package com.example.duanmau.LOGIN;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,11 +12,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.duanmau.DAO.NguoiDungDAO;
+import com.example.duanmau.DAO.UserDAO;
 import com.example.duanmau.R;
-import com.example.duanmau.TheLoaiActivity;
-import com.example.duanmau.model.NguoiDung;
-import com.google.android.material.textfield.TextInputEditText;
+import com.example.duanmau.BookCategoryActivity;
+import com.example.duanmau.model.User;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LogInActivity extends AppCompatActivity {
@@ -29,8 +25,8 @@ public class LogInActivity extends AppCompatActivity {
     Button login, cancel;
     TextInputLayout passLayout;
     TextView createAccount, fogetPassword;
-    NguoiDung nguoiDung = new NguoiDung();
-    NguoiDungDAO nguoiDungDAO;
+    User user = new User();
+    UserDAO userDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +42,18 @@ public class LogInActivity extends AppCompatActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nguoiDungDAO=new NguoiDungDAO(LogInActivity.this);
+                userDAO =new UserDAO(LogInActivity.this);
                 sTrUser = user.getText().toString();
                 sTrPass = pass.getText().toString();
                 if (sTrUser.equals("admin") && sTrPass.equals("admin")) {
                     Toast.makeText(getApplicationContext(), "Bạn đang đăng nhập với tư cách Admin!", Toast.LENGTH_SHORT).show();
                     rememberUser(sTrUser,sTrPass,chk_save_pass.isChecked());
-                    Intent intent = new Intent(LogInActivity.this, TheLoaiActivity.class);
+                    Intent intent = new Intent(LogInActivity.this, BookCategoryActivity.class);
                     startActivity(intent);
-                } else if (nguoiDungDAO.checkLogin(sTrUser, sTrPass) > 0) {
+                } else if (userDAO.checkLogin(sTrUser, sTrPass) > 0) {
                     Toast.makeText(getApplicationContext(), "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                     rememberUser(sTrUser,sTrPass,chk_save_pass.isChecked());
-                    Intent  intent =new Intent(LogInActivity.this,TheLoaiActivity.class);
+                    Intent  intent =new Intent(LogInActivity.this, BookCategoryActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(LogInActivity.this, "Tài khoán hoặc mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();
@@ -69,7 +65,7 @@ public class LogInActivity extends AppCompatActivity {
         createAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LogInActivity.this, SignInActivity.class);
+                Intent intent = new Intent(LogInActivity.this, CreateAccountActivity.class);
                 startActivity(intent);
             }
         });

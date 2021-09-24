@@ -10,12 +10,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,18 +23,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.duanmau.DAO.HoaDonDAO;
+import com.example.duanmau.DAO.BillDAO;
 import com.example.duanmau.LOGIN.LogInActivity;
 import com.example.duanmau.adapter.BillAdapter;
-import com.example.duanmau.model.HoaDon;
+import com.example.duanmau.model.Bill;
 import com.google.android.material.navigation.NavigationView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
 public class BillActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
@@ -44,9 +40,9 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     NavigationView navigationView;
     BillAdapter billAdapter;
-    ArrayList<HoaDon> hoaDonArrayList;
+    ArrayList<Bill> billArrayList;
     RecyclerView recBill;
-    HoaDonDAO hoaDonDAO;
+    BillDAO billDAO;
     Dialog dialog;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -56,9 +52,9 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_bill);
         Menu();
         AnhXa();
-        hoaDonDAO = new HoaDonDAO(BillActivity.this);
+        billDAO = new BillDAO(BillActivity.this);
 
-            billAdapter = new BillAdapter(this, hoaDonDAO.getAllHoaDon());
+            billAdapter = new BillAdapter(this, billDAO.getAllHoaDon());
 
         recBill.setLayoutManager(new GridLayoutManager(this, 2));
         recBill.setAdapter(billAdapter);
@@ -97,13 +93,13 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
         if (item.getItemId() == R.id.user_menu) {
             startActivity(new Intent(BillActivity.this, UserActivity.class));
         } else if (item.getItemId() == R.id.type_menu) {
-            startActivity(new Intent(BillActivity.this, TheLoaiActivity.class));
+            startActivity(new Intent(BillActivity.this, BookCategoryActivity.class));
         } else if (item.getItemId() == R.id.book_menu) {
-            startActivity(new Intent(BillActivity.this, SachActivity.class));
+            startActivity(new Intent(BillActivity.this, BookActivity.class));
         } else if (item.getItemId() == R.id.bill_menu) {
             startActivity(new Intent(BillActivity.this, BillActivity.class));
         } else if (item.getItemId() == R.id.statistical_menu) {
-            startActivity(new Intent(BillActivity.this, ThongKeActivity.class));
+            startActivity(new Intent(BillActivity.this, StatisticalActivity.class));
         } else if (item.getItemId() == R.id.settings_menu) {
             startActivity(new Intent(BillActivity.this, SettingActivity.class));
         } else if (item.getItemId() == R.id.exit_menu) {
@@ -171,13 +167,13 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
                         if (checkIdBill(Integer.parseInt(idBill.getText().toString()))) {
                             Toast.makeText(BillActivity.this, "Mã Hóa Đơn đã tồn tại!", Toast.LENGTH_SHORT).show();
                         } else {
-                            HoaDon hoaDon = new HoaDon();
-                            hoaDon.setMaHoaDon(Integer.parseInt(idBill.getText().toString()));
+                            Bill bill = new Bill();
+                            bill.setMaHoaDon(Integer.parseInt(idBill.getText().toString()));
                             Date date1=new SimpleDateFormat("yyyy-mm-dd").parse(date.getYear()+"-"+date.getMonth()+"-"+date.getDayOfMonth());
-                            hoaDon.setNgayMua(date1);
-                            hoaDonDAO.inserHoaDon(hoaDon);
+                            bill.setNgayMua(date1);
+                            billDAO.inserHoaDon(bill);
                             billAdapter.notifyDataSetChanged();
-                            Intent intent = new  Intent(BillActivity.this, HoaDonChiTietActivity.class);
+                            Intent intent = new  Intent(BillActivity.this, BillDetailActivity.class);
                             intent.putExtra("MAHOADON", idBill.getText().toString());
                             startActivity(intent);
                             Toast.makeText(BillActivity.this, "Thêm hóa đơn thành công!", Toast.LENGTH_SHORT).show();
@@ -193,8 +189,8 @@ public class BillActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private boolean checkIdBill(int id) throws ParseException {
-        for (int i = 0; i < hoaDonDAO.getAllHoaDon().size(); i++) {
-            if (id==hoaDonDAO.getAllHoaDon().get(i).getMaHoaDon()) {
+        for (int i = 0; i < billDAO.getAllHoaDon().size(); i++) {
+            if (id== billDAO.getAllHoaDon().get(i).getMaHoaDon()) {
                 return true;
             }
         }

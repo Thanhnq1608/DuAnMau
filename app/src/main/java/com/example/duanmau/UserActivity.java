@@ -16,12 +16,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.duanmau.DAO.NguoiDungDAO;
+import com.example.duanmau.DAO.UserDAO;
 import com.example.duanmau.LOGIN.ChangePassActivity;
 import com.example.duanmau.LOGIN.LogInActivity;
-import com.example.duanmau.LOGIN.SignInActivity;
+import com.example.duanmau.LOGIN.CreateAccountActivity;
 import com.example.duanmau.adapter.UserAdapter;
-import com.example.duanmau.model.NguoiDung;
+import com.example.duanmau.model.User;
 import com.google.android.material.navigation.NavigationView;
 
 public class UserActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,7 +31,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     ActionBarDrawerToggle actionBarDrawerToggle;
     Toolbar toolbar;
     NavigationView navigationView;
-    NguoiDungDAO nguoiDungDAO;
+    UserDAO userDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +39,10 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_user);
         anhXa();
         Menu();
-        nguoiDungDAO=new NguoiDungDAO(UserActivity.this);
+        userDAO =new UserDAO(UserActivity.this);
 
         addUser();
-        userAdapter = new UserAdapter(this,nguoiDungDAO.getAllNguoiDung() );
+        userAdapter = new UserAdapter(this, userDAO.getAllNguoiDung() );
         recUser.setLayoutManager(new GridLayoutManager(this, 1));
         recUser.setAdapter(userAdapter);
         userAdapter.notifyDataSetChanged();
@@ -53,14 +53,14 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void addUser(){
-        NguoiDung nguoiDung =new NguoiDung("Thanh","thanh123","Nam","12344","thanh567");
-        NguoiDung nguoiDung1 =new NguoiDung("Thanh12","thanh123","Nữ","1245344","thanh567");
-        NguoiDung nguoiDung2 =new NguoiDung("Thanh323","thanh123","Nam","12365444","thanh567");
-        NguoiDung nguoiDung3 =new NguoiDung("Thanh443","thanh123","Nữ","12364544","thanh567");
-        nguoiDungDAO.inserNguoiDung(nguoiDung);
-        nguoiDungDAO.inserNguoiDung(nguoiDung1);
-        nguoiDungDAO.inserNguoiDung(nguoiDung2);
-        nguoiDungDAO.inserNguoiDung(nguoiDung3);
+        User user =new User("Thanh","thanh123","Nam","12344","thanh567");
+        User user1 =new User("Thanh12","thanh123","Nữ","1245344","thanh567");
+        User user2 =new User("Thanh323","thanh123","Nam","12365444","thanh567");
+        User user3 =new User("Thanh443","thanh123","Nữ","12364544","thanh567");
+        userDAO.inserNguoiDung(user);
+        userDAO.inserNguoiDung(user1);
+        userDAO.inserNguoiDung(user2);
+        userDAO.inserNguoiDung(user3);
     }
 
     private void Menu() {
@@ -81,13 +81,13 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
         if (item.getItemId() == R.id.user_menu) {
             startActivity(new Intent(UserActivity.this, UserActivity.class));
         } else if (item.getItemId() == R.id.type_menu) {
-            startActivity(new Intent(UserActivity.this, TheLoaiActivity.class));
+            startActivity(new Intent(UserActivity.this, BookCategoryActivity.class));
         } else if (item.getItemId() == R.id.book_menu) {
-            startActivity(new Intent(UserActivity.this, SachActivity.class));
+            startActivity(new Intent(UserActivity.this, BookActivity.class));
         } else if (item.getItemId() == R.id.bill_menu) {
             startActivity(new Intent(UserActivity.this, BillActivity.class));
         } else if (item.getItemId() == R.id.statistical_menu) {
-            startActivity(new Intent(UserActivity.this, ThongKeActivity.class));
+            startActivity(new Intent(UserActivity.this, StatisticalActivity.class));
         } else if (item.getItemId() == R.id.settings_menu) {
             startActivity(new Intent(UserActivity.this, SettingActivity.class));
         } else if (item.getItemId() == R.id.exit_menu) {
@@ -122,7 +122,7 @@ public class UserActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.menu_add_user:
-                Intent intent=new Intent(UserActivity.this, SignInActivity.class);
+                Intent intent=new Intent(UserActivity.this, CreateAccountActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.menu_change_pass_user:

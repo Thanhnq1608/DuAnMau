@@ -10,14 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.duanmau.DAO.NguoiDungDAO;
+import com.example.duanmau.DAO.UserDAO;
 import com.example.duanmau.R;
-import com.example.duanmau.model.NguoiDung;
+import com.example.duanmau.model.User;
 
 public class ChangePassActivity extends AppCompatActivity {
     EditText user,pass,re_pass;
     Button btn_cofirm,btn_cancel;
-    NguoiDungDAO nguoiDungDAO;
+    UserDAO userDAO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +33,11 @@ public class ChangePassActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences pref = getSharedPreferences("USER_FILE",MODE_PRIVATE);
                 String strUserName = pref.getString("USERNAME",user.getText().toString());
-                nguoiDungDAO = new NguoiDungDAO(ChangePassActivity.this);
-                NguoiDung username = new NguoiDung(strUserName, pass.getText().toString(), "", "","");
+                userDAO = new UserDAO(ChangePassActivity.this);
+                User username = new User(strUserName, pass.getText().toString(), "", "","");
                 try {
                     if (validateForm()>0){
-                        if (nguoiDungDAO.changePasswordNguoiDung(username) > 0) {
+                        if (userDAO.changePasswordNguoiDung(username) > 0) {
                             Toast.makeText(getApplicationContext(), "Lưu thành công",
                                     Toast.LENGTH_SHORT).show();
                         } else {
