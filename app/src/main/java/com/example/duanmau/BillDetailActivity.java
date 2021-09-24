@@ -32,7 +32,7 @@ public class BillDetailActivity extends AppCompatActivity {
     Spinner spnMaSach;
     BillDetailDAO billDetailDAO;
     BookDAO bookDAO;
-    ArrayList<BillDetail> listUnpaidBill=new ArrayList<>();
+    ArrayList<BillDetail> listUnpaidBill = new ArrayList<>();
     BookCategoryDAO bookCategoryDAO;
     BillDAO billDAO;
     ListView lvCart;
@@ -117,22 +117,21 @@ public class BillDetailActivity extends AppCompatActivity {
 
     public void thanhToanHoaDon(View view) {
         billDetailDAO = new BillDetailDAO(BillDetailActivity.this);
-
         int thanhTien = 0;
 
-        for (BillDetail hd : listUnpaidBill) {
-            thanhTien += hd.getSoLuongMua() * hd.getSach().getGiaBia();
-        }
-        tvThanhTien.setText("Thành tiền: "+thanhTien);
-        Toast.makeText(this, "Bạn đã thanh toán hóa đơn thành công", Toast.LENGTH_SHORT).show();
-        if (!listUnpaidBill.isEmpty()){
+        if (!listUnpaidBill.isEmpty()) {
+            tvThanhTien.setText("Thành tiền: " + thanhTien);
+            Toast.makeText(this, "Bạn đã thanh toán hóa đơn thành công", Toast.LENGTH_SHORT).show();
+            for (BillDetail hd : listUnpaidBill) {
+                thanhTien += hd.getSoLuongMua() * hd.getSach().getGiaBia();
+            }
             int temp = listUnpaidBill.size();
-            for (int i = 0;i<temp;i++){
+            for (int i = 0; i < temp; i++) {
                 billDetailDAO.inserHoaDonChiTiet(listUnpaidBill.get(i));
                 listUnpaidBill.remove(i);
             }
             adapter.notifyDataSetChanged();
-        }else {
+        } else {
             Toast.makeText(this, "Bạn không có hóa đơn nào cần thanh toán!", Toast.LENGTH_SHORT).show();
         }
     }

@@ -19,7 +19,7 @@ import com.example.duanmau.model.User;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class LogInActivity extends AppCompatActivity {
-    EditText user, pass;
+    EditText username, pass;
     CheckBox chk_save_pass;
     String sTrUser, sTrPass;
     Button login, cancel;
@@ -43,7 +43,7 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 userDAO =new UserDAO(LogInActivity.this);
-                sTrUser = user.getText().toString();
+                sTrUser = username.getText().toString();
                 sTrPass = pass.getText().toString();
                 if (sTrUser.equals("admin") && sTrPass.equals("admin")) {
                     Toast.makeText(getApplicationContext(), "Bạn đang đăng nhập với tư cách Admin!", Toast.LENGTH_SHORT).show();
@@ -94,7 +94,7 @@ public class LogInActivity extends AppCompatActivity {
     }
 
     private void anhXa() {
-        user = findViewById(R.id.ed_user_login);
+        username = findViewById(R.id.ed_user_login);
         passLayout = findViewById(R.id.edPassLayout);
         pass = findViewById(R.id.ed_pass_login);
         login = findViewById(R.id.btn_login_login);

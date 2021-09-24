@@ -15,7 +15,7 @@ import com.example.duanmau.R;
 import com.example.duanmau.model.User;
 
 public class FogetPassActivity extends AppCompatActivity {
-    EditText user, phone, pass, rePass;
+    EditText username, phone, pass, rePass;
     Button confirm, cancel;
     UserDAO userDAO;
     User user;
@@ -24,7 +24,7 @@ public class FogetPassActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_foget_pass);
-        user = findViewById(R.id.ed_user_foget);
+        username = findViewById(R.id.ed_user_foget);
         phone = findViewById(R.id.ed_phone_foget);
         pass = findViewById(R.id.ed_pass_foget);
         rePass = findViewById(R.id.ed_repass_foget);
@@ -43,11 +43,11 @@ public class FogetPassActivity extends AppCompatActivity {
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (user.getText().toString().equals("") || phone.getText().toString().equals("") || pass.getText().toString().equals("") || rePass.getText().toString().equals("")) {
+                if (username.getText().toString().equals("") || phone.getText().toString().equals("") || pass.getText().toString().equals("") || rePass.getText().toString().equals("")) {
                     Toast.makeText(FogetPassActivity.this, "Bạn không được bỏ trống dữ liệu!", Toast.LENGTH_SHORT).show();
-                } else if (checkUser(user.getText().toString())) {
+                } else if (checkUser(username.getText().toString())) {
                     Toast.makeText(FogetPassActivity.this, "Tài Khoản hoặc số điện thoại không chính xác1!", Toast.LENGTH_SHORT).show();
-                } else if (checkPhoneNumber(user.getText().toString(), phone.getText().toString())) {
+                } else if (checkPhoneNumber(username.getText().toString(), phone.getText().toString())) {
                     Toast.makeText(FogetPassActivity.this, "Tài Khoản hoặc số điện thoại không chính xác2!", Toast.LENGTH_SHORT).show();
                 } else if (pass.getText().toString().length() < 6) {
                     Toast.makeText(FogetPassActivity.this, "Mật khẩu phải có ít nhất 6 kí tự!", Toast.LENGTH_SHORT).show();
@@ -56,7 +56,7 @@ public class FogetPassActivity extends AppCompatActivity {
 
                 } else {
                     SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);
-                    String strUserName = pref.getString("USERNAME", user.getText().toString());
+                    String strUserName = pref.getString("USERNAME", username.getText().toString());
                     User username = new User(strUserName, pass.getText().toString(), "","",
                             "");
                     if (userDAO.changePasswordNguoiDung(username) > 0) {
